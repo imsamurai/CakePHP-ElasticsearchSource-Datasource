@@ -12,6 +12,9 @@ App::uses('HttpSourceEndpoint', 'HttpSource.Lib/Config');
 
 /**
  * Elasticsearch source endpoint
+ *
+ * @package ElasticsearchSource
+ * @subpackage Config
  */
 class ElasticsearchSourceEndpoint extends HttpSourceEndpoint {
 
@@ -23,19 +26,7 @@ class ElasticsearchSourceEndpoint extends HttpSourceEndpoint {
 	 * @param array $queryData Query data: conditions, limit, etc
 	 */
 	protected function _buildQuery(Model $Model, array $usedConditions, array $queryData) {
-//		if (empty($queryData['fields'])) {
-//			throw new HttpSourceException('SELECT * is not supported.  Please manually list the columns you are interested in.');
-//		}
-//
-//		$queryData['table'] = $this->table();
-//
-//		$Model->request['uri']['query'] = array(
-//			'q' => static::buildStatement($queryData, $Model),
-//			'format' => 'json-strings'
-//		);
-
 		parent::_buildQuery($Model, $usedConditions, $queryData);
-		debug($Model->request);
 
 		if (!empty($queryData['limit'])) {
 			$Model->request['body']['size'] = $queryData['limit'];

@@ -9,6 +9,13 @@
  * @subpackage Datasource
  *
  */
+
+/**
+ * Elasticsearch Connection
+ *
+ * @package ElasticsearchSource
+ * @subpackage Config
+ */
 class ElasticsearchConnection extends HttpSourceConnection {
 
 	/**

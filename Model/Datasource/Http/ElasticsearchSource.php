@@ -12,6 +12,12 @@
 App::uses('HttpSource', 'HttpSource.Model/Datasource');
 App::uses('ElasticsearchConnection', 'ElasticsearchSource.Model/Datasource');
 
+/**
+ * Elasticsearch DataSource
+ *
+ * @package ElasticsearchSource
+ * @subpackage Datasource
+ */
 class ElasticsearchSource extends HttpSource {
 
 	/**

@@ -13,6 +13,9 @@ App::uses('ElasticsearchSourceEndpoint', 'ElasticsearchSource.Lib/Config');
 
 /**
  * Factory to make ElasticsearchSource configuration
+ *
+ * @package ElasticsearchSource
+ * @subpackage Config
  */
 class ElasticsearchSourceConfigFactory extends HttpSourceConfigFactory {
 
