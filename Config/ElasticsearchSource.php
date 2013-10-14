@@ -11,7 +11,7 @@
  */
 $config['ElasticsearchSource']['config_version'] = 2;
 
-$CF = HttpSourceConfigFactory::instance('ElasticsearchSource.ElasticsearchSourceConfigFactory');
+$CF = HttpSourceConfigFactory::instance();
 $Config = $CF->config();
 
 $Config
@@ -30,9 +30,21 @@ $Config
 				->addCondition($CF->condition()->name('hobbies'))
 				->addCondition($CF->condition()->name('terms'))
 				->addCondition($CF->condition()->name('fields'))
+				->addCondition($CF->condition()->name('size'))
+				->addCondition($CF->condition()->name('from'))
+				->addCondition($CF->condition()->name('sort'))
+				->addCondition($CF->condition()->name('fields'))
+				->addCondition($CF->condition()->name('index')->sendInQuery()->required())
+				->path(':index/_search')
 				->table('_search')
+				->readParams(array(
+					'size' => 'limit',
+					'from' => 'offset',
+					'sort' => 'order.0',
+					'fields' => 'fields'
+				))
 		)
-		->result($CF->result()->map(function($result) {debug($result);
+		->result($CF->result()->map(function($result) {
 					return Hash::extract($result, 'hits.hits.{n}._source') + Hash::extract($result, 'hits.hits.{n}.fields');
 				}))
 

@@ -57,7 +57,8 @@ class ElasticsearchTest extends CakeTestCase {
 			'conditions' => array(
 				'query' => array(
 					"term" => array("title" => "apple")
-				)
+				),
+				'index' => 'news'
 			),
 			'fields' => array('title', 'rank'),
 			'order' => array('rank' => 'desc'),
@@ -65,7 +66,7 @@ class ElasticsearchTest extends CakeTestCase {
 		);
 
 		$result = $this->Elasticsearch->find('first', $params);
-		$this->assertNotEqual($result, false);debug($result);
+		$this->assertNotEqual($result, false);
 		$this->assertCount(1, $result);
 		debug($result);
 	}

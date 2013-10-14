@@ -43,22 +43,6 @@ class ElasticsearchSource extends HttpSource {
 	}
 
 	/**
-	 * Single request
-	 *
-	 * @param array $request
-	 * @param string $request_method
-	 * @param Model $model
-	 * @return array|bool
-	 */
-	protected function _singleRequest(array $request, $request_method, Model $model = null) {
-		if (!empty($request['uri']['path'])) {
-			$request['uri']['path'] = (string) Hash::get($this->config, 'path') . '/' . $request['uri']['path'];
-		}
-
-		return parent::_singleRequest($request, $request_method, $model);
-	}
-
-	/**
 	 * {@inheritdoc}
 	 *
 	 * @param Model $Model
