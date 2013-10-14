@@ -44,9 +44,23 @@ $Config
 					'fields' => 'fields'
 				))
 		)
+		->add(
+				$CF->endpoint()
+				->id(2)
+				->methodUpdate()
+				->table('index_create')
+				->path(':index/:type/:id')
+				->addCondition($CF->condition()->name('index')->sendInQuery()->required())
+				->addCondition($CF->condition()->name('type')->sendInQuery()->required())
+				->addCondition($CF->condition()->name('id')->sendInQuery()->length(100)->required())
+				->addCondition($CF->condition()->name('timestamp')->sendInQuery())
+				->addCondition($CF->condition()->name('ttl')->sendInQuery())
+		)
 		->result($CF->result()->map(function($result) {
 					return Hash::extract($result, 'hits.hits.{n}._source') + Hash::extract($result, 'hits.hits.{n}.fields');
 				}))
+
+
 
 ;
 

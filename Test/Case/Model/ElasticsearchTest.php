@@ -46,6 +46,7 @@ class ElasticsearchTest extends CakeTestCase {
 			);
 		}
 
+		ConnectionManager::drop($config_name);
 		ConnectionManager::create($config_name, $config);
 		$this->Elasticsearch = new Elasticsearch(false, null, $config_name);
 	}
@@ -66,6 +67,32 @@ class ElasticsearchTest extends CakeTestCase {
 		);
 
 		$result = $this->Elasticsearch->find('first', $params);
+		$this->assertNotEqual($result, false);
+		$this->assertCount(1, $result);
+		debug($result);
+	}
+
+	public function test_index_create() {
+		$CF = HttpSourceConfigFactory::instance();
+		$Config = $CF->load('ElasticsearchSource');
+		$Config->endpoint(2)
+				->addCondition($CF->condition()->name('title'))
+				->addCondition($CF->condition()->name('description'));
+
+		$this->_loadModel();
+
+		$this->Elasticsearch->setSource('index_create');
+
+		$params = array(
+			"title" => "Test 5",
+			"description" => 'test descr',
+			"index" => "news",
+			"type" => "article",
+			"id" => "3425234532543532452352345"
+		);
+
+		$result = $this->Elasticsearch->save($params);
+		debug($result);
 		$this->assertNotEqual($result, false);
 		$this->assertCount(1, $result);
 		debug($result);

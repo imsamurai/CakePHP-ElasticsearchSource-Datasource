@@ -24,6 +24,8 @@ class ElasticsearchSource extends HttpSource {
 	 * Http methods constants
 	 */
 	const HTTP_METHOD_READ = 'POST';
+	const HTTP_METHOD_CREATE = 'POST';
+	const HTTP_METHOD_UPDATE = 'PUT';
 
 	/**
 	 * Elasticsearch API Datasource
