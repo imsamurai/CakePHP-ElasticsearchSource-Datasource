@@ -43,6 +43,9 @@ $Config
 					'sort' => 'order.0',
 					'fields' => 'fields'
 				))
+				->result($CF->result()->map(function($result) {
+					return Hash::extract($result, 'hits.hits.{n}._source') + Hash::extract($result, 'hits.hits.{n}.fields');
+				}))
 		)
 		->add(
 				$CF->endpoint()
@@ -55,10 +58,9 @@ $Config
 				->addCondition($CF->condition()->name('id')->sendInQuery()->length(100)->required())
 				->addCondition($CF->condition()->name('timestamp')->sendInQuery())
 				->addCondition($CF->condition()->name('ttl')->sendInQuery())
+
 		)
-		->result($CF->result()->map(function($result) {
-					return Hash::extract($result, 'hits.hits.{n}._source') + Hash::extract($result, 'hits.hits.{n}.fields');
-				}))
+
 
 
 
