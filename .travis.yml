@@ -41,3 +41,6 @@ script:
 
 after_script:
   - curl -XGET 'http://localhost:9200/_search' -vvvv
+
+notifications:
+  email: im.samuray@gmail.com
