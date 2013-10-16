@@ -61,7 +61,7 @@ class ElasticsearchTest extends CakeTestCase {
 			$config += array(
 				'datasource' => 'ElasticsearchSource.Http/ElasticsearchSource',
 				'host' => '127.0.0.1',
-				'port' => 80,
+				'port' => 9200,
 				'timeout' => 5
 			);
 		}
