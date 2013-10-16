@@ -7,9 +7,6 @@ php:
   - 5.4
   - 5.5
 
-elasticsearch:
-  - 0.90.5
-
 env:
   - CAKE_VERSION=2.3.10
   - CAKE_VERSION=2.4.1

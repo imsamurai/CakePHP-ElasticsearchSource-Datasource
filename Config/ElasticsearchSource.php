@@ -25,7 +25,7 @@ $Config
 				->id(1)
 				->methodRead()
 				->table('search')
-				->path(':index/_search')
+				->path(':index/:type/_search')
 				->addCondition($CF->condition()->name('query'))
 				->addCondition($CF->condition()->name('filter'))
 				->addCondition($CF->condition()->name('facets'))
@@ -37,6 +37,7 @@ $Config
 				->addCondition($CF->condition()->name('sort'))
 				->addCondition($CF->condition()->name('fields'))
 				->addCondition($CF->condition()->name('index')->sendInQuery()->required())
+				->addCondition($CF->condition()->name('type')->sendInQuery()->defaults(''))
 				->readParams(array(
 					'size' => 'limit',
 					'from' => 'offset',

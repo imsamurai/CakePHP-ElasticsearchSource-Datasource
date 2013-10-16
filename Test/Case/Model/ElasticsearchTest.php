@@ -47,7 +47,7 @@ class ElasticsearchTest extends CakeTestCase {
 
 	public function tearDown() {
 		parent::tearDown();
-		debug(ConnectionManager::getDataSource('testElasticsearchSource')->getLog());
+		debug(ConnectionManager::getDataSource('testElasticsearchSource')->getLog(false, false));
 	}
 
 
@@ -80,7 +80,7 @@ class ElasticsearchTest extends CakeTestCase {
 
 	public function test_search_document() {
 		$this->Elasticsearch->setSource('search');
-		$r = $this->Elasticsearch->find('all', array('conditions' => array('index' => 'test_index')));
+		$r = $this->Elasticsearch->find('all', array('conditions' => array('index' => 'test_index', 'type' => 'test_type')));
 		debug($r);
 		$params = array(
 			'conditions' => array(
