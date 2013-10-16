@@ -80,6 +80,8 @@ class ElasticsearchTest extends CakeTestCase {
 
 	public function test_search_document() {
 		$this->Elasticsearch->setSource('search');
+		$r = $this->Elasticsearch->find('all', array('conditions' => array('index' => 'test_index')));
+		debug($r);
 		$params = array(
 			'conditions' => array(
 				'query' => array(
