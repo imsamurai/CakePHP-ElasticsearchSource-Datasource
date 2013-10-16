@@ -32,7 +32,7 @@ before_script:
     );
 
     }" > ../cakephp/app/Config/database.php
-  - echo curl -XGET 'localhost:9200'
+  - curl -XGET 'localhost:9200'
 
 
 script:
