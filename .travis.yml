@@ -20,7 +20,7 @@ before_script:
   - chmod -R 777 ../cakephp/app/tmp
   - set +H
   - echo "CakePlugin::load('HttpSource', array('bootstrap' => true, 'routes' => false));" >> ../cakephp/app/Config/bootstrap.php
-   - echo "<?php
+  - echo "<?php
     class DATABASE_CONFIG {
     private \$test = array(
         'datasource' => 'Database/Mysql',
