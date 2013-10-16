@@ -22,7 +22,7 @@ before_script:
   - echo "CakePlugin::load('HttpSource', array('bootstrap' => true, 'routes' => false));" >> ../cakephp/app/Config/bootstrap.php
   - echo "<?php
     class DATABASE_CONFIG {
-    private \$test = array(
+    public \$test = array(
         'datasource' => 'Database/Mysql',
         'host' => '127.0.0.1',
         'login' => 'travis',
