@@ -20,19 +20,19 @@ before_script:
   - chmod -R 777 ../cakephp/app/tmp
   - set +H
   - echo "CakePlugin::load('HttpSource', array('bootstrap' => true, 'routes' => false));" >> ../cakephp/app/Config/bootstrap.php
-  - echo "<?php
+   - echo "<?php
     class DATABASE_CONFIG {
-		\$test = array(
-			'datasource' => 'Database/Mysql',
-			'persistent' => false,
-			'host' => '127.0.0.1',
-			'login' => 'travis',
-			'password' => '',
-			'database' => 'elastic_test',
-			'prefix' => '',
-			'encoding' => 'utf8',
-		)
+    private \$test = array(
+        'datasource' => 'Database/Mysql',
+        'host' => '127.0.0.1',
+        'login' => 'travis',
+        'database' => 'elastic_test',
+        'prefix' => '',
+        'encoding' => 'utf8'
+    );
+
     }" > ../cakephp/app/Config/database.php
+
 
 script:
   - ./lib/Cake/Console/cake test ElasticsearchSource AllElasticsearchSource --stderr
