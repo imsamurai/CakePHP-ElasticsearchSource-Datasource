@@ -30,7 +30,6 @@ then update submodules:
 public $elasticsearch = array(
   'datasource' => 'ElasticsearchSource.Http/ElasticsearchSource',
         'host' => 'example.com',
-		'path' => 'path to index',
         'port' => 'some port'
 );
 

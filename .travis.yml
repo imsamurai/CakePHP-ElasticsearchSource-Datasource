@@ -1,0 +1,27 @@
+language: php
+
+services:
+  - elasticsearch
+  
+php:
+  - 5.4
+  - 5.5
+
+env:
+  - CAKE_VERSION=2.3.10
+  - CAKE_VERSION=2.4.1
+  - CAKE_VERSION=master
+
+before_script:
+  - git clone git://github.com/cakephp/cakephp ../cakephp && cd ../cakephp && git checkout $CAKE_VERSION
+  - cp -R ../CakePHP-ElasticsearchSource-Datasource plugins/ElasticsearchSource
+  - git clone --recursive git://github.com/imsamurai/cakephp-httpsource-datasource plugins/HttpSource
+  - chmod -R 777 ../cakephp/app/tmp
+  - set +H
+  - echo "CakePlugin::load('HttpSource', array('bootstrap' => true, 'routes' => false));" >> ../cakephp/app/Config/bootstrap.php
+  - echo "<?php
+    class DATABASE_CONFIG {
+    }" > ../cakephp/app/Config/database.php
+
+script:
+  - ./lib/Cake/Console/cake test ElasticsearchSource AllElasticsearchSource --stderr

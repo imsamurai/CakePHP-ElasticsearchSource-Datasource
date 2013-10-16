@@ -60,16 +60,6 @@ class ElasticsearchSource extends HttpSource {
 	 * @param Model $Model
 	 * @param array $result
 	 */
-	protected function _emulateFields(Model $Model, array &$result) {
-
-	}
-
-	/**
-	 * {@inheritdoc}
-	 *
-	 * @param Model $Model
-	 * @param array $result
-	 */
 	protected function _emulateLimit(Model $Model, array &$result) {
 
 	}

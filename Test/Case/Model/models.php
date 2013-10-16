@@ -1,4 +1,4 @@
-<?
+<?php
 /**
  * Author: imsamurai <im.samuray@gmail.com>
  * Date: 10.10.2013
@@ -13,4 +13,7 @@ App::uses('HttpSourceModel', 'HttpSource.Model');
 
 class Elasticsearch extends HttpSourceModel {
     public $name = 'Elasticsearch';
+	public $useDbConfig = 'testElasticsearchSource';
+	public $useTable = 'search';
+
 }

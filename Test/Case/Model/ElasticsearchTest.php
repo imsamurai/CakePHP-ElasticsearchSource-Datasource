@@ -1,4 +1,4 @@
-<?
+<?php
 
 /**
  * Author: imsamurai <im.samuray@gmail.com>
@@ -6,12 +6,25 @@
  * Time: 18:00:00
  * Format: http://book.cakephp.org/2.0/en/development/testing.html
  *
- * @package ElasticsearchSource
- * @subpackage Test
  */
 require_once dirname(__FILE__) . DS . 'models.php';
 
+/**
+ * Tests
+ *
+ * @package ElasticsearchSource
+ * @subpackage Test
+ */
 class ElasticsearchTest extends CakeTestCase {
+
+	/**
+	 * Fixtures
+	 *
+	 * @var array
+	 */
+	public $fixtures = array(
+		'plugin.ElasticsearchSource.ElasticsearchArticle',
+	);
 
 	/**
 	 * Elasticsearch Model
@@ -20,17 +33,25 @@ class ElasticsearchTest extends CakeTestCase {
 	 */
 	public $Elasticsearch = null;
 
+	public function __construct($name = NULL, array $data = array(), $dataName = '') {
+		$this->_setConfig();
+		$this->_loadModel();
+		parent::__construct($name, $data, $dataName);
+	}
+
 	public function setUp() {
 		parent::setUp();
 		$this->_setConfig();
+		$this->_loadModel();
 	}
 
 	protected function _setConfig() {
 		Configure::delete('ElasticsearchSource');
 		Configure::load('ElasticsearchSource.ElasticsearchSource');
+		include dirname(__FILE__) . DS . 'config.php';
 	}
 
-	protected function _loadModel($config_name = 'elasticsearchSource', $config = array()) {
+	protected function _loadModel($config_name = 'testElasticsearchSource', $config = array()) {
 		$db_configs = ConnectionManager::enumConnectionObjects();
 
 		if (!empty($db_configs['elasticsearchTest'])) {
@@ -39,29 +60,28 @@ class ElasticsearchTest extends CakeTestCase {
 		} else {
 			$config += array(
 				'datasource' => 'ElasticsearchSource.Http/ElasticsearchSource',
-				'host' => 'example.com',
-				'path' => 'yourpath',
+				'host' => '127.0.0.1',
 				'port' => 80,
 				'timeout' => 5
 			);
 		}
 
-		ConnectionManager::drop($config_name);
+		$config+=array('prefix' => '');
+
 		ConnectionManager::create($config_name, $config);
 		$this->Elasticsearch = new Elasticsearch(false, null, $config_name);
 	}
 
-	public function test_simple_query() {
-		$this->_loadModel();
-		$this->Elasticsearch->setSource('_search');
+	public function test_search_document() {
+		$this->Elasticsearch->setSource('search');
 		$params = array(
 			'conditions' => array(
 				'query' => array(
-					"term" => array("title" => "apple")
+					"term" => array("title" => "guratabaata")
 				),
-				'index' => 'news'
+				'index' => 'test_index'
 			),
-			'fields' => array('title', 'rank'),
+			'fields' => array('title', 'rank', 'id'),
 			'order' => array('rank' => 'desc'),
 			'offset' => 2
 		);
@@ -72,30 +92,35 @@ class ElasticsearchTest extends CakeTestCase {
 		debug($result);
 	}
 
-	public function test_index_create() {
-		$CF = HttpSourceConfigFactory::instance();
-		$Config = $CF->load('ElasticsearchSource');
-		$Config->endpoint(2)
-				->addCondition($CF->condition()->name('title'))
-				->addCondition($CF->condition()->name('description'));
-
-		$this->_loadModel();
-
-		$this->Elasticsearch->setSource('index_create');
+	public function test_add_document() {
+		$this->Elasticsearch->setSource('search');
 
 		$params = array(
-			"title" => "Test 5",
+			"title" => "Testaaa",
 			"description" => 'test descr',
-			"index" => "news",
-			"type" => "article",
+			"index" => "test_index",
+			"type" => "test_type",
 			"id" => "3425234532543532452352345"
 		);
 
 		$result = $this->Elasticsearch->save($params);
 		debug($result);
 		$this->assertNotEqual($result, false);
-		$this->assertCount(1, $result);
-		debug($result);
+
+		$resultCheck = $this->Elasticsearch->find('first', array(
+			'conditions' => array(
+				'query' => array(
+					"ids" => array(
+						"type" => "test_type",
+						"values" => array($params['id'])
+					)
+				),
+				'index' => 'test_index'
+			)
+		));
+		debug($resultCheck);
+		$this->assertNotEqual($resultCheck, false);
+		$this->assertCount(1, $resultCheck);
 	}
 
 }
