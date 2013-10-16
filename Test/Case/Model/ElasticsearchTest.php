@@ -7,7 +7,7 @@
  * Format: http://book.cakephp.org/2.0/en/development/testing.html
  *
  */
-require_once dirname(__FILE__) . DS . 'models.php';
+require_once App::pluginPath('ElasticsearchSource') . 'Test' . DS . 'Data' . DS . 'models.php';
 
 /**
  * Tests
@@ -48,7 +48,7 @@ class ElasticsearchTest extends CakeTestCase {
 	protected function _setConfig() {
 		Configure::delete('ElasticsearchSource');
 		Configure::load('ElasticsearchSource.ElasticsearchSource');
-		include dirname(__FILE__) . DS . 'config.php';
+		include App::pluginPath('ElasticsearchSource') . 'Test' . DS . 'Data' . DS . 'config.php';
 	}
 
 	protected function _loadModel($config_name = 'testElasticsearchSource', $config = array()) {
