@@ -36,7 +36,7 @@ $Config
 				->addCondition($CF->condition()->name('from'))
 				->addCondition($CF->condition()->name('sort'))
 				->addCondition($CF->condition()->name('fields'))
-				->addCondition($CF->condition()->name('index')->sendInQuery()->required())
+				->addCondition($CF->condition()->name('index')->sendInQuery()->defaults(''))
 				->addCondition($CF->condition()->name('type')->sendInQuery()->defaults(''))
 				->readParams(array(
 					'size' => 'limit',
