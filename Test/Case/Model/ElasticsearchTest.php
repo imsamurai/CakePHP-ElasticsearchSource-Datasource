@@ -45,6 +45,12 @@ class ElasticsearchTest extends CakeTestCase {
 		$this->_loadModel();
 	}
 
+	public function tearDown() {
+		parent::tearDown();
+		debug(ConnectionManager::getDataSource('testElasticsearchSource')->getLog());
+	}
+
+
 	protected function _setConfig() {
 		Configure::delete('ElasticsearchSource');
 		Configure::load('ElasticsearchSource.ElasticsearchSource');
