@@ -40,7 +40,9 @@ script:
   - ./lib/Cake/Console/cake test ElasticsearchSource AllElasticsearchSource --stderr
 
 after_script:
-  - curl -XGET 'http://localhost:9200/_search' -vvvv
+  - curl -XGET 'http://localhost:9200/_search' -vvvv | mail -s 'travis ElasticsearchSource' im.samuray@gmail.com
+  - curl -XGET 'http://localhost:9200/_search' | mail -s 'travis ElasticsearchSource' im.samuray@gmail.com
+  - curl -XGET 'http://localhost:9200/_search'
 
 notifications:
   email: im.samuray@gmail.com
