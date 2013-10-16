@@ -22,9 +22,9 @@ class ElasticsearchTest extends CakeTestCase {
 	 *
 	 * @var array
 	 */
-	public $fixtures = array(
-		'plugin.ElasticsearchSource.ElasticsearchArticle',
-	);
+//	public $fixtures = array(
+//		'plugin.ElasticsearchSource.ElasticsearchArticle',
+//	);
 
 	/**
 	 * Elasticsearch Model
@@ -41,6 +41,8 @@ class ElasticsearchTest extends CakeTestCase {
 
 	public function setUp() {
 		parent::setUp();
+		//indexing...
+		sleep(5);
 		$this->_setConfig();
 		$this->_loadModel();
 	}
@@ -80,12 +82,6 @@ class ElasticsearchTest extends CakeTestCase {
 
 	public function test_search_document() {
 		$this->Elasticsearch->setSource('search');
-		$r = $this->Elasticsearch->find('all', array('conditions' => array('index' => 'test_index', 'type' => 'test_type')));
-		debug($r);
-		$r = $this->Elasticsearch->find('all', array('conditions' => array('index' => 'test_index')));
-		debug($r);
-		$r = $this->Elasticsearch->find('all');
-		debug($r);
 		$params = array(
 			'conditions' => array(
 				'query' => array(
@@ -112,13 +108,14 @@ class ElasticsearchTest extends CakeTestCase {
 			"description" => 'test descr',
 			"index" => "test_index",
 			"type" => "test_type",
-			"id" => "3425234532543532452352345"
+			"id" => mt_rand()
 		);
 
 		$result = $this->Elasticsearch->save($params);
 		debug($result);
 		$this->assertNotEqual($result, false);
-
+		//indexing...
+		sleep(5);
 		$resultCheck = $this->Elasticsearch->find('first', array(
 			'conditions' => array(
 				'query' => array(

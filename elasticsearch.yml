@@ -1,8 +1,0 @@
-index :
-  analysis :
-    tokenizer :
-      KeywordPatternAnalyzer :
-        type : pattern
-        pattern : ;
-  store:
-        type: memory

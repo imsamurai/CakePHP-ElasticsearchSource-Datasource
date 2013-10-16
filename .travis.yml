@@ -1,5 +1,8 @@
 language: php
 
+services:
+  - elasticsearch
+
 php:
   - 5.4
   - 5.5
@@ -15,9 +18,6 @@ before_script:
   - cp -R ../CakePHP-ElasticsearchSource-Datasource plugins/ElasticsearchSource
   - git clone --recursive git://github.com/imsamurai/cakephp-httpsource-datasource plugins/HttpSource
   - chmod -R 777 ../cakephp/app/tmp
-  - curl -L  http://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.5.tar.gz | tar -xz
-  - chmod +x elasticsearch-0.90.5/bin/elasticsearch
-  - elasticsearch-0.90.5/bin/elasticsearch
   - set +H
   - echo "CakePlugin::load('HttpSource', array('bootstrap' => true, 'routes' => false));" >> ../cakephp/app/Config/bootstrap.php
   - echo "<?php
@@ -32,15 +32,10 @@ before_script:
     );
 
     }" > ../cakephp/app/Config/database.php
-  - curl -XGET 'localhost:9200' -vvvv
-  - curl -XPUT http://localhost:9200/test_index/ -d @../CakePHP-ElasticsearchSource-Datasource/elasticsearch.yml -vvvv
-
+  - curl -XGET '127.0.0.1:9200' -vvvv
 
 script:
   - ./lib/Cake/Console/cake test ElasticsearchSource AllElasticsearchSource --stderr
-
-after_script:
-  - curl -XGET 'http://localhost:9200/_search' -vvvv
 
 notifications:
   email: im.samuray@gmail.com
