@@ -33,7 +33,7 @@ before_script:
 
     }" > ../cakephp/app/Config/database.php
   - curl -XGET 'localhost:9200'
-  - elasticsearch -f -Des.config=../CakePHP-ElasticsearchSource-Datasource/elasticsearch.yml
+  - curl -XPUT http://localhost:9200/test_index/ -d @../CakePHP-ElasticsearchSource-Datasource/elasticsearch.yml
 
 
 script:
