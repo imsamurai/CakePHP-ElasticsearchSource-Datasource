@@ -32,9 +32,12 @@ before_script:
     );
 
     }" > ../cakephp/app/Config/database.php
-  - curl -XGET 'localhost:9200'
-  - curl -XPUT http://localhost:9200/test_index/ -d @../CakePHP-ElasticsearchSource-Datasource/elasticsearch.yml
+  - curl -XGET 'localhost:9200' -vvvv
+  - curl -XPUT http://localhost:9200/test_index/ -d @../CakePHP-ElasticsearchSource-Datasource/elasticsearch.yml -vvvv
 
 
 script:
   - ./lib/Cake/Console/cake test ElasticsearchSource AllElasticsearchSource --stderr
+
+after_script:
+  - curl -XGET 'http://localhost:9200/_search' -vvvv
