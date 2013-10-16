@@ -62,7 +62,7 @@ To run tests add and fill $elasticsearchTest in `database.php`
 
 You can use elasticsearch almost as db tables:
 ```php
-$this->Elasticsearch->setSource('_search');
+$this->Elasticsearch->setSource('search');
 	$params = array(
 		'conditions' => array(
 			'query' => array(
