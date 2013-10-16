@@ -22,9 +22,9 @@ class ElasticsearchTest extends CakeTestCase {
 	 *
 	 * @var array
 	 */
-//	public $fixtures = array(
-//		'plugin.ElasticsearchSource.ElasticsearchArticle',
-//	);
+	public $fixtures = array(
+		'plugin.ElasticsearchSource.ElasticsearchArticle',
+	);
 
 	/**
 	 * Elasticsearch Model
