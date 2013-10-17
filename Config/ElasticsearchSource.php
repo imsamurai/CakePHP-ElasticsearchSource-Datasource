@@ -14,21 +14,31 @@ $config['ElasticsearchSource']['config_version'] = 2;
 $CF = HttpSourceConfigFactory::instance();
 $Config = $CF->config();
 
-$Config
-		/*
-		 * Search apis
+$Config/*
+		 * Get api
 		 *
-		 * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search.html
+		 * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-get.html
 		 */
 		->add(
 				$CF->endpoint()
 				->id(1)
 				->methodRead()
 				->table('search')
-				->path(':index/:type/:id')
-				->addCondition($CF->condition()->name('index')->sendInQuery()->required())
-				->addCondition($CF->condition()->name('type')->sendInQuery()->required())
-				->addCondition($CF->condition()->name('id')->sendInQuery()->required())
+				->path(':index/:type/:id/:_source')
+				->addCondition($CF->condition()->name('index')->required())
+				->addCondition($CF->condition()->name('type')->required())
+				->addCondition($CF->condition()->name('id')->required())
+				->addCondition($CF->condition()->name('realtime'))
+				->addCondition($CF->condition()->name('fields')->map(function($fields) { return implode(',', $fields); }))
+				->addCondition($CF->condition()->name('routing'))
+				->addCondition($CF->condition()->name('preference'))
+				->addCondition($CF->condition()->name('refresh'))
+				->addCondition($CF->condition()->name('distributed'))
+				->addCondition($CF->condition()->name('distributed'))
+				->addCondition($CF->condition()->name('_source')->defaults(''))
+				->readParams(array(
+					'fields' => 'fields'
+				))
 				->result($CF->result()->map(function($data) {
 							return array((array) Hash::get($data, '_source') + array(
 							'id' => $data['_id'],
@@ -37,6 +47,11 @@ $Config
 							));
 						}))
 		)
+		/*
+		 * Search api
+		 *
+		 * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search.html
+		 */
 		->add(
 				$CF->endpoint()
 				->id(2)
@@ -128,7 +143,6 @@ $Config
 							} else {
 								return false;
 							}
-
 						}))
 		)
 
