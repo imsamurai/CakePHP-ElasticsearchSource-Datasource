@@ -30,7 +30,7 @@ class ElasticsearchArticleFixture extends HttpSourceTestFixture {
 	 *
 	 * @var string
 	 */
-	public $model ="ElasticsearchSource.Elasticsearch";
+	public $model ="ElasticsearchSource.ElasticsearchDocument";
 
 	/**
 	 * Records

@@ -8,6 +8,7 @@
  *
  */
 App::uses('ElasticsearchTest', 'ElasticsearchSource.Test/');
+App::uses('ElasticsearchDocument', 'ElasticsearchSource.Model');
 
 /**
  * Tests documents api - search/get/delete/update/create
@@ -26,9 +27,15 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 		'plugin.ElasticsearchSource.ElasticsearchArticle',
 	);
 
+	/**
+	 * {@inheritdoc}
+	 *
+	 * @param array $config_name
+	 * @param array $config
+	 */
 	protected function _loadModel($config_name = 'testElasticsearchSource', $config = array()) {
-		parent::_loadModel();
-		$this->Elasticsearch->setSource('search');
+		parent::_loadModel($config_name, $config);
+		$this->Elasticsearch = new ElasticsearchDocument(false, null, $config_name);
 	}
 
 	public function test_search_document() {

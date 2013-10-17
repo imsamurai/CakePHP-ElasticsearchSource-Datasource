@@ -7,7 +7,8 @@
  * Format: http://book.cakephp.org/2.0/en/development/testing.html
  *
  */
-require_once App::pluginPath('ElasticsearchSource') . 'Test' . DS . 'Data' . DS . 'models.php';
+
+App::uses('ConnectionManager', 'Model');
 
 /**
  * Tests
@@ -24,24 +25,43 @@ abstract class ElasticsearchTest extends CakeTestCase {
 	 */
 	public $Elasticsearch = null;
 
+	/**
+	 * {@inheritdoc}
+	 *
+	 * @param string $name
+	 * @param array $data
+	 * @param string $dataName
+	 */
 	public function __construct($name = NULL, array $data = array(), $dataName = '') {
 		$this->_setConfig();
 		$this->_loadModel();
 		parent::__construct($name, $data, $dataName);
 	}
 
+	/**
+	 * {@inheritdoc}
+	 */
 	public function setUp() {
 		parent::setUp();
 		$this->_setConfig();
 		$this->_loadModel();
 	}
 
+	/**
+	 * Sets datasource config
+	 */
 	protected function _setConfig() {
 		Configure::delete('ElasticsearchSource');
 		Configure::load('ElasticsearchSource.ElasticsearchSource');
 		include App::pluginPath('ElasticsearchSource') . 'Test' . DS . 'Data' . DS . 'config.php';
 	}
 
+	/**
+	 * Load model
+	 *
+	 * @param array $config_name
+	 * @param array $config
+	 */
 	protected function _loadModel($config_name = 'testElasticsearchSource', $config = array()) {
 		$db_configs = ConnectionManager::enumConnectionObjects();
 
@@ -60,7 +80,6 @@ abstract class ElasticsearchTest extends CakeTestCase {
 		$config+=array('prefix' => '');
 
 		ConnectionManager::create($config_name, $config);
-		$this->Elasticsearch = new Elasticsearch(false, null, $config_name);
 	}
 
 }
