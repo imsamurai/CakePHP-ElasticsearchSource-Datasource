@@ -68,7 +68,10 @@ class ElasticsearchConnection extends HttpSourceConnection {
 			$response = $this->_decode();
 			return Hash::get($response, 'error');
 		} catch (Exception $Exception) {
-			return parent::getTook();
+			if ($this->_Response && trim($this->_Response->body())) {
+				return $this->_Response->body();
+			}
+			return parent::_extractRemoteError();
 		}
 	}
 

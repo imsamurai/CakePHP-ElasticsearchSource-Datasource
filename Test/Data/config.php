@@ -12,7 +12,12 @@
  */
 $CF = HttpSourceConfigFactory::instance();
 $Config = $CF->load('ElasticsearchSource');
-$Config->endpoint(2)
+$Config->endpoint(3)
+		->addCondition($CF->condition()->name('title'))
+		->addCondition($CF->condition()->name('description'))
+		->addCondition($CF->condition()->name('rank'));
+
+$Config->endpoint(4)
 		->addCondition($CF->condition()->name('title'))
 		->addCondition($CF->condition()->name('description'))
 		->addCondition($CF->condition()->name('rank'));

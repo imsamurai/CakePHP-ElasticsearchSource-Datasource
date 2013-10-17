@@ -7,15 +7,15 @@
  * Format: http://book.cakephp.org/2.0/en/development/testing.html
  *
  */
-require_once App::pluginPath('ElasticsearchSource') . 'Test' . DS . 'Data' . DS . 'models.php';
+App::uses('ElasticsearchTest', 'ElasticsearchSource.Test/');
 
 /**
- * Tests
+ * Tests documents api - search/get/delete/update/create
  *
  * @package ElasticsearchSource
  * @subpackage Test
  */
-class ElasticsearchTest extends CakeTestCase {
+class ElasticsearchDocumentsTest extends ElasticsearchTest {
 
 	/**
 	 * Fixtures
@@ -26,54 +26,12 @@ class ElasticsearchTest extends CakeTestCase {
 		'plugin.ElasticsearchSource.ElasticsearchArticle',
 	);
 
-	/**
-	 * Elasticsearch Model
-	 *
-	 * @var Elasticsearch
-	 */
-	public $Elasticsearch = null;
-
-	public function __construct($name = NULL, array $data = array(), $dataName = '') {
-		$this->_setConfig();
-		$this->_loadModel();
-		parent::__construct($name, $data, $dataName);
-	}
-
-	public function setUp() {
-		parent::setUp();
-		$this->_setConfig();
-		$this->_loadModel();
-	}
-
-	protected function _setConfig() {
-		Configure::delete('ElasticsearchSource');
-		Configure::load('ElasticsearchSource.ElasticsearchSource');
-		include App::pluginPath('ElasticsearchSource') . 'Test' . DS . 'Data' . DS . 'config.php';
-	}
-
 	protected function _loadModel($config_name = 'testElasticsearchSource', $config = array()) {
-		$db_configs = ConnectionManager::enumConnectionObjects();
-
-		if (!empty($db_configs['elasticsearchTest'])) {
-			$TestDS = ConnectionManager::getDataSource('elasticsearchTest');
-			$config += $TestDS->config;
-		} else {
-			$config += array(
-				'datasource' => 'ElasticsearchSource.Http/ElasticsearchSource',
-				'host' => '127.0.0.1',
-				'port' => 9200,
-				'timeout' => 5
-			);
-		}
-
-		$config+=array('prefix' => '');
-
-		ConnectionManager::create($config_name, $config);
-		$this->Elasticsearch = new Elasticsearch(false, null, $config_name);
+		parent::_loadModel();
+		$this->Elasticsearch->setSource('search');
 	}
 
 	public function test_search_document() {
-		$this->Elasticsearch->setSource('search');
 		$params = array(
 			'conditions' => array(
 				'query' => array(
@@ -89,12 +47,28 @@ class ElasticsearchTest extends CakeTestCase {
 		$result = $this->Elasticsearch->find('first', $params);
 		$this->assertNotEqual($result, false);
 		$this->assertCount(1, $result);
+		$this->assertEqual($result[$this->Elasticsearch->alias]['id'], 1);
 		debug($result);
 	}
 
-	public function test_add_document() {
-		$this->Elasticsearch->setSource('search');
+	public function test_get_document() {
+		$params = array(
+			'conditions' => array(
+				'id' => 2,
+				'index' => 'test_index',
+				'type' => 'test_type'
+			),
+			'fields' => array('title', 'rank', 'id')
+		);
 
+		$result = $this->Elasticsearch->find('first', $params);
+		$this->assertNotEqual($result, false);
+		$this->assertCount(1, $result);
+		$this->assertEqual($result[$this->Elasticsearch->alias]['id'], 2);
+		debug($result);
+	}
+
+	public function test_update_document() {
 		$params = array(
 			"title" => "Testaaa",
 			"description" => 'test descr',
@@ -117,6 +91,35 @@ class ElasticsearchTest extends CakeTestCase {
 					)
 				),
 				'index' => 'test_index'
+			)
+		));
+		debug($resultCheck);
+		$this->assertNotEqual($resultCheck, false);
+		$this->assertCount(1, $resultCheck);
+	}
+
+	public function test_create_document() {
+		$params = array(
+			"title" => "Testaaattt",
+			"description" => 'test descr 123',
+			"index" => "test_index",
+			"type" => "test_type",
+			"refresh" => 1
+		);
+		$this->Elasticsearch->create();
+		$result = $this->Elasticsearch->save($params);
+		debug($result);
+		$this->assertNotEqual($result, false);
+
+		$resultCheck = $this->Elasticsearch->find('first', array(
+			'conditions' => array(
+				'query' => array(
+					"ids" => array(
+						"type" => $params['type'],
+						"values" => array($result[$this->Elasticsearch->alias]['id'])
+					)
+				),
+				'index' => $params['index']
 			)
 		));
 		debug($resultCheck);

@@ -25,17 +25,34 @@ $Config
 				->id(1)
 				->methodRead()
 				->table('search')
+				->path(':index/:type/:id')
+				->addCondition($CF->condition()->name('index')->sendInQuery()->required())
+				->addCondition($CF->condition()->name('type')->sendInQuery()->required())
+				->addCondition($CF->condition()->name('id')->sendInQuery()->required())
+				->result($CF->result()->map(function($data) {
+							return array((array) Hash::get($data, '_source') + array(
+							'id' => $data['_id'],
+							'type' => $data['_type'],
+							'index' => $data['_index']
+							));
+						}))
+		)
+		->add(
+				$CF->endpoint()
+				->id(2)
+				->methodRead()
+				->table('search')
 				->path(':index/:type/_search')
-				->addCondition($CF->condition()->name('query'))
-				->addCondition($CF->condition()->name('filter'))
-				->addCondition($CF->condition()->name('facets'))
-				->addCondition($CF->condition()->name('hobbies'))
-				->addCondition($CF->condition()->name('terms'))
-				->addCondition($CF->condition()->name('fields'))
-				->addCondition($CF->condition()->name('size'))
-				->addCondition($CF->condition()->name('from'))
-				->addCondition($CF->condition()->name('sort'))
-				->addCondition($CF->condition()->name('fields'))
+				->addCondition($CF->condition()->name('query')->sendInBody())
+				->addCondition($CF->condition()->name('filter')->sendInBody())
+				->addCondition($CF->condition()->name('facets')->sendInBody())
+				->addCondition($CF->condition()->name('hobbies')->sendInBody())
+				->addCondition($CF->condition()->name('terms')->sendInBody())
+				->addCondition($CF->condition()->name('fields')->sendInBody())
+				->addCondition($CF->condition()->name('size')->sendInBody())
+				->addCondition($CF->condition()->name('from')->sendInBody())
+				->addCondition($CF->condition()->name('sort')->sendInBody())
+				->addCondition($CF->condition()->name('fields')->sendInBody())
 				->addCondition($CF->condition()->name('index')->sendInQuery()->defaults(''))
 				->addCondition($CF->condition()->name('type')->sendInQuery()->defaults(''))
 				->readParams(array(
@@ -57,6 +74,7 @@ $Config
 							return $result;
 						}))
 		)
+
 		/**
 		 * Indexing
 		 *
@@ -64,7 +82,7 @@ $Config
 		 */
 		->add(
 				$CF->endpoint()
-				->id(2)
+				->id(3)
 				->methodUpdate()
 				->table('search')
 				->path(':index/:type/:id')
@@ -86,12 +104,13 @@ $Config
 		)
 		->add(
 				$CF->endpoint()
-				->id(3)
+				->id(4)
 				->methodCreate()
 				->table('search')
 				->path(':index/:type')
 				->addCondition($CF->condition()->name('index')->sendInQuery()->required())
 				->addCondition($CF->condition()->name('type')->sendInQuery()->required())
+				->addCondition($CF->condition()->name('id')->length(100))
 				->addCondition($CF->condition()->name('routing')->sendInQuery())
 				->addCondition($CF->condition()->name('parent')->sendInQuery())
 				->addCondition($CF->condition()->name('timestamp')->sendInQuery())
@@ -102,6 +121,15 @@ $Config
 				->addCondition($CF->condition()->name('replication')->sendInQuery())
 				->addCondition($CF->condition()->name('refresh')->sendInQuery())
 				->addCondition($CF->condition()->name('timeout')->sendInQuery())
+				->result($CF->result()->map(function($data, Model $Model) {
+							if (!empty($data['ok'])) {
+								$Model->id = $data['_id'];
+								return $data;
+							} else {
+								return false;
+							}
+
+						}))
 		)
 
 
