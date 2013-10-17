@@ -23,7 +23,7 @@ class ElasticsearchArticleFixture extends HttpSourceTestFixture {
 	 *
 	 * @var string
 	 */
-	public $useDbConfig ="test";
+	public $useDbConfig ="testElasticsearchSource";
 
 	/**
 	 * {@inheritdoc}

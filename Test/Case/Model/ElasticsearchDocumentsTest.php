@@ -127,4 +127,30 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 		$this->assertCount(1, $resultCheck);
 	}
 
+	public function test_delete_document() {
+		$params = array(
+			"index" => "test_index",
+			"type" => "test_type",
+			"id" => 3
+		);
+
+		$result = $this->Elasticsearch->deleteAll($params);
+		debug($result);
+		$this->assertNotEqual($result, false);
+
+		$resultCheck = $this->Elasticsearch->find('first', array(
+			'conditions' => array(
+				'query' => array(
+					"ids" => array(
+						"type" => $params['type'],
+						"values" => array($params['id'])
+					)
+				),
+				'index' => $params['index']
+			)
+		));
+		debug($resultCheck);
+		$this->assertNotEqual($resultCheck, true);
+	}
+
 }

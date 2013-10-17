@@ -29,7 +29,9 @@ $Config/*
 				->addCondition($CF->condition()->name('type')->required())
 				->addCondition($CF->condition()->name('id')->required())
 				->addCondition($CF->condition()->name('realtime'))
-				->addCondition($CF->condition()->name('fields')->map(function($fields) { return implode(',', $fields); }))
+				->addCondition($CF->condition()->name('fields')->map(function($fields) {
+							return implode(',', $fields);
+						}))
 				->addCondition($CF->condition()->name('routing'))
 				->addCondition($CF->condition()->name('preference'))
 				->addCondition($CF->condition()->name('refresh'))
@@ -138,13 +140,40 @@ $Config/*
 				->result($CF->result()->map(function($data, Model $Model) {
 							if (!empty($data['ok'])) {
 								$Model->id = $data['_id'];
-								return $data;
-							} else {
-								return false;
+								return array('ok' => $data['ok']);
 							}
+							return false;
 						}))
 		)
-
+		/**
+		 * Indexing
+		 *
+		 * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-delete.html
+		 */
+		->add(
+				$CF->endpoint()
+				->id(5)
+				->methodDelete()
+				->table('search')
+				->path(':index/:type/:id')
+				->addCondition($CF->condition()->name('index')->sendInQuery()->required())
+				->addCondition($CF->condition()->name('type')->sendInQuery()->required())
+				->addCondition($CF->condition()->name('id')->sendInQuery()->length(100)->required())
+				->addCondition($CF->condition()->name('version')->sendInQuery())
+				->addCondition($CF->condition()->name('routing')->sendInQuery())
+				->addCondition($CF->condition()->name('parent')->sendInQuery())
+				->addCondition($CF->condition()->name('distributed')->sendInQuery())
+				->addCondition($CF->condition()->name('consistency')->sendInQuery())
+				->addCondition($CF->condition()->name('replication')->sendInQuery())
+				->addCondition($CF->condition()->name('refresh')->sendInQuery())
+				->result($CF->result()->map(function($data, Model $Model) {
+							if (!empty($data['ok'])) {
+								$Model->id = $data['_id'];
+								return array('ok' => $data['ok']);
+							}
+							return false;
+						}))
+		)
 
 
 
