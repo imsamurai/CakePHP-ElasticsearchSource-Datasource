@@ -1,4 +1,4 @@
-ElasticsearchSource Plugin
+ElasticsearchSource Plugin [![Build Status](https://travis-ci.org/imsamurai/CakePHP-ElasticsearchSource-Datasource.png?branch=master)](https://travis-ci.org/imsamurai/CakePHP-ElasticsearchSource-Datasource)
 ==========================
 
 CakePHP ElasticsearchSource is DataSource Plugin  for [Elasticsearch](http://www.elasticsearch.org/)
@@ -32,7 +32,7 @@ public $elasticsearch = array(
         'host' => 'example.com',
         'port' => 'some port'
 );
-
+```
 Then make model
 
 ```
@@ -41,7 +41,6 @@ Then make model
 ```php
 public $useDbConfig = 'elasticsearch';
 public $useTable = '<desired endpoint, for ex: "_search">';
-
 ```
 
 ### Step 4: Load plugin
@@ -52,7 +51,6 @@ public $useTable = '<desired endpoint, for ex: "_search">';
 ```php
 CakePlugin::load('HttpSource', array('bootstrap' => true, 'routes' => false));
 CakePlugin::load('ElasticsearchSource');
-
 ```
 #Tests
 
