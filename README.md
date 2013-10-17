@@ -1,4 +1,4 @@
-ElasticsearchSource Plugin
+ElasticsearchSource Plugin [![Build Status](https://travis-ci.org/imsamurai/CakePHP-ElasticsearchSource-Datasource.png?branch=master)](https://travis-ci.org/imsamurai/CakePHP-ElasticsearchSource-Datasource)
 ==========================
 
 CakePHP ElasticsearchSource is DataSource Plugin  for [Elasticsearch](http://www.elasticsearch.org/)
