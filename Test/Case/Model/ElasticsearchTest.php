@@ -42,16 +42,10 @@ class ElasticsearchTest extends CakeTestCase {
 	public function setUp() {
 		parent::setUp();
 		//indexing...
-		sleep(5);
+		sleep(1);
 		$this->_setConfig();
 		$this->_loadModel();
 	}
-
-	public function tearDown() {
-		parent::tearDown();
-		debug(ConnectionManager::getDataSource('testElasticsearchSource')->getLog(false, false));
-	}
-
 
 	protected function _setConfig() {
 		Configure::delete('ElasticsearchSource');
@@ -115,7 +109,7 @@ class ElasticsearchTest extends CakeTestCase {
 		debug($result);
 		$this->assertNotEqual($result, false);
 		//indexing...
-		sleep(5);
+		sleep(1);
 		$resultCheck = $this->Elasticsearch->find('first', array(
 			'conditions' => array(
 				'query' => array(

@@ -55,9 +55,7 @@ class ElasticsearchConnection extends HttpSourceConnection {
 			$request['body'] = json_encode($request['body']);
 		}
 
-		$result = parent::request($request);
-		debug($this->_Response['raw']);
-		return $result;
+		return parent::request($request);
 	}
 
 	/**
