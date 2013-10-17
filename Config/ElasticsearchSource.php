@@ -34,7 +34,6 @@ $Config/*
 				->addCondition($CF->condition()->name('preference'))
 				->addCondition($CF->condition()->name('refresh'))
 				->addCondition($CF->condition()->name('distributed'))
-				->addCondition($CF->condition()->name('distributed'))
 				->addCondition($CF->condition()->name('_source')->defaults(''))
 				->readParams(array(
 					'fields' => 'fields'
