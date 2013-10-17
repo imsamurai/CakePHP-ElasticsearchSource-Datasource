@@ -57,6 +57,11 @@ $Config
 							return $result;
 						}))
 		)
+		/**
+		 * Indexing
+		 *
+		 * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-index_.html
+		 */
 		->add(
 				$CF->endpoint()
 				->id(2)
@@ -66,8 +71,37 @@ $Config
 				->addCondition($CF->condition()->name('index')->sendInQuery()->required())
 				->addCondition($CF->condition()->name('type')->sendInQuery()->required())
 				->addCondition($CF->condition()->name('id')->sendInQuery()->length(100)->required())
+				->addCondition($CF->condition()->name('version')->sendInQuery())
+				->addCondition($CF->condition()->name('op_type')->sendInQuery())
+				->addCondition($CF->condition()->name('routing')->sendInQuery())
+				->addCondition($CF->condition()->name('parent')->sendInQuery())
 				->addCondition($CF->condition()->name('timestamp')->sendInQuery())
 				->addCondition($CF->condition()->name('ttl')->sendInQuery())
+				->addCondition($CF->condition()->name('percolate')->sendInQuery())
+				->addCondition($CF->condition()->name('distributed')->sendInQuery())
+				->addCondition($CF->condition()->name('consistency')->sendInQuery())
+				->addCondition($CF->condition()->name('replication')->sendInQuery())
+				->addCondition($CF->condition()->name('refresh')->sendInQuery())
+				->addCondition($CF->condition()->name('timeout')->sendInQuery())
+		)
+		->add(
+				$CF->endpoint()
+				->id(3)
+				->methodCreate()
+				->table('search')
+				->path(':index/:type')
+				->addCondition($CF->condition()->name('index')->sendInQuery()->required())
+				->addCondition($CF->condition()->name('type')->sendInQuery()->required())
+				->addCondition($CF->condition()->name('routing')->sendInQuery())
+				->addCondition($CF->condition()->name('parent')->sendInQuery())
+				->addCondition($CF->condition()->name('timestamp')->sendInQuery())
+				->addCondition($CF->condition()->name('ttl')->sendInQuery())
+				->addCondition($CF->condition()->name('percolate')->sendInQuery())
+				->addCondition($CF->condition()->name('distributed')->sendInQuery())
+				->addCondition($CF->condition()->name('consistency')->sendInQuery())
+				->addCondition($CF->condition()->name('replication')->sendInQuery())
+				->addCondition($CF->condition()->name('refresh')->sendInQuery())
+				->addCondition($CF->condition()->name('timeout')->sendInQuery())
 		)
 
 

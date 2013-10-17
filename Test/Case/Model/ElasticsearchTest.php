@@ -41,8 +41,6 @@ class ElasticsearchTest extends CakeTestCase {
 
 	public function setUp() {
 		parent::setUp();
-		//indexing...
-		sleep(1);
 		$this->_setConfig();
 		$this->_loadModel();
 	}
@@ -102,14 +100,14 @@ class ElasticsearchTest extends CakeTestCase {
 			"description" => 'test descr',
 			"index" => "test_index",
 			"type" => "test_type",
-			"id" => mt_rand()
+			"id" => mt_rand(),
+			"refresh" => 1
 		);
 
 		$result = $this->Elasticsearch->save($params);
 		debug($result);
 		$this->assertNotEqual($result, false);
-		//indexing...
-		sleep(1);
+
 		$resultCheck = $this->Elasticsearch->find('first', array(
 			'conditions' => array(
 				'query' => array(
