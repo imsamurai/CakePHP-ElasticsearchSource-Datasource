@@ -41,4 +41,11 @@ class ElasticsearchIndicesStatus extends HttpSourceModel {
 	 */
 	public $useDbConfig = 'elasticsearch';
 
+	/**
+	 * {@inheritdoc}
+	 *
+	 * @var string
+	 */
+	public $primaryKey = 'name';
+
 }
