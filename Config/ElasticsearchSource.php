@@ -175,8 +175,26 @@ $Config/*
 						}))
 		)
 
-
-
+		/**
+		 *  Indices status
+		 *
+		 * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-status.html
+		 */
+		->add(
+				$CF->endpoint()
+				->id(6)
+				->methodRead()
+				->table('indices_status')
+				->path(':index/_status')
+				->addCondition($CF->condition()->name('index')->sendInQuery()->defaults(''))
+				->result($CF->result()->map(function($data, Model $Model) {
+							$results = array();
+							foreach ((array)Hash::get($data, 'indices') as $name => $info) {
+								$results[] = compact('name') + $info;
+							}
+							return $results;
+						}))
+		)
 ;
 
 
