@@ -63,4 +63,17 @@ class ElasticsearchSource extends HttpSource {
 
 	}
 
+	/**
+	 * {@inheritdoc}
+	 *
+	 * @param Model $model
+	 * @param array $result
+	 * @param string $request_method
+	 * @param bool $force
+	 * @return array
+	 */
+	protected function _extractResult(Model $model, array $result, $request_method, $force = false) {
+		return parent::_extractResult($model, $result, $request_method, true);
+	}
+
 }
