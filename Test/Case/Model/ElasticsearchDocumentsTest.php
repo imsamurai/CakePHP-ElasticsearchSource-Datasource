@@ -74,6 +74,24 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 		$this->assertEqual($result[$this->Elasticsearch->alias]['id'], 2);
 		debug($result);
 	}
+	
+	public function test_get_multiple_documents() {
+		$params = array(
+			'conditions' => array(
+				'id' => array(1, 2),
+				'index' => 'test_index',
+				'type' => 'test_type'
+			)
+		);
+
+		$results = $this->Elasticsearch->find('all', $params);
+		debug($results);
+		$this->assertNotEqual($results, false);
+		$this->assertCount(2, $results);
+		foreach ($results as $result) {
+			$this->assertTrue(in_array($result[$this->Elasticsearch->alias]['id'], $params['conditions']['id']));
+		}
+	}
 
 	public function test_update_document() {
 		$params = array(

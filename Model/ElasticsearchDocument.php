@@ -44,4 +44,42 @@ class ElasticsearchDocument extends HttpSourceModel {
 	 */
 	public $useDbConfig = 'elasticsearch';
 
+	/**
+	 * {@inheritdoc}
+	 * 
+	 * @param array $queryData
+	 * @return array
+	 */
+	public function beforeFind($queryData) {
+		parent::beforeFind($queryData);
+		$this->_mapMultipleIds($queryData);
+
+		return $queryData;
+	}
+
+	/**
+	 * Put ids in right place in case of multiple ids
+	 * 
+	 * @param array $queryData
+	 */
+	protected function _mapMultipleIds(array &$queryData) {
+		$idsKeys = array(
+			$this->primaryKey,
+			"{$this->alias}.{$this->primaryKey}"
+		);
+
+		foreach ($idsKeys as $idsKey) {
+			if (!isset($queryData['conditions'][$idsKey])) {
+				continue;
+			}
+			$ids = $queryData['conditions'][$idsKey];
+			if (!is_array($ids)) {
+				break;
+			}
+			unset($queryData['conditions'][$idsKey]);
+
+			$queryData['conditions'] = Hash::insert($queryData['conditions'], 'query.ids.values', $ids);
+		}
+	}
+
 }
