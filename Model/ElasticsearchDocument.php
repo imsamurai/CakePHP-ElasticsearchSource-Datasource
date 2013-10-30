@@ -73,7 +73,7 @@ class ElasticsearchDocument extends HttpSourceModel {
 				continue;
 			}
 			
-			$queryData['conditions'] = Hash::insert($queryData['conditions'], 'query.ids.values', $queryData['conditions'][$idsKey]);
+			$queryData['conditions'] = Hash::insert($queryData['conditions'], 'query.ids.values', (array) $queryData['conditions'][$idsKey]);
 			unset($queryData['conditions'][$idsKey]);
 		}
 	}
