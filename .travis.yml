@@ -30,6 +30,13 @@ before_script:
         'prefix' => '',
         'encoding' => 'utf8'
     );
+    public \$elasticsearchTest = array(
+        'datasource' => 'ElasticsearchSource.Http/ElasticsearchSource',
+        'host' => 'localhost',
+        'prefix' => '',
+        'port' => 9200,
+        'timeout' => 5
+    );
 
     }" > ../cakephp/app/Config/database.php
   - curl -XGET '127.0.0.1:9200' -vvvv
