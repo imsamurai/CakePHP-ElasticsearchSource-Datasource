@@ -24,19 +24,13 @@ abstract class ElasticsearchTest extends CakeTestCase {
 	 * @var Elasticsearch
 	 */
 	public $Elasticsearch = null;
-
+	
 	/**
 	 * {@inheritdoc}
 	 *
-	 * @param string $name
-	 * @param array $data
-	 * @param string $dataName
+	 * @var bool
 	 */
-	public function __construct($name = NULL, array $data = array(), $dataName = '') {
-		$this->_setConfig();
-		$this->_loadModel();
-		parent::__construct($name, $data, $dataName);
-	}
+	public $autoFixtures = false;
 
 	/**
 	 * {@inheritdoc}
@@ -45,6 +39,7 @@ abstract class ElasticsearchTest extends CakeTestCase {
 		parent::setUp();
 		$this->_setConfig();
 		$this->_loadModel();
+		$this->loadFixtures('ElasticsearchArticle');
 	}
 
 	/**
