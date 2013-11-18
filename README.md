@@ -29,8 +29,15 @@ then update submodules:
 ```php
 public $elasticsearch = array(
   'datasource' => 'ElasticsearchSource.Http/ElasticsearchSource',
-        'host' => 'example.com',
-        'port' => 'some port'
+  'host' => 'example.com',
+  'port' => 'some port'
+);
+public $elasticsearchTest = array(
+  'datasource' => 'ElasticsearchSource.Http/ElasticsearchSource',
+  'host' => 'localhost',
+  'prefix' => '',
+  'port' => 9200,
+  'timeout' => 5
 );
 ```
 Then make model
