@@ -95,8 +95,8 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 
 	public function test_update_document() {
 		$params = array(
-			"title" => "Testaaa",
-			"description" => 'test descr',
+			"title" => "Test update",
+			"description" => 'test update document '. __FUNCTION__ .'|'. __LINE__,
 			"index" => "test_index",
 			"type" => "test_type",
 			"id" => mt_rand(),
@@ -121,12 +121,14 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 		debug($resultCheck);
 		$this->assertNotEqual($resultCheck, false);
 		$this->assertCount(1, $resultCheck);
+		//not forget to delete document
+		$this->test_delete_document($params['id']);
 	}
 
 	public function test_create_document() {
 		$params = array(
-			"title" => "Testaaattt",
-			"description" => 'test descr 123',
+			"title" => "Test create",
+			"description" => 'test create '. __FUNCTION__ .'|'. __LINE__,
 			"index" => "test_index",
 			"type" => "test_type",
 			"refresh" => 1
@@ -150,13 +152,15 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 		debug($resultCheck);
 		$this->assertNotEqual($resultCheck, false);
 		$this->assertCount(1, $resultCheck);
+		//not forget to delete document
+		$this->test_delete_document($result[$this->Elasticsearch->alias]['id']);
 	}
 
-	public function test_delete_document() {
+	public function test_delete_document($id = null) {
 		$params = array(
 			"index" => "test_index",
 			"type" => "test_type",
-			"id" => 3
+			"id" => is_null($id) ? 3 : $id
 		);
 
 		$result = $this->Elasticsearch->deleteAll($params);
