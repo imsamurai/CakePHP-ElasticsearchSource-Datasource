@@ -9,7 +9,7 @@
  * @package ElasticsearchSource
  * @subpackage Document
  */
-App::uses('HttpSourceModel', 'HttpSource.Model');
+App::uses('ElasticsearchModel', 'ElasticsearchSource.Model');
 
 /**
  * Indices Status
@@ -21,7 +21,7 @@ App::uses('HttpSourceModel', 'HttpSource.Model');
  * @package ElasticsearchSource
  * @subpackage Indices
  */
-class ElasticsearchDocument extends HttpSourceModel {
+class ElasticsearchDocument extends ElasticsearchModel {
 
 	/**
 	 * {@inheritdoc}
@@ -36,14 +36,7 @@ class ElasticsearchDocument extends HttpSourceModel {
 	 * @var string
 	 */
 	public $useTable = 'document';
-
-	/**
-	 * {@inheritdoc}
-	 *
-	 * @var string
-	 */
-	public $useDbConfig = 'elasticsearch';
-
+	
 	/**
 	 * {@inheritdoc}
 	 * 

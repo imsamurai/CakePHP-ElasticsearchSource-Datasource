@@ -36,6 +36,7 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 	protected function _loadModel($config_name = 'testElasticsearchSource', $config = array()) {
 		parent::_loadModel($config_name, $config);
 		$this->Elasticsearch = new ElasticsearchDocument(false, null, $config_name);
+		$this->Elasticsearch->setSource('document', 'test_index', 'test_type');
 	}
 
 	public function test_search_document() {

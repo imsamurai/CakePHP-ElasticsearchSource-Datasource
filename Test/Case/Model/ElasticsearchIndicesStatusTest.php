@@ -39,7 +39,6 @@ class ElasticsearchIndicesStatusTest extends ElasticsearchTest {
 	}
 
 	public function test_status() {
-
 		$result = $this->Elasticsearch->find('all', array('fields'=> array('name')));
 		$this->assertNotEqual($result, false);
 		$this->assertTrue(in_array('test_index', Hash::extract($result, "{n}.{$this->Elasticsearch->alias}.name"), true));
