@@ -39,6 +39,7 @@ class ElasticsearchModel extends HttpSourceModel {
 
 	/**
 	 * {@inheritdoc}
+	 * With index/type support
 	 * 
 	 * @param string $tableName
 	 * @param string $indexName
@@ -46,9 +47,55 @@ class ElasticsearchModel extends HttpSourceModel {
 	 * @throws MissingTableException when database table $tableName is not found on data source
 	 */
 	public function setSource($tableName, $indexName = null, $typeName = null) {
-		$this->useIndex = $indexName;
-		$this->useType = $typeName;
+		if ($indexName) {
+			$this->useIndex = $indexName;
+		}
+		if ($typeName) {
+			$this->useType = $typeName;
+		}
 		parent::setSource($tableName);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 * With index/type support
+	 * 
+	 * @param array $queryData
+	 * @return array
+	 */
+	public function beforeFind($queryData) {
+		$queryData = Hash::insert($queryData, 'conditions.index', $this->useIndex);
+		$queryData = Hash::insert($queryData, 'conditions.type', $this->useType);
+		return $queryData;
+	}
+
+	/**
+	 * {@inheritdoc}
+	 * With index/type support
+	 * 
+	 * @param array $options
+	 * @return bool
+	 */
+	public function beforeSave($options = array()) {
+		$this->set('index', $this->useIndex);
+		$this->set('type', $this->useType);
+		return parent::beforeSave($options);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 * With index/type support
+	 * 
+	 * @param integer|string $id ID of record to delete
+	 * @param boolean $cascade Set to true to delete records that depend on this record
+	 * @return boolean True on success
+	 */
+	public function delete($id = null, $cascade = true) {
+		return $this->deleteAll(array(
+					$this->primaryKey => $id,
+					'index' => $this->useIndex,
+					'type' => $this->useType
+						), $cascade);
 	}
 
 }

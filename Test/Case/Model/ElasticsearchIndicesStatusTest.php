@@ -29,21 +29,19 @@ class ElasticsearchIndicesStatusTest extends ElasticsearchTest {
 
 	/**
 	 * {@inheritdoc}
-	 *
-	 * @param array $config_name
-	 * @param array $config
 	 */
-	protected function _loadModel($config_name = 'testElasticsearchSource', $config = array()) {
-		parent::_loadModel($config_name, $config);
-		$this->Elasticsearch = new ElasticsearchIndicesStatus(false, null, $config_name);
+	public function setUp() {
+		parent::setUp();
+		$this->loadFixtures('ElasticsearchArticle');
+		$this->Elasticsearch = new ElasticsearchIndicesStatus(false, null, 'elasticsearchTest');
+		$this->Elasticsearch->setSource('indices_status', 'test_index', 'test_type');
 	}
 
 	public function test_status() {
-		$result = $this->Elasticsearch->find('all', array('fields'=> array('name')));
+		$result = $this->Elasticsearch->find('all', array('fields' => array('name')));
+		debug($result);
 		$this->assertNotEqual($result, false);
 		$this->assertTrue(in_array('test_index', Hash::extract($result, "{n}.{$this->Elasticsearch->alias}.name"), true));
-		debug($result);
 	}
-
 
 }

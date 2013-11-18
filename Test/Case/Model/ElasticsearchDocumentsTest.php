@@ -29,13 +29,11 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 
 	/**
 	 * {@inheritdoc}
-	 *
-	 * @param array $config_name
-	 * @param array $config
 	 */
-	protected function _loadModel($config_name = 'testElasticsearchSource', $config = array()) {
-		parent::_loadModel($config_name, $config);
-		$this->Elasticsearch = new ElasticsearchDocument(false, null, $config_name);
+	public function setUp() {
+		parent::setUp();
+		$this->loadFixtures('ElasticsearchArticle');
+		$this->Elasticsearch = new ElasticsearchDocument(false, null, 'elasticsearchTest');
 		$this->Elasticsearch->setSource('document', 'test_index', 'test_type');
 	}
 
@@ -44,8 +42,7 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 			'conditions' => array(
 				'query' => array(
 					"term" => array("title" => "guratabaata")
-				),
-				'index' => 'test_index'
+				)
 			),
 			'fields' => array('title', 'rank', 'id'),
 			'order' => array('rank' => 'desc'),
@@ -62,9 +59,7 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 	public function test_get_document() {
 		$params = array(
 			'conditions' => array(
-				'id' => 2,
-				'index' => 'test_index',
-				'type' => 'test_type'
+				'id' => 2
 			),
 			'fields' => array('title', 'rank', 'id')
 		);
@@ -79,9 +74,7 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 	public function test_get_multiple_documents() {
 		$params = array(
 			'conditions' => array(
-				'id' => array(1, 2),
-				'index' => 'test_index',
-				'type' => 'test_type'
+				'id' => array(1, 2)
 			)
 		);
 
@@ -98,8 +91,6 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 		$params = array(
 			"title" => "Test update",
 			"description" => 'test update document '. __FUNCTION__ .'|'. __LINE__,
-			"index" => "test_index",
-			"type" => "test_type",
 			"id" => mt_rand(),
 			"refresh" => 1
 		);
@@ -115,8 +106,7 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 						"type" => "test_type",
 						"values" => array($params['id'])
 					)
-				),
-				'index' => 'test_index'
+				)
 			)
 		));
 		debug($resultCheck);
@@ -130,8 +120,6 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 		$params = array(
 			"title" => "Test create",
 			"description" => 'test create '. __FUNCTION__ .'|'. __LINE__,
-			"index" => "test_index",
-			"type" => "test_type",
 			"refresh" => 1
 		);
 		$this->Elasticsearch->create();
@@ -143,11 +131,9 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 			'conditions' => array(
 				'query' => array(
 					"ids" => array(
-						"type" => $params['type'],
 						"values" => array($result[$this->Elasticsearch->alias]['id'])
 					)
-				),
-				'index' => $params['index']
+				)
 			)
 		));
 		debug($resultCheck);
@@ -158,13 +144,9 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 	}
 
 	public function test_delete_document($id = null) {
-		$params = array(
-			"index" => "test_index",
-			"type" => "test_type",
-			"id" => is_null($id) ? 3 : $id
-		);
+		$id = is_null($id) ? 3 : $id;
 
-		$result = $this->Elasticsearch->deleteAll($params);
+		$result = $this->Elasticsearch->delete($id);
 		debug($result);
 		$this->assertNotEqual($result, false);
 
@@ -172,11 +154,9 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 			'conditions' => array(
 				'query' => array(
 					"ids" => array(
-						"type" => $params['type'],
-						"values" => array($params['id'])
+						"values" => array($id)
 					)
 				),
-				'index' => $params['index']
 			)
 		));
 		debug($resultCheck);

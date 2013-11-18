@@ -44,7 +44,7 @@ class ElasticsearchDocument extends ElasticsearchModel {
 	 * @return array
 	 */
 	public function beforeFind($queryData) {
-		parent::beforeFind($queryData);
+		$queryData = parent::beforeFind($queryData);
 		$this->_mapMultipleIds($queryData);
 
 		return $queryData;

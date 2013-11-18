@@ -37,44 +37,17 @@ abstract class ElasticsearchTest extends CakeTestCase {
 	 */
 	public function setUp() {
 		parent::setUp();
-		$this->_setConfig();
-		$this->_loadModel();
-		$this->loadFixtures('ElasticsearchArticle');
+		static::setConfig();
 	}
-
+	
 	/**
-	 * Sets datasource config
+	 * Sets config for source
 	 */
-	protected function _setConfig() {
+	public static function setConfig() {
 		Configure::delete('ElasticsearchSource');
 		Configure::load('ElasticsearchSource.ElasticsearchSource');
 		include App::pluginPath('ElasticsearchSource') . 'Test' . DS . 'Data' . DS . 'config.php';
 	}
-
-	/**
-	 * Load model
-	 *
-	 * @param array $config_name
-	 * @param array $config
-	 */
-	protected function _loadModel($config_name = 'testElasticsearchSource', $config = array()) {
-		$db_configs = ConnectionManager::enumConnectionObjects();
-
-		if (!empty($db_configs['elasticsearchTest'])) {
-			$TestDS = ConnectionManager::getDataSource('elasticsearchTest');
-			$config += $TestDS->config;
-		} else {
-			$config += array(
-				'datasource' => 'ElasticsearchSource.Http/ElasticsearchSource',
-				'host' => '127.0.0.1',
-				'port' => 9200,
-				'timeout' => 5
-			);
-		}
-
-		$config+=array('prefix' => '');
-
-		ConnectionManager::create($config_name, $config);
-	}
-
 }
+
+

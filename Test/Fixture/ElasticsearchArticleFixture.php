@@ -23,7 +23,7 @@ class ElasticsearchArticleFixture extends HttpSourceTestFixture {
 	 *
 	 * @var string
 	 */
-	public $useDbConfig ="testElasticsearchSource";
+	public $useDbConfig ="elasticsearchTest";
 
 	/**
 	 * {@inheritdoc}
@@ -38,9 +38,21 @@ class ElasticsearchArticleFixture extends HttpSourceTestFixture {
 	 * @var array
 	 */
 	public $records = array(
-		array("id" => 1, "title" => "guratabaata 1", "description" => "test article 1", "index" =>"test_index", "type" =>"test_type", "rank" => 1, "refresh" => 1),
-		array("id" => 2, "title" => "guratabaata 2", "description" => "test article 2", "index" =>"test_index", "type" =>"test_type", "rank" => 2, "refresh" => 1),
-		array("id" => 3, "title" => "guratabaata 3", "description" => "test article 3", "index" =>"test_index", "type" =>"test_type", "rank" => 3, "refresh" => 1)
+		array("id" => 1, "title" => "guratabaata 1", "description" => "test article 1", "rank" => 1, "refresh" => 1),
+		array("id" => 2, "title" => "guratabaata 2", "description" => "test article 2", "rank" => 2, "refresh" => 1),
+		array("id" => 3, "title" => "guratabaata 3", "description" => "test article 3", "rank" => 3, "refresh" => 1)
 	);
 
+	/**
+	 * {@inheritdoc}
+	 *
+	 * @return void
+	 * @throws MissingModelException Whe importing from a model that does not exist.
+	 */
+	public function init() {
+		ElasticsearchTest::setConfig();
+		parent::init();
+		$this->_Model->setSource('document', 'test_index', 'test_type');
+	}
+	
 }
