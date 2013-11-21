@@ -163,4 +163,11 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 		$this->assertNotEqual($resultCheck, true);
 	}
 
+	public function test_count_document() {
+
+		$this->Elasticsearch->find('all');
+		$total = $this->Elasticsearch->getDatasource()->lastCandidates();
+
+		$this->assertNotEqual($total, 0);
+	}
 }
