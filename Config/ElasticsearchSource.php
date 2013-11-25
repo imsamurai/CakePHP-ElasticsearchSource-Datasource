@@ -70,6 +70,7 @@ $Config/*
 				->addCondition($CF->condition()->name('sort')->sendInBody())
 				->addCondition($CF->condition()->name('fields')->sendInBody())
 				->addCondition($CF->condition()->name('highlight')->sendInBody())
+				->addCondition($CF->condition()->name('track_scores')->sendInBody())
 				->addCondition($CF->condition()->name('index')->sendInQuery()->defaults(''))
 				->addCondition($CF->condition()->name('type')->sendInQuery()->defaults(''))
 				->readParams(array(
