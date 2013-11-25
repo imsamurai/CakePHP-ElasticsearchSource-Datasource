@@ -89,7 +89,6 @@ $Config/*
 									'highlight' => (array) Hash::get($item, 'highlight'),
 								) +  (array) Hash::get($item, '_source') + (array) Hash::get($item, 'fields');
 							}
-							debug($result);
 							return $result;
 						}))
 		)
