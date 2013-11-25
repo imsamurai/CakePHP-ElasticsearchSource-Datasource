@@ -170,4 +170,24 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 
 		$this->assertNotEqual($total, 0);
 	}
+
+	public function test_highlight_search_document() {
+		$params = array(
+			'conditions' => array(
+				'query' => array(
+					"term" => array("title" => "guratabaata")
+				),
+				'size' => 1,
+				'highlight' => array('fields' => array('title' => new Object()))
+			),
+			'order' => array('rank' => 'desc')
+		);
+
+		$result = $this->Elasticsearch->find('all', $params);
+		debug($result);
+		$res =  Hash::extract($result, '{n}.'.$this->Elasticsearch->alias.'.highlight.title');
+
+		$this->assertNotEmpty($res);
+	}
+
 }

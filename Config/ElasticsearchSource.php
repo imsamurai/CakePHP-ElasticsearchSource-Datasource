@@ -69,6 +69,7 @@ $Config/*
 				->addCondition($CF->condition()->name('from')->sendInBody())
 				->addCondition($CF->condition()->name('sort')->sendInBody())
 				->addCondition($CF->condition()->name('fields')->sendInBody())
+				->addCondition($CF->condition()->name('highlight')->sendInBody())
 				->addCondition($CF->condition()->name('index')->sendInQuery()->defaults(''))
 				->addCondition($CF->condition()->name('type')->sendInQuery()->defaults(''))
 				->readParams(array(
@@ -80,13 +81,15 @@ $Config/*
 				->result($CF->result()->map(function($data) {
 							$result = array();
 							foreach ((array) Hash::get($data, 'hits.hits') as $item) {
-								$result[] = (array) Hash::get($item, '_source') + (array) Hash::get($item, 'fields') + array(
+								$result[] = array(
 									'id' => $item['_id'],
 									'type' => $item['_type'],
 									'index' => $item['_index'],
 									'score' => $item['_score'],
-								);
+									'highlight' => (array) Hash::get($item, 'highlight'),
+								) +  (array) Hash::get($item, '_source') + (array) Hash::get($item, 'fields');
 							}
+							debug($result);
 							return $result;
 						}))
 		)
