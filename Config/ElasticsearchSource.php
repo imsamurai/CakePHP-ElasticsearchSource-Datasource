@@ -70,6 +70,7 @@ $Config/*
 				->addCondition($CF->condition()->name('sort')->sendInBody())
 				->addCondition($CF->condition()->name('fields')->sendInBody())
 				->addCondition($CF->condition()->name('highlight')->sendInBody())
+				->addCondition($CF->condition()->name('version')->sendInBody())
 				->addCondition($CF->condition()->name('track_scores')->sendInBody())
 				->addCondition($CF->condition()->name('index')->sendInQuery()->defaults(''))
 				->addCondition($CF->condition()->name('type')->sendInQuery()->defaults(''))
@@ -87,6 +88,7 @@ $Config/*
 									'type' => $item['_type'],
 									'index' => $item['_index'],
 									'score' => $item['_score'],
+									'version' => isset($item['_version']) ? $item['_version'] : 0,
 									'highlight' => (array) Hash::get($item, 'highlight'),
 								) +  (array) Hash::get($item, '_source') + (array) Hash::get($item, 'fields');
 							}
