@@ -112,6 +112,15 @@ class ElasticsearchSource extends HttpSource {
 	}
 
 	/**
+	 * Get search time.
+	 *
+	 * @return int
+	 */
+	public function timeTook() {
+		return (int)isset($this->request_status['read']['took']) ? $this->request_status['read']['took'] : 0;
+	}
+
+	/**
 	 * Log given query.
 	 *
 	 * @return void
