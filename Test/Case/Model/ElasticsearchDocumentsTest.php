@@ -113,7 +113,7 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 		$this->assertNotEqual($resultCheck, false);
 		$this->assertCount(1, $resultCheck);
 		//not forget to delete document
-		$this->test_delete_document($params['id']);
+		$this->testDeleteDocument($params['id']);
 	}
 
 	public function testCreateDocument() {
@@ -140,7 +140,7 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 		$this->assertNotEqual($resultCheck, false);
 		$this->assertCount(1, $resultCheck);
 		//not forget to delete document
-		$this->test_delete_document($result[$this->Elasticsearch->alias]['id']);
+		$this->testDeleteDocument($result[$this->Elasticsearch->alias]['id']);
 	}
 
 	public function testDeleteDocument($id = null) {
