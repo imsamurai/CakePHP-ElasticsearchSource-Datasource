@@ -37,7 +37,7 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 		$this->Elasticsearch->setSource('document', 'test_index', 'test_type');
 	}
 
-	public function test_search_document() {
+	public function testSearchDocument() {
 		$params = array(
 			'conditions' => array(
 				'query' => array(
@@ -56,7 +56,7 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 		debug($result);
 	}
 
-	public function test_get_document() {
+	public function testGetDocument() {
 		$params = array(
 			'conditions' => array(
 				'id' => 2
@@ -70,8 +70,8 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 		$this->assertEqual($result[$this->Elasticsearch->alias]['id'], 2);
 		debug($result);
 	}
-	
-	public function test_get_multiple_documents() {
+
+	public function testGetMultipleDocuments() {
 		$params = array(
 			'conditions' => array(
 				'id' => array(1, 2)
@@ -87,10 +87,10 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 		}
 	}
 
-	public function test_update_document() {
+	public function testUpdateDocument() {
 		$params = array(
 			"title" => "Test update",
-			"description" => 'test update document '. __FUNCTION__ .'|'. __LINE__,
+			"description" => 'test update document ' . __FUNCTION__ . '|' . __LINE__,
 			"id" => mt_rand(),
 			"refresh" => 1
 		);
@@ -116,10 +116,10 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 		$this->test_delete_document($params['id']);
 	}
 
-	public function test_create_document() {
+	public function testCreateDocument() {
 		$params = array(
 			"title" => "Test create",
-			"description" => 'test create '. __FUNCTION__ .'|'. __LINE__,
+			"description" => 'test create ' . __FUNCTION__ . '|' . __LINE__,
 			"refresh" => 1
 		);
 		$this->Elasticsearch->create();
@@ -143,7 +143,7 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 		$this->test_delete_document($result[$this->Elasticsearch->alias]['id']);
 	}
 
-	public function test_delete_document($id = null) {
+	public function testDeleteDocument($id = null) {
 		$id = is_null($id) ? 3 : $id;
 
 		$result = $this->Elasticsearch->delete($id);
@@ -163,15 +163,14 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 		$this->assertNotEqual($resultCheck, true);
 	}
 
-	public function test_count_document() {
-
+	public function testCountDocument() {
 		$this->Elasticsearch->find('all');
 		$total = $this->Elasticsearch->getDatasource()->lastCandidates();
 
 		$this->assertNotEqual($total, 0);
 	}
 
-	public function test_highlight_search_document() {
+	public function testHighlightSearchDocument() {
 		$params = array(
 			'conditions' => array(
 				'query' => array(
@@ -185,7 +184,7 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 
 		$result = $this->Elasticsearch->find('all', $params);
 		debug($result);
-		$res =  Hash::extract($result, '{n}.'.$this->Elasticsearch->alias.'.highlight.title');
+		$res = Hash::extract($result, '{n}.' . $this->Elasticsearch->alias . '.highlight.title');
 
 		$this->assertNotEmpty($res);
 	}

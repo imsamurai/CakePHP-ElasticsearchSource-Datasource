@@ -38,7 +38,7 @@ class ElasticsearchSource extends HttpSource {
 	 *
 	 * @var string
 	 */
-	private $request_status = array();
+	protected $_requestStatus = array();
 
 	/**
 	 * {@inheritdoc}
@@ -57,7 +57,6 @@ class ElasticsearchSource extends HttpSource {
 	 * @param array $result
 	 */
 	protected function _emulateOrder(Model $Model, array &$result) {
-
 	}
 
 	/**
@@ -67,7 +66,6 @@ class ElasticsearchSource extends HttpSource {
 	 * @param array $result
 	 */
 	protected function _emulateLimit(Model $Model, array &$result) {
-
 	}
 
 	/**
@@ -75,31 +73,32 @@ class ElasticsearchSource extends HttpSource {
 	 *
 	 * @param Model $model
 	 * @param array $result
-	 * @param string $request_method
+	 * @param string $requestMethod
 	 * @param bool $force
 	 * @return array
 	 */
-	protected function _extractResult(Model $model, array $result, $request_method, $force = false) {
+	protected function _extractResult(Model $model, array $result, $requestMethod, $force = false) {
 		//save read info: score, total
-		$this->request_status[$request_method] = array();
-		if(static::METHOD_READ == $request_method){
+		$this->_requestStatus[$requestMethod] = array();
+		if (static::METHOD_READ == $requestMethod) {
 			$getinfo = array('took', 'timed_out', '_shards');
 			$gethits = array('total', 'max_score');
-			foreach($getinfo as $index_name)
-				if(isset($result[$index_name])){
-					$this->request_status[$request_method][$index_name] = $result[$index_name];
-			}
-			if(isset($result['hits'])){
-				foreach($gethits as $index_name)
-					if(isset($result['hits'][$index_name])){
-						$this->request_status[$request_method][$index_name] = $result['hits'][$index_name];
+			foreach ($getinfo as $indexName)
+				if (isset($result[$indexName])) {
+					$this->_requestStatus[$requestMethod][$indexName] = $result[$indexName];
 				}
+			if (isset($result['hits'])) {
+				foreach ($gethits as $indexName)
+					if (isset($result['hits'][$indexName])) {
+						$this->_requestStatus[$requestMethod][$indexName] = $result['hits'][$indexName];
+					}
 			}
-		}else{  //other info like delete, update
-			$this->request_status[$request_method] = $result;
+		} else {
+			//other info like delete, update
+			$this->_requestStatus[$requestMethod] = $result;
 		}
 
-		return parent::_extractResult($model, $result, $request_method, true);
+		return parent::_extractResult($model, $result, $requestMethod, true);
 	}
 
 	/**
@@ -108,7 +107,7 @@ class ElasticsearchSource extends HttpSource {
 	 * @return int
 	 */
 	public function lastCandidates() {
-		return (int)isset($this->request_status['read']['total']) ? $this->request_status['read']['total'] : 0;
+		return (int)isset($this->_requestStatus['read']['total']) ? $this->_requestStatus['read']['total'] : 0;
 	}
 
 	/**
@@ -117,7 +116,7 @@ class ElasticsearchSource extends HttpSource {
 	 * @return int
 	 */
 	public function timeTook() {
-		return (int)isset($this->request_status['read']['took']) ? $this->request_status['read']['took'] : 0;
+		return (int)isset($this->_requestStatus['read']['took']) ? $this->_requestStatus['read']['took'] : 0;
 	}
 
 	/**
@@ -129,4 +128,5 @@ class ElasticsearchSource extends HttpSource {
 		$this->numRows = $this->lastCandidates();
 		parent::logRequest();
 	}
+
 }

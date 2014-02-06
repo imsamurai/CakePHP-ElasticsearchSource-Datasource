@@ -29,7 +29,8 @@ $Config/*
 				->addCondition($CF->condition()->name('type')->required())
 				->addCondition($CF->condition()->name('id')->required())
 				->addCondition($CF->condition()->name('realtime'))
-				->addCondition($CF->condition()->name('fields')->map(function($fields) {
+				->addCondition($CF->condition()->name('fields')
+						->map(function($fields) {
 							return implode(',', $fields);
 						}))
 				->addCondition($CF->condition()->name('routing'))
@@ -40,13 +41,15 @@ $Config/*
 				->readParams(array(
 					'fields' => 'fields'
 				))
-				->result($CF->result()->map(function($data) {
-							return array((array) Hash::get($data, '_source') + array(
+				->result($CF->result()
+						->map(function($data) {
+							return array((array)Hash::get($data, '_source') + array(
 							'id' => $data['_id'],
 							'type' => $data['_type'],
 							'index' => $data['_index']
 							));
-						}))
+						})
+				)
 		)
 		/*
 		 * Search api
@@ -79,17 +82,18 @@ $Config/*
 					'sort' => 'order.0',
 					'fields' => 'fields'
 				))
-				->result($CF->result()->map(function($data) {
+				->result($CF->result()
+						->map(function($data) {
 							$result = array();
-							foreach ((array) Hash::get($data, 'hits.hits') as $item) {
+							foreach ((array)Hash::get($data, 'hits.hits') as $item) {
 								$result[] = array(
 									'id' => $item['_id'],
 									'type' => $item['_type'],
 									'index' => $item['_index'],
 									'score' => $item['_score'],
 									'version' => isset($item['_version']) ? $item['_version'] : 0,
-									'highlight' => (array) Hash::get($item, 'highlight'),
-								) +  (array) Hash::get($item, '_source') + (array) Hash::get($item, 'fields');
+									'highlight' => (array)Hash::get($item, 'highlight'),
+										) + (array)Hash::get($item, '_source') + (array)Hash::get($item, 'fields');
 							}
 							return $result;
 						}))
@@ -141,13 +145,15 @@ $Config/*
 				->addCondition($CF->condition()->name('replication')->sendInQuery())
 				->addCondition($CF->condition()->name('refresh')->sendInQuery())
 				->addCondition($CF->condition()->name('timeout')->sendInQuery())
-				->result($CF->result()->map(function($data, Model $Model) {
+				->result($CF->result()
+						->map(function($data, Model $Model) {
 							if (!empty($data['ok'])) {
 								$Model->id = $data['_id'];
 								return array('ok' => $data['ok']);
 							}
 							return false;
-						}))
+						})
+				)
 		)
 		/**
 		 * Indexing
@@ -170,13 +176,15 @@ $Config/*
 				->addCondition($CF->condition()->name('consistency')->sendInQuery())
 				->addCondition($CF->condition()->name('replication')->sendInQuery())
 				->addCondition($CF->condition()->name('refresh')->sendInQuery())
-				->result($CF->result()->map(function($data, Model $Model) {
+				->result($CF->result()
+						->map(function($data, Model $Model) {
 							if (!empty($data['ok'])) {
 								$Model->id = $data['_id'];
 								return array('ok' => $data['ok']);
 							}
 							return false;
-						}))
+						})
+				)
 		)
 
 		/**
@@ -191,15 +199,16 @@ $Config/*
 				->table('indices_status')
 				->path(':index/_status')
 				->addCondition($CF->condition()->name('index')->sendInQuery()->defaults(''))
-				->result($CF->result()->map(function($data, Model $Model) {
+				->result($CF->result()
+						->map(function($data, Model $Model) {
 							$results = array();
 							foreach ((array)Hash::get($data, 'indices') as $name => $info) {
 								$results[] = compact('name') + $info;
 							}
 							return $results;
-						}))
-		)
-;
+						})
+				)
+);
 
 
 $config['ElasticsearchSource']['config'] = $Config;

@@ -1,0 +1,33 @@
+{
+  "name": "imsamurai/elasticsearch-source",
+  "description": "Elasticsearch source for CakePHP (HttpSource)",
+  "type": "cakephp-plugin",
+  "keywords": [
+    "cakephp",
+    "database",
+	"datasource",
+    "plugin"
+  ],
+  "homepage": "http://github.com/imsamurai/CakePHP-ElasticsearchSource-Datasource",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Shamray Alexander",
+      "email": "im.samuray@gmail.com",
+      "homepage": "https://imsamurai.me",
+      "role": "Maintainer"
+    }
+  ],
+  "require": {
+    "composer/installers": "*",
+	"imsamurai/http-source": "1.0.*"
+  },
+  "support": {
+    "email": "im.samuray@gmail.com",
+    "issues": "https://github.com/imsamurai/CakePHP-ElasticsearchSource-Datasource/issues",
+    "source": "https://github.com/imsamurai/CakePHP-ElasticsearchSource-Datasource"
+  },
+  "extra": {
+    "installer-name": "ElasticsearchSource"
+  }
+}

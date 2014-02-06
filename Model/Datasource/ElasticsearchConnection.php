@@ -75,5 +75,4 @@ class ElasticsearchConnection extends HttpSourceConnection {
 		}
 	}
 
-
 }
