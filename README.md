@@ -1,5 +1,7 @@
-ElasticsearchSource Plugin [![Build Status](https://travis-ci.org/imsamurai/CakePHP-ElasticsearchSource-Datasource.png?branch=master)](https://travis-ci.org/imsamurai/CakePHP-ElasticsearchSource-Datasource)
+ElasticsearchSource Plugin
 ==========================
+[![Build Status](https://travis-ci.org/imsamurai/CakePHP-ElasticsearchSource-Datasource.png)](https://travis-ci.org/imsamurai/CakePHP-ElasticsearchSource-Datasource) [![Coverage Status](https://coveralls.io/repos/imsamurai/CakePHP-ElasticsearchSource-Datasource/badge.png?branch=master)](https://coveralls.io/r/imsamurai/CakePHP-ElasticsearchSource-Datasource?branch=master) [![Latest Stable Version](https://poser.pugx.org/imsamurai/elasticsearch-source/v/stable.png)](https://packagist.org/packages/imsamurai/elasticsearch-source) [![Total Downloads](https://poser.pugx.org/imsamurai/elasticsearch-source/downloads.png)](https://packagist.org/packages/imsamurai/elasticsearch-source) [![Latest Unstable Version](https://poser.pugx.org/imsamurai/elasticsearch-source/v/unstable.png)](https://packagist.org/packages/imsamurai/elasticsearch-source) [![License](https://poser.pugx.org/imsamurai/elasticsearch-source/license.png)](https://packagist.org/packages/imsamurai/elasticsearch-source)
+
 
 CakePHP ElasticsearchSource is DataSource Plugin  for [Elasticsearch](http://www.elasticsearch.org/)
 
