@@ -48,6 +48,14 @@ before_script:
                         'port' => 9200,
                         'timeout' => 5
                     );
+                    public \$test = array(
+                        'datasource' => 'Database/Mysql',
+                        'host' => '127.0.0.1',
+                        'login' => 'travis',
+                        'database' => 'test',
+                        'prefix' => '',
+                        'encoding' => 'utf8'
+                    );
                 }" > ../cakephp/app/Config/database.php;
       fi
     - if [ "$PHPCS" = 1 ]; then
