@@ -15,9 +15,11 @@ $Config = $CF->load('ElasticsearchSource');
 $Config->endpoint(3)
 		->addCondition($CF->condition()->name('title'))
 		->addCondition($CF->condition()->name('description'))
-		->addCondition($CF->condition()->name('rank'));
+		->addCondition($CF->condition()->name('rank'))
+		->addCondition($CF->condition()->name('summary'));
 
 $Config->endpoint(4)
 		->addCondition($CF->condition()->name('title'))
 		->addCondition($CF->condition()->name('description'))
-		->addCondition($CF->condition()->name('rank'));
+		->addCondition($CF->condition()->name('rank'))
+		->addCondition($CF->condition()->name('summary'));

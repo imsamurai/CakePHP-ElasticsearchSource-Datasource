@@ -14,6 +14,12 @@ $config['ElasticsearchSource']['config_version'] = 2;
 $CF = HttpSourceConfigFactory::instance();
 $Config = $CF->config();
 
+$TimeIdField = $CF->field()
+		->name('id')
+		->map(function() {
+			return time();
+		});
+
 $Config/*
 		 * Get api
 		 *
@@ -208,6 +214,38 @@ $Config/*
 							return $results;
 						})
 				)
+		)
+		/*
+		 * Search facets api
+		 *
+		 * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-facets.html
+		 */
+		->add(
+				$CF->endpoint()
+				->id(7)
+				->methodRead()
+				->table('facets')
+				->path(':index/:type/_search')
+				->addField($TimeIdField)
+				->addCondition($CF->condition()->name('query')->sendInBody())
+				->addCondition($CF->condition()->name('filter')->sendInBody())
+				->addCondition($CF->condition()->name('facets')->sendInBody())
+				->addCondition($CF->condition()->name('terms')->sendInBody())
+				->addCondition($CF->condition()->name('fields')->sendInBody())
+				->addCondition($CF->condition()->name('size')->sendInQuery()->defaults('10'))
+				->addCondition($CF->condition()->name('from')->sendInQuery())
+				->addCondition($CF->condition()->name('index')->sendInQuery()->defaults(''))
+				->addCondition($CF->condition()->name('type')->sendInQuery()->defaults(''))
+				->result($CF->result()
+						->map(function($data) {
+							$result = array();
+							$tmp = (array)Hash::get($data, 'facets');
+							if(!empty($tmp)){
+								$result[] = $tmp;
+								return $result;
+							}
+							return false;
+						}))
 );
 
 
