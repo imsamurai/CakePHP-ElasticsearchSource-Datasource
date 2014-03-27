@@ -240,7 +240,7 @@ $Config/*
 						->map(function($data) {
 							$result = array();
 							$tmp = (array)Hash::get($data, 'facets');
-							if(!empty($tmp)){
+							if (!empty($tmp)) {
 								$result[] = $tmp;
 								return $result;
 							}
