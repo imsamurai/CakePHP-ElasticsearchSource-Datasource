@@ -93,7 +93,7 @@ class ElasticsearchSource extends HttpSource {
 					$this->_requestStatus[$requestMethod][$indexName] = $result[$indexName];
 				}
 			if (isset($result['hits'])) {
-				if(isset($result['hits']['hits'])){
+				if (isset($result['hits']['hits'])) {
 					$this->affected = count($result['hits']['hits']);
 				}
 				foreach ($gethits as $indexName)
