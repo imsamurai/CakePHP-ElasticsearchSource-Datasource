@@ -149,24 +149,24 @@ class ElasticsearchSource extends HttpSource {
 			'numRows' => $this->numRows,
 			'took' => $this->took,
 		);
-		$http_parts = explode('HTTP/', $this->query);
+		$httpParts = explode('HTTP/', $this->query);
 
-		$get_parts = explode('GET ', $http_parts[0]);
-		if(isset($get_parts[1]) && isset($http_parts[1])){
-			$host_parts = explode('Host:', $http_parts[1]);
-			$request_parts = explode('Content-Length: ', $http_parts[1]);
-			$http_request = '';
-			if(isset($request_parts[1]) && false !== strpos($request_parts[1], '{')){
-				$http_request = strstr($request_parts[1], '{');
+		$getParts = explode('GET ', $httpParts[0]);
+		if (isset($getParts[1]) && isset($httpParts[1])) {
+			$hostParts = explode('Host:', $httpParts[1]);
+			$requestParts = explode('Content-Length: ', $httpParts[1]);
+			$httpRequest = '';
+			if (isset($requestParts[1]) && false !== strpos($requestParts[1], '{')) {
+				$httpRequest = strstr($requestParts[1], '{');
 			}
-			$connection_parts = explode('Connection:', $host_parts[1]);
-			$get_request = trim($get_parts[1]);
+			$connectionParts = explode('Connection:', $hostParts[1]);
+			$getRequest = trim($getParts[1]);
 
-			$http_request = $get_request.(false !== strpos($get_request, '?') ? '&source=' : '?source=').htmlentities($http_request);
-			$explain_request = $http_request.'&explain=true';
+			$httpRequest = $getRequest . (false !== strpos($getRequest, '?') ? '&source=' : '?source=') . htmlentities($httpRequest);
+			$explaineRequest = $httpRequest . '&explain=true';
 
-			//$log['took'] .= '<br/><a href="http://'.trim($connection_parts[0]).$explain_request.'"><b>Explain</b></a>';
-			//$log['took'] .= '<br/><a href="http://'.trim($connection_parts[0]).$http_request.'"><b>Request</b></a>';
+			//$log['took'] .= '<br/><a href="http://'. trim($connectionParts[0]) . $explaineRequest. '"><b>Explain</b></a>';
+			//$log['took'] .= '<br/><a href="http://'. trim($connectionParts[0]) . $httpRequest. '"><b>Request</b></a>';
 		}
 		$this->_logRow = $log;
 	}
