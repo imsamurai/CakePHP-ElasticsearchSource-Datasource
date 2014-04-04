@@ -33,9 +33,23 @@ class ElasticsearchModel extends HttpSourceModel {
 	/**
 	 * Elasticsearch index type
 	 *
-	 * @var string 
+	 * @var string
 	 */
 	public $useType;
+
+	/**
+	 * Analysis language
+	 *
+	 * @var string
+	 */
+	public $language;
+
+	/**
+	 * Analysis implementation
+	 *
+	 * @var string
+	 */
+	public $implementation;
 
 	/**
 	 * {@inheritdoc}
@@ -44,14 +58,22 @@ class ElasticsearchModel extends HttpSourceModel {
 	 * @param string $tableName
 	 * @param string $indexName
 	 * @param string $typeName
+	 * @param string $language
+	 * @param string $implementation
 	 * @throws MissingTableException when database table $tableName is not found on data source
 	 */
-	public function setSource($tableName, $indexName = null, $typeName = null) {
+	public function setSource($tableName, $indexName = null, $typeName = null, $language = null, $implementation = null) {
 		if ($indexName) {
 			$this->useIndex = $indexName;
 		}
 		if ($typeName) {
 			$this->useType = $typeName;
+		}
+		if ($language) {
+			$this->language = $language;
+		}
+		if ($implementation) {
+			$this->implementation = $implementation;
 		}
 		parent::setSource($tableName);
 	}
@@ -77,6 +99,8 @@ class ElasticsearchModel extends HttpSourceModel {
 	 * @return bool
 	 */
 	public function beforeSave($options = array()) {
+		$this->set('language', $this->language);
+		$this->set('implementation', $this->implementation);
 		$this->set('index', $this->useIndex);
 		$this->set('type', $this->useType);
 		return parent::beforeSave($options);
