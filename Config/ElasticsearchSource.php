@@ -267,7 +267,7 @@ $Config/*
 							foreach ($data as $index => $mappingOptions) {
 								foreach ($mappingOptions as $type => $mapping) {
 									$result[] = array(
-										'id' => $index.'/'.$type,
+										'id' => $index . '/' . $type,
 										'index' => $index,
 										'type' => $type,
 										'mapping' => $mapping
