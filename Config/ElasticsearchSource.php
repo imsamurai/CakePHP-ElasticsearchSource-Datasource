@@ -245,7 +245,43 @@ $Config/*
 								return $result;
 							}
 							return false;
+						})
+					)
+				)
+		/*
+		 * Search facets api
+		 *
+		 * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-facets.html
+		 */
+		->add(
+				$CF->endpoint()
+				->id(8)
+				->methodRead()
+				->table('mapping')
+				->path(':index/:type/_mapping')
+				->addCondition($CF->condition()->name('index')->sendInQuery()->defaults('_all'))
+				->addCondition($CF->condition()->name('type')->sendInQuery()->defaults('_all'))
+				->result($CF->result()
+						->map(function($data) {
+							$result = array();
+							foreach ($data as $index => $mappingOptions) {
+								foreach ($mappingOptions as $type => $mapping) {
+									$result[] = array(
+										'id' => $index.'/'.$type,
+										'index' => $index,
+										'type' => $type,
+										'mapping' => $mapping
+									);
+								}
+							}
+
+							if (!empty($result)) {
+								//debug($result); exit();
+								return $result;
+							}
+							return false;
 						}))
+
 );
 
 

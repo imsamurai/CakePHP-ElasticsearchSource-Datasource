@@ -66,13 +66,13 @@ class ElasticsearchModel extends HttpSourceModel {
 		if ($indexName) {
 			$this->useIndex = $indexName;
 		}
-		if ($typeName) {
+		if (!is_null($typeName)) {
 			$this->useType = $typeName;
 		}
-		if ($language) {
+		if (!is_null($language)) {
 			$this->language = $language;
 		}
-		if ($implementation) {
+		if (!is_null($implementation)) {
 			$this->implementation = $implementation;
 		}
 		parent::setSource($tableName);
