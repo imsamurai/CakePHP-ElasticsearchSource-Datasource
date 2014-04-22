@@ -282,7 +282,33 @@ $Config/*
 							return false;
 						}))
 
-);
+)
+		/*
+		 * Count api
+		 *
+		 * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/search-count.html
+		 */
+		->add(
+				$CF->endpoint()
+				->id(9)
+				->methodRead()
+				->table('count')
+				->path(':index/:type/_count')
+				->addField($TimeIdField)
+				->addCondition($CF->condition()->name('query')->sendInQuery())
+				->addCondition($CF->condition()->name('index')->sendInQuery()->defaults('_all'))
+				->addCondition($CF->condition()->name('type')->sendInQuery()->defaults(''))
+				->result($CF->result()
+						->map(function($data) {
+							$result = array();
+							if (isset($data['count'])) {
+								$result[] = array('count' => $data['count']);
+								return $result;
+							}
 
+							return false;
+						}))
+
+);
 
 $config['ElasticsearchSource']['config'] = $Config;
