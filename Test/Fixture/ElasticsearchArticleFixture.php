@@ -54,5 +54,55 @@ class ElasticsearchArticleFixture extends HttpSourceTestFixture {
 		parent::init();
 		$this->_Model->setSource('document', 'test_index', 'test_type');
 	}
-	
+
+	/**
+	 * {@inheritdoc}
+	 *
+	 * @param DboSource $db An instance of the database object used to create the fixture table
+	 * @return boolean True on success, false on failure
+	 */
+	public function create($db) {
+		$Schema = new CakeSchema(array(
+			'name' => 'TestSuite',
+			'index' => array(
+				'tableParameters' => array(
+					'index' => $this->_Model->useIndex
+				)
+			),
+			'mapping' => array(
+				'tableParameters' => array(
+					'index' => $this->_Model->useIndex,
+					'type' => $this->_Model->useType
+				)
+			),
+		));
+		$db->execute($db->createSchema($Schema));
+		return parent::create($db);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 *
+	 * @param DboSource $db An instance of the database object used to create the fixture table
+	 * @return boolean True on success, false on failure
+	 */
+	public function drop($db) {
+		$Schema = new CakeSchema(array(
+			'name' => 'TestSuite',
+			'mapping' => array(
+				'tableParameters' => array(
+					'index' => $this->_Model->useIndex,
+					'type' => $this->_Model->useType
+				)
+			),
+			'index' => array(
+				'tableParameters' => array(
+					'index' => $this->_Model->useIndex
+				)
+			)
+		));
+		$db->execute($db->dropSchema($Schema));
+		return parent::drop($db);
+	}
+
 }

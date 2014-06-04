@@ -48,7 +48,7 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 			'order' => array('rank' => 'desc'),
 			'offset' => 2
 		);
-
+		
 		$result = $this->Elasticsearch->find('first', $params);
 		$this->assertNotEqual($result, false);
 		$this->assertCount(1, $result);
@@ -164,7 +164,7 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 	}
 
 	public function testCountDocument() {
-		$this->Elasticsearch->find('all');
+		debug($this->Elasticsearch->find('all'));
 		$total = $this->Elasticsearch->getDatasource()->lastCandidates();
 
 		$this->assertNotEqual($total, 0);
@@ -187,6 +187,121 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 		$res = Hash::extract($result, '{n}.' . $this->Elasticsearch->alias . '.highlight.title');
 
 		$this->assertNotEmpty($res);
+	}
+
+	/**
+	 * Test create/drop schema
+	 */
+	public function testCreateDropSchema() {
+		$Schema = new CakeSchema(array(
+			'name' => 'TestSuite',
+			'index' => array(
+				'tableParameters' => array(
+					'index' => 'new_test_index'
+				)
+			),
+			'mapping' => array(
+				'tableParameters' => array(
+					'index' => 'new_test_index',
+					'type' => 'new_test_type'
+				)
+			),
+		));
+		$DB = $this->Elasticsearch->getDataSource();
+		$DB->execute($DB->dropSchema($Schema));
+		$result = $DB->execute($DB->createSchema($Schema, 'index'));
+		$this->assertTrue((bool)$result[0]);
+		$result = $DB->execute($DB->createSchema($Schema, 'index'));
+		$this->assertFalse((bool)$result[0]);
+		$result = $DB->execute($DB->createSchema($Schema, 'mapping'));
+		$this->assertTrue((bool)$result[0]);
+
+		$result = $DB->execute($DB->dropSchema($Schema, 'mapping'));
+		$this->assertTrue((bool)$result[0]);
+		$result = $DB->execute($DB->dropSchema($Schema, 'mapping'));
+		$this->assertFalse((bool)$result[0]);
+
+		$result = $DB->execute($DB->dropSchema($Schema, 'index'));
+		$this->assertTrue((bool)$result[0]);
+		$result = $DB->execute($DB->dropSchema($Schema, 'index'));
+		$this->assertFalse((bool)$result[0]);
+	}
+
+	/**
+	 * Test type mapping
+	 */
+	public function testMapping() {
+		$Schema = new CakeSchema(array(
+			'name' => 'TestSuite',
+			'mapping' => array(
+				'tableParameters' => array(
+					'index' => 'test_index',
+					'type' => 'new_test_type',
+					'mapping' => array(
+						"_timestamp" => array(
+							"enabled" => true,
+							"store" => true
+						),
+						"properties" => array(
+							"title" => array(
+								"type" => "string",
+								"index" => "analyzed"
+							),
+							"description" => array(
+								"type" => "string",
+								"index" => "analyzed"
+							),
+							"pubtime" => array(
+								"type" => "date",
+								"format" => "basic_date_time_no_millis"
+							),
+						)
+					)
+				)
+			)
+		));
+		$DB = $this->Elasticsearch->getDataSource();
+		$DB->execute($DB->createSchema($Schema));
+		$this->Elasticsearch->setSource('mapping', 'test_index', 'new_test_type');
+		$mappings = $this->Elasticsearch->find('list', array('fields' => array('type', 'mapping')));
+
+		$expectedMappings = array(
+			'_timestamp' => array(
+				'enabled' => true,
+				'store' => true
+			),
+			'properties' => array(
+				'description' => array(
+					'type' => 'string'
+				),
+				'pubtime' => array(
+					'type' => 'date',
+					'format' => 'basic_date_time_no_millis'
+				),
+				'title' => array(
+					'type' => 'string'
+				)
+			)
+		);
+		$this->assertSame($expectedMappings, $mappings);
+		$DB->execute($DB->dropSchema($Schema));
+	}
+	
+	public function testExistsDocument() {
+		$params = array(
+			"title" => "Test create",
+			"description" => 'test create ' . __FUNCTION__ . '|' . __LINE__,
+			"refresh" => 1
+		);
+		$this->Elasticsearch->create();
+		$result = $this->Elasticsearch->save($params);
+		debug($result);
+		$this->assertNotEqual($result, false);
+
+		$this->assertTrue($this->Elasticsearch->exists($result[$this->Elasticsearch->alias]['id']));
+		$this->Elasticsearch->delete($result[$this->Elasticsearch->alias]['id']);
+		
+		$this->assertFalse($this->Elasticsearch->exists($result[$this->Elasticsearch->alias]['id']));
 	}
 
 }

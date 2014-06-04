@@ -17,8 +17,8 @@ $Config = $CF->config();
 $TimeIdField = $CF->field()
 		->name('id')
 		->map(function() {
-			return time();
-		});
+	return time();
+});
 
 $Config/*
 		 * Get api
@@ -55,6 +55,26 @@ $Config/*
 							'index' => $data['_index']
 							));
 						})
+				)
+		)
+		/*
+		 * Check api
+		 *
+		 * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-get.html
+		 */
+		->add(
+				$CF->endpoint()
+				->id(15)
+				->methodCheck()
+				->table('document')
+				->path(':index/:type/:id')
+				->addCondition($CF->condition()->name('index')->required())
+				->addCondition($CF->condition()->name('type')->required())
+				->addCondition($CF->condition()->name('id')->required())
+				->result($CF->result()
+						->map(function() {
+								return array('ok' => true);
+							})
 				)
 		)
 		/*
@@ -137,10 +157,10 @@ $Config/*
 				->id(4)
 				->methodCreate()
 				->table('document')
-				->path(':index/:type')
+				->path(':index/:type/:id')
 				->addCondition($CF->condition()->name('index')->sendInQuery()->required())
 				->addCondition($CF->condition()->name('type')->sendInQuery()->required())
-				->addCondition($CF->condition()->name('id')->length(100))
+				->addCondition($CF->condition()->name('id')->sendInQuery()->length(100))
 				->addCondition($CF->condition()->name('routing')->sendInQuery())
 				->addCondition($CF->condition()->name('parent')->sendInQuery())
 				->addCondition($CF->condition()->name('timestamp')->sendInQuery())
@@ -246,8 +266,8 @@ $Config/*
 							}
 							return false;
 						})
-					)
 				)
+		)
 		/*
 		 * Search facets api
 		 *
@@ -281,8 +301,7 @@ $Config/*
 							}
 							return false;
 						}))
-
-)
+		)
 		/*
 		 * Count api
 		 *
@@ -308,7 +327,125 @@ $Config/*
 
 							return false;
 						}))
+		)
 
-);
+		/*
+		 * Create index api
+		 *
+		 * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-create-index.html
+		 */
+		->add(
+				$CF->endpoint()
+				->id(10)
+				->methodCreate()
+				->table('index')
+				->path(':index')
+				->addField($TimeIdField)
+				->addCondition($CF->condition()->name('index')->sendInQuery()->required())
+				->addCondition($CF->condition()->name('settings')->sendInBody())
+				->addCondition($CF->condition()->name('mappings')->sendInBody())
+				->addCondition($CF->condition()->name('warmers')->sendInBody())
+				->result($CF->result()
+						->map(function($data, Model $Model) {
+							if (!empty($data['ok'])) {
+								return array('ok' => $data['ok']);
+							}
+							return false;
+						})
+				)
+		)
+
+		/*
+		 * Delete index api
+		 *
+		 * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-delete-index.html
+		 */
+		->add(
+				$CF->endpoint()
+				->id(11)
+				->methodDelete()
+				->table('index')
+				->path(':index')
+				->addField($TimeIdField)
+				->addCondition($CF->condition()->name('index')->sendInQuery()->required())
+				->result($CF->result()
+						->map(function($data, Model $Model) {
+							if (!empty($data['ok'])) {
+								return array('ok' => $data['ok']);
+							}
+							return false;
+						})
+				)
+		)
+
+		/*
+		 * Exists index api
+		 *
+		 * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-exists.html
+		 */
+		->add(
+				$CF->endpoint()
+				->id(12)
+				->methodRead()
+				->table('index')
+				->path(':index')
+				->addField($TimeIdField)
+				->addCondition($CF->condition()->name('index')->sendInQuery()->required())
+				->result($CF->result()
+						->map(function($data, Model $Model) {
+							return $data ? array(array('ok' => true)) : false;
+						})
+				)
+		)
+
+		/*
+		 * Create type api
+		 *
+		 * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-create-index.html
+		 */
+		->add(
+				$CF->endpoint()
+				->id(13)
+				->methodCreate()
+				->table('mapping')
+				->path(':index/:type/_mapping')
+				->addField($TimeIdField)
+				->addCondition($CF->condition()->name('index')->sendInQuery()->required())
+				->addCondition($CF->condition()->name('type')->sendInQuery()->required())
+				->addCondition($CF->condition()->name('mapping')->map(null, '_default_')->sendInBody()->defaults((object)array()))
+				->result($CF->result()
+						->map(function($data, Model $Model) {
+							if (!empty($data['ok'])) {
+								return array('ok' => $data['ok']);
+							}
+							return false;
+						})
+				)
+		)
+		/*
+		 * Create delete api
+		 *
+		 * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-create-index.html
+		 */
+		->add(
+				$CF->endpoint()
+				->id(14)
+				->methodDelete()
+				->table('mapping')
+				->path(':index/:type/')
+				->addField($TimeIdField)
+				->addCondition($CF->condition()->name('index')->sendInQuery()->required())
+				->addCondition($CF->condition()->name('type')->sendInQuery()->required())
+				->result($CF->result()
+						->map(function($data, Model $Model) {
+							if (!empty($data['ok'])) {
+								return array('ok' => $data['ok']);
+							}
+							return false;
+						})
+				)
+		)
+
+;
 
 $config['ElasticsearchSource']['config'] = $Config;

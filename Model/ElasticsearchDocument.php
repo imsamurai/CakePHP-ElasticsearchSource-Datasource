@@ -49,6 +49,21 @@ class ElasticsearchDocument extends ElasticsearchModel {
 
 		return $queryData;
 	}
+	
+	/**
+	 * {@inheritdoc}
+	 * 
+	 * @param mixed $id
+	 * @param array $conditions
+	 * @return bool
+	 */
+	public function exists($id = null, array $conditions = array()) {
+		$ex = parent::exists($id, array(
+					'index' => $this->useIndex,
+					'type' => $this->useType,
+		));
+		return $ex;
+	}
 
 	/**
 	 * Put ids in right place in case of multiple ids

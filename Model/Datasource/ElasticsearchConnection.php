@@ -35,15 +35,29 @@ class ElasticsearchConnection extends HttpSourceConnection {
 	 * @return int|string
 	 */
 	public function getTook() {
-		try {
-			$response = $this->_decode();
-			$tookRemote = (float)Hash::get($response, 'took');
-		} catch (Exception $Exception) {
-			$tookRemote = 0;
-		}
+		$tookRemote = (float)Hash::get((array)$this->_lastResponse, 'took');
 		return parent::getTook() . " ($tookRemote)";
 	}
+	
+	/**
+	 * {@inheritdoc}
+	 *
+	 * @return int|string
+	 */
+	public function getCandidates() {
+		return (int)Hash::get((array)$this->_lastResponse, 'hits.total');
+	}
 
+	/**
+	 * {@inheritdoc}
+	 * 
+	 * @param mixed $result
+	 * @return int|string
+	 */
+	public function getNumRows($result) {
+		return parent::getNumRows($result) . " ({$this->getCandidates()})";
+	}
+	
 	/**
 	 * {@inheritdoc}
 	 *
@@ -55,7 +69,9 @@ class ElasticsearchConnection extends HttpSourceConnection {
 			$request['body'] = json_encode($request['body']);
 		}
 
-		return parent::request($request);
+		$response = parent::request($request);
+		$this->_affected = count((array)Hash::get((array)$response, 'hits.hits'));
+		return $response;
 	}
 
 	/**
@@ -64,15 +80,7 @@ class ElasticsearchConnection extends HttpSourceConnection {
 	 * @return string
 	 */
 	protected function _extractRemoteError() {
-		try {
-			$response = $this->_decode();
-			return Hash::get($response, 'error');
-		} catch (Exception $Exception) {
-			if ($this->_Response && trim($this->_Response->body())) {
-				return $this->_Response->body();
-			}
-			return parent::_extractRemoteError();
-		}
+		return Hash::get((array)$this->_lastResponse, 'error');
 	}
 
 }
