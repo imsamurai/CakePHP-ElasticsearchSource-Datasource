@@ -17,8 +17,8 @@ $Config = $CF->config();
 $TimeIdField = $CF->field()
 		->name('id')
 		->map(function() {
-	return time();
-});
+			return time();
+		});
 
 $Config/*
 		 * Get api
@@ -73,9 +73,8 @@ $Config/*
 				->addCondition($CF->condition()->name('id')->required())
 				->result($CF->result()
 						->map(function() {
-								return array('ok' => true);
-							})
-				)
+							return array('ok' => true);
+						}))
 		)
 		/*
 		 * Search api
@@ -444,8 +443,6 @@ $Config/*
 							return false;
 						})
 				)
-		)
-
-;
+		);
 
 $config['ElasticsearchSource']['config'] = $Config;
