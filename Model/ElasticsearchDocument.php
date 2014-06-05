@@ -103,6 +103,7 @@ class ElasticsearchDocument extends ElasticsearchModel {
 		parse_str($queryData['query'], $query);
 		$queryData['query'] = $query ? $query : array();
 		$queryData['data'] = $queryData['data'] ? json_decode($queryData['data'], true) : array();
+		$queryData['data'] = $queryData['data'] ? : array();
 
 		$Model = new static(false, false, $connection);
 		$Model->setDataSource($connection);
