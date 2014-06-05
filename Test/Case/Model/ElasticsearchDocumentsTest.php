@@ -314,7 +314,6 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 	 */
 	public function testExplainQuery($rawQuery, $explainationExists) {
 		$explainations = $this->Elasticsearch->explainQuery($this->Elasticsearch->useDbConfig, $rawQuery);
-//		debug($explainations);
 		$this->assertSame($explainationExists, (bool)$explainations);
 	}
 
