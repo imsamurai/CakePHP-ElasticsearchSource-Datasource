@@ -83,7 +83,7 @@ class ElasticsearchDocument extends ElasticsearchModel {
 		$queryData = array();
 		foreach ($patterns as $pattern) {
 			preg_match($pattern, $query, $matches);
-			$queryData+=$matches;
+			$queryData += $matches;
 		}
 		if (!$queryData) {
 			return array();
