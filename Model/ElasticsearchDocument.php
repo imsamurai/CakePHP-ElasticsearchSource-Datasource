@@ -104,7 +104,7 @@ class ElasticsearchDocument extends ElasticsearchModel {
 		$queryData['query'] = $query ? $query : array();
 		$queryData['data'] = $queryData['data'] ? json_decode($queryData['data'], true) : array();
 
-		$Model = new static(false, false);
+		$Model = new static(false, false, $connection);
 		$Model->setDataSource($connection);
 		$Model->setSource($this->useTable, $queryData['index'], $queryData['type']);
 		$explanations = $Model->find('all', array(
