@@ -48,7 +48,7 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 			'order' => array('rank' => 'desc'),
 			'offset' => 2
 		);
-		
+
 		$result = $this->Elasticsearch->find('first', $params);
 		$this->assertNotEqual($result, false);
 		$this->assertCount(1, $result);
@@ -286,7 +286,7 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 		$this->assertSame($expectedMappings, $mappings);
 		$DB->execute($DB->dropSchema($Schema));
 	}
-	
+
 	public function testExistsDocument() {
 		$params = array(
 			"title" => "Test create",
@@ -300,8 +300,60 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 
 		$this->assertTrue($this->Elasticsearch->exists($result[$this->Elasticsearch->alias]['id']));
 		$this->Elasticsearch->delete($result[$this->Elasticsearch->alias]['id']);
-		
+
 		$this->assertFalse($this->Elasticsearch->exists($result[$this->Elasticsearch->alias]['id']));
+	}
+
+	/**
+	 * Test query explaination
+	 * 
+	 * @param string $rawQuery
+	 * @param array $explainationExists
+	 * 
+	 * @dataProvider explainQueryProvider
+	 */
+	public function testExplainQuery($rawQuery, $explainationExists) {
+		$explainations = $this->Elasticsearch->explainQuery($this->Elasticsearch->useDbConfig, $rawQuery);
+//		debug($explainations);
+		$this->assertSame($explainationExists, (bool)$explainations);
+	}
+
+	/**
+	 * Data provider for testExplainQuery
+	 * 
+	 * @return array
+	 */
+	public function explainQueryProvider() {
+		return array(
+			//set #0
+			array(
+				//rawQuery
+				'GET /_status HTTP/1.1 Host: localhost:9200 Connection: close User-Agent: CakePHP',
+				//explainationExists
+				false
+			),
+			//set #1
+			array(
+				//rawQuery
+				'GET /test_index/test_type/_search?size=10 HTTP/1.1 Host: localhost:9200 Connection: close User-Agent: CakePHP Content-Type: application/x-www-form-urlencoded Content-Length: 171 {"query":{"bool":{"must":[{"match":{"_all":{"query":"guratabaata 1"}}}]}}}',
+				//explainationExists
+				true
+			),
+			//set #2
+			array(
+				//rawQuery
+				'GET ///_search?size=10 HTTP/1.1 Host: localhost:9200 Connection: close User-Agent: CakePHP Content-Type: application/x-www-form-urlencoded Content-Length: 171 {"query":{"bool":{"must":[{"match":{"_all":{"query":"guratabaata 1"}}}]}}}',
+				//explainationExists
+				true
+			),
+			//set #3
+			array(
+				//rawQuery
+				'GET //_search?size=10 HTTP/1.1 Host: localhost:9200 Connection: close User-Agent: CakePHP Content-Type: application/x-www-form-urlencoded Content-Length: 171 {"query":{"bool":{"must":[{"match":{"_all":{"query":"guratabaata 1"}}}]}}}',
+				//explainationExists
+				true
+			)
+		);
 	}
 
 }

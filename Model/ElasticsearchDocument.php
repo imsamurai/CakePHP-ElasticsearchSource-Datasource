@@ -36,7 +36,7 @@ class ElasticsearchDocument extends ElasticsearchModel {
 	 * @var string
 	 */
 	public $useTable = 'document';
-	
+
 	/**
 	 * {@inheritdoc}
 	 * 
@@ -49,7 +49,7 @@ class ElasticsearchDocument extends ElasticsearchModel {
 
 		return $queryData;
 	}
-	
+
 	/**
 	 * {@inheritdoc}
 	 * 
@@ -63,6 +63,63 @@ class ElasticsearchDocument extends ElasticsearchModel {
 					'type' => $this->useType,
 		));
 		return $ex;
+	}
+
+	/**
+	 * Runs an explain on a query
+	 *
+	 * @param string $connection Connection name
+	 * @param string $query RAW query to explain / find query plan for.
+	 * @return array Array of explain information or empty array if connection is unsupported.
+	 */
+	public function explainQuery($connection, $query) {
+		$patterns = array(
+			'#^\s*GET /(?P<index>[^/]*)/(?P<type>[^/]*)/(?P<id>[^/?=_\s]*)(:?\?(?P<query>[^\s]*)|)#',
+			'#^\s*GET /(?P<index>[^/]*)/(?P<type>[^/]*)/_search(:?\?(?P<query>[^\s]*)|)#',
+			'#^\s*GET /(?P<index>[^/]*)/_search(:?\?(?P<query>[^\s]*)|)#',
+			'#^\s*GET /(?P<id>_search)(:?\?(?P<query>[^\s]*)|)#',
+			'#(?P<data>{.*})#'
+		);
+		$queryData = array();
+		foreach ($patterns as $pattern) {
+			preg_match($pattern, $query, $matches);
+			$queryData+=$matches;
+		}
+		if (!$queryData) {
+			return array();
+		}
+		$queryData += array(
+			'query' => null,
+			'data' => null,
+			'id' => null,
+			'index' => null,
+			'type' => null
+		);
+
+		if (preg_match('#^_#', $queryData['id'])) {
+			$queryData['id'] = null;
+		}
+
+		parse_str($queryData['query'], $query);
+		$queryData['query'] = $query ? $query : array();
+		$queryData['data'] = $queryData['data'] ? json_decode($queryData['data'], true) : array();
+
+		$Model = new static(false, false);
+		$Model->setDataSource($connection);
+		$Model->setSource($this->useTable, $queryData['index'], $queryData['type']);
+		$explanations = $Model->find('all', array(
+			'fields' => array(
+				'id',
+				'explanation'
+			),
+			'conditions' => array(
+		'explain' => true
+			) + $queryData['data'] + $queryData['query']
+		));
+		if (!$explanations) {
+			return array();
+		}
+		return Hash::extract($explanations, '{n}.{s}');
 	}
 
 	/**
@@ -80,7 +137,7 @@ class ElasticsearchDocument extends ElasticsearchModel {
 			if (!isset($queryData['conditions'][$idsKey])) {
 				continue;
 			}
-			
+
 			$queryData['conditions'] = Hash::insert($queryData['conditions'], 'query.ids.values', (array)$queryData['conditions'][$idsKey]);
 			$queryData['limit'] = count($queryData['conditions'][$idsKey]);
 			unset($queryData['conditions'][$idsKey]);

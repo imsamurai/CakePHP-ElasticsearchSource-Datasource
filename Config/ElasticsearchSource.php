@@ -101,6 +101,7 @@ $Config/*
 				->addCondition($CF->condition()->name('track_scores')->sendInBody())
 				->addCondition($CF->condition()->name('index')->sendInQuery()->defaults(''))
 				->addCondition($CF->condition()->name('type')->sendInQuery()->defaults(''))
+				->addCondition($CF->condition()->name('explain')->sendInQuery()->defaults(false))
 				->readParams(array(
 					'size' => 'limit',
 					'from' => 'offset',
@@ -116,6 +117,7 @@ $Config/*
 									'type' => $item['_type'],
 									'index' => $item['_index'],
 									'score' => $item['_score'],
+									'explanation' => isset($item['_explanation']) ? $item['_explanation'] : null,
 									'version' => isset($item['_version']) ? $item['_version'] : 0,
 									'highlight' => (array)Hash::get($item, 'highlight'),
 										) + (array)Hash::get($item, '_source') + (array)Hash::get($item, 'fields');
