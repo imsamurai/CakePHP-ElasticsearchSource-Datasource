@@ -28,11 +28,6 @@ class ElasticsearchSource extends HttpSource {
 	const HTTP_METHOD_CHECK = 'HEAD';
 
 	/**
-	 * Maximum log length
-	 */
-	const LOG_MAX_LENGTH = 1000;
-
-	/**
 	 * Elasticsearch API Datasource
 	 *
 	 * @var string
