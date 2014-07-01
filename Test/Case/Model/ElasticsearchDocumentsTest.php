@@ -298,10 +298,10 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 		debug($result);
 		$this->assertNotEqual($result, false);
 
-		$this->assertTrue($this->Elasticsearch->exists($result[$this->Elasticsearch->alias]['id']));
+		$this->assertTrue($this->Elasticsearch->exists($result[$this->Elasticsearch->alias]['id'], array(), true));
 		$this->Elasticsearch->delete($result[$this->Elasticsearch->alias]['id']);
 
-		$this->assertFalse($this->Elasticsearch->exists($result[$this->Elasticsearch->alias]['id']));
+		$this->assertFalse($this->Elasticsearch->exists($result[$this->Elasticsearch->alias]['id'], array(), true));
 	}
 
 	/**

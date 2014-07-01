@@ -55,14 +55,14 @@ class ElasticsearchDocument extends ElasticsearchModel {
 	 * 
 	 * @param mixed $id
 	 * @param array $conditions
+	 * @param bool $force
 	 * @return bool
 	 */
-	public function exists($id = null, array $conditions = array()) {
-		$ex = parent::exists($id, array(
+	public function exists($id = null, array $conditions = array(), $force = false) {
+		return parent::exists($id, array(
 					'index' => $this->useIndex,
 					'type' => $this->useType,
-		));
-		return $ex;
+		), $force);
 	}
 
 	/**
