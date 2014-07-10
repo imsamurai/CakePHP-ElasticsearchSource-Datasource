@@ -17,7 +17,7 @@ $Config = $CF->config();
 $TimeIdField = $CF->field()
 		->name('id')
 		->map(function() {
-			return time();
+			return microtime(true) . '.' . mt_srand();
 		});
 
 $Config/*
