@@ -23,3 +23,5 @@ $Config->endpoint(4)
 		->addCondition($CF->condition()->name('description'))
 		->addCondition($CF->condition()->name('rank'))
 		->addCondition($CF->condition()->name('summary'));
+
+$Config->cacheName('Elasticsearch');

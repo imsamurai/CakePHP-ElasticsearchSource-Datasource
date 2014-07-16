@@ -164,10 +164,44 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 	}
 
 	public function testCountDocument() {
+		Cache::config('Elasticsearch', array(
+			'engine' => 'File',
+			'prefix' => 'Elasticsearch_',
+			'path' => CACHE,
+			'mask' => 0777,
+			'serialize' => true,
+			'duration' => '+10 minutes'
+			
+		));
+		Cache::clear(false, 'Elasticsearch');
+		$this->Elasticsearch->cacheQueries = false;
+		Configure::write('Cache.disable', true);
 		debug($this->Elasticsearch->find('all'));
 		$total = $this->Elasticsearch->getDatasource()->lastCandidates();
-
+		debug($this->Elasticsearch->find('all', array('limit' => 1)));
+		$total1 = $this->Elasticsearch->getDatasource()->lastCandidates();
+		debug($this->Elasticsearch->find('all'));
+		$total2 = $this->Elasticsearch->getDatasource()->lastCandidates();
+		
 		$this->assertNotEqual($total, 0);
+		$this->assertNotEqual($total1, 0);
+		$this->assertNotEqual($total2, 0);
+		$this->assertEqual($total, $total2);
+		$this->assertEqual($total1, $total2);
+		$this->Elasticsearch->cacheQueries = true;
+		Configure::write('Cache.disable', false);
+		debug($this->Elasticsearch->find('all'));
+		$total = $this->Elasticsearch->getDatasource()->lastCandidates();
+		debug($this->Elasticsearch->find('all', array('limit' => 1)));
+		$total1 = $this->Elasticsearch->getDatasource()->lastCandidates();
+		debug($this->Elasticsearch->find('all'));
+		$total2 = $this->Elasticsearch->getDatasource()->lastCandidates();
+		
+		$this->assertNotEqual($total, 0);
+		$this->assertNotEqual($total1, 0);
+		$this->assertNotEqual($total2, 0);
+		$this->assertEqual($total, $total2);
+		$this->assertEqual($total1, $total2);
 	}
 
 	public function testHighlightSearchDocument() {

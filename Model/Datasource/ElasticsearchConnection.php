@@ -28,24 +28,21 @@ class ElasticsearchConnection extends HttpSourceConnection {
 		'retryCodes' => array(429),
 		'retryDelay' => 5 //in seconds
 	);
+	
+	/**
+	 * Candidates count
+	 *
+	 * @var int 
+	 */
+	protected $_candidates;
 
 	/**
 	 * {@inheritdoc}
 	 *
-	 * @return int|string
-	 */
-	public function getTook() {
-		$tookRemote = (float)Hash::get((array)$this->_lastResponse, 'took');
-		return parent::getTook() . " ($tookRemote)";
-	}
-	
-	/**
-	 * {@inheritdoc}
-	 *
-	 * @return int|string
+	 * @return int
 	 */
 	public function getCandidates() {
-		return (int)Hash::get((array)$this->_lastResponse, 'hits.total');
+		return $this->_candidates;
 	}
 
 	/**
@@ -57,7 +54,7 @@ class ElasticsearchConnection extends HttpSourceConnection {
 	public function getNumRows($result) {
 		return parent::getNumRows($result) . " ({$this->getCandidates()})";
 	}
-	
+
 	/**
 	 * {@inheritdoc}
 	 *
@@ -71,7 +68,17 @@ class ElasticsearchConnection extends HttpSourceConnection {
 
 		$response = parent::request($request);
 		$this->_affected = count((array)Hash::get((array)$response, 'hits.hits'));
+		$this->_took .= " (" . (float)Hash::get((array)$response, 'took') . ")";
+		$this->_candidates = (int)Hash::get((array)$response, 'hits.total');
 		return $response;
+	}
+
+	/**
+	 * Reset state variables
+	 */
+	public function reset() {
+		parent::reset();
+		$this->_candidates = null;
 	}
 
 	/**

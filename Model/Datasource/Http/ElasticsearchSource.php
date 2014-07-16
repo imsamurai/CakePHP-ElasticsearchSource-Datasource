@@ -35,6 +35,13 @@ class ElasticsearchSource extends HttpSource {
 	public $description = 'ElasticsearchSource DataSource';
 
 	/**
+	 * Result candidates
+	 *
+	 * @var int
+	 */
+	public $candidates = 0;
+
+	/**
 	 * last request status
 	 *
 	 * @var string
@@ -79,7 +86,7 @@ class ElasticsearchSource extends HttpSource {
 	 * @return int
 	 */
 	public function lastCandidates() {
-		return $this->_Connection->getCandidates();
+		return $this->candidates;
 	}
 
 	/**
@@ -89,6 +96,72 @@ class ElasticsearchSource extends HttpSource {
 	 */
 	public function timeTook() {
 		return $this->took;
+	}
+
+	/**
+	 * {@inheritdoc}
+	 *
+	 * @param array $request query
+	 *
+	 * @return mixed results for query if it is cached, false otherwise
+	 */
+	public function getQueryCache(array $request) {
+		$key = serialize($request);
+		$cacheName = $this->_currentEndpoint->cacheName();
+		if (!$cacheName) {
+			return false;
+		}
+		$cache = Cache::read(md5($key), $cacheName);
+		if (!is_array($cache)) {
+			return false;
+		}
+		$this->candidates = $cache['candidates'];
+		return $cache['data'];
+	}
+
+	/**
+	 * Sends HttpSocket requests. Builds your uri and formats the response too.
+	 *
+	 * @param Model $model Model object
+	 * @param mixed $requestData Array of request or string uri
+	 * @param string $requestMethod read, create, update, delete
+	 *
+	 * @return array|false $response
+	 */
+	public function request(Model $model = null, $requestData = null, $requestMethod = HttpSource::METHOD_READ) {
+		$this->candidates = 0;
+		return parent::request($model, $requestData, $requestMethod);
+	}
+
+	/**
+	 * Single request
+	 *
+	 * @param array $request
+	 * @param string $requestMethod
+	 * @param Model $model
+	 * @return array|bool
+	 */
+	protected function _singleRequest(array $request, $requestMethod, Model $model = null) {
+		$response = parent::_singleRequest($request, $requestMethod, $model);
+		$this->candidates += $this->_Connection->getCandidates();
+		return $response;
+	}
+
+	/**
+	 * {@inheritdoc}
+	 *
+	 * @param array $request Http request
+	 * @param mixed $data result of $request query
+	 */
+	protected function _writeQueryCache(array $request, $data) {
+		$key = serialize($request);
+		$cacheName = $this->_currentEndpoint->cacheName();
+		if ($cacheName) {
+			Cache::write(md5($key), array(
+				'data' => $data,
+				'candidates' => $this->lastCandidates()
+					), $cacheName);
+		}
 	}
 
 }
