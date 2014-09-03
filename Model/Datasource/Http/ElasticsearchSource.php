@@ -5,9 +5,6 @@
  * Date: 10.10.2013
  * Time: 18:00:00
  * Format: https://github.com/imsamurai/cakephp-httpsource-datasource
- *
- * @package ElasticsearchSource
- * @subpackage Datasource
  */
 App::uses('HttpSource', 'HttpSource.Model/Datasource');
 App::uses('ElasticsearchConnection', 'ElasticsearchSource.Model/Datasource');
@@ -16,7 +13,7 @@ App::uses('ElasticsearchConnection', 'ElasticsearchSource.Model/Datasource');
  * Elasticsearch DataSource
  *
  * @package ElasticsearchSource
- * @subpackage Datasource
+ * @subpackage Model.Datasource
  */
 class ElasticsearchSource extends HttpSource {
 

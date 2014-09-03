@@ -4,17 +4,13 @@
  * Author: imsamurai <im.samuray@gmail.com>
  * Date: 10.10.2013
  * Time: 18:00:00
- *
- * @package ElasticsearchSource
- * @subpackage Datasource
- *
  */
 
 /**
  * Elasticsearch Connection
  *
  * @package ElasticsearchSource
- * @subpackage Config
+ * @subpackage Model.Datasource
  */
 class ElasticsearchConnection extends HttpSourceConnection {
 

@@ -4,17 +4,14 @@
  * Author: imsamurai <im.samuray@gmail.com>
  * Date: 10.10.2013
  * Time: 18:00:00
- *
- * @package ElasticsearchSource
- * @subpackage Test
  */
 App::uses("HttpSourceTestFixture", "HttpSource.TestSuite/Fixture");
 
 /**
  * Main fixture
  *
- * @package ElasticsearchSource
- * @subpackage Test
+ * @package ElasticsearchSourceTest
+ * @subpackage Test.Fixture
  */
 class ElasticsearchArticleFixture extends HttpSourceTestFixture {
 

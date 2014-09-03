@@ -4,8 +4,12 @@
  * Author: imsamurai <im.samuray@gmail.com>
  * Date: 10.10.2013
  * Time: 18:00:00
- *
- * @package ElasticsearchSource
+ */
+
+/**
+ * All Elasticsearch Source Tests
+ * 
+ * @package ElasticsearchSourceTest
  * @subpackage Test
  */
 class AllElasticsearchSourceTest extends PHPUnit_Framework_TestSuite {

@@ -5,7 +5,6 @@
  * Date: 18.10.2013
  * Time: 16:00:00
  * Format: http://book.cakephp.org/2.0/en/development/testing.html
- *
  */
 App::uses('ElasticsearchTest', 'ElasticsearchSource.Test/');
 App::uses('ElasticsearchIndicesStatus', 'ElasticsearchSource.Model');
@@ -13,8 +12,8 @@ App::uses('ElasticsearchIndicesStatus', 'ElasticsearchSource.Model');
 /**
  * Tests indices status api
  *
- * @package ElasticsearchSource
- * @subpackage Test
+ * @package ElasticsearchSourceTest
+ * @subpackage Model
  */
 class ElasticsearchIndicesStatusTest extends ElasticsearchTest {
 
@@ -37,6 +36,9 @@ class ElasticsearchIndicesStatusTest extends ElasticsearchTest {
 		$this->Elasticsearch->setSource('indices_status', 'test_index', 'test_type');
 	}
 
+	/**
+	 * Test status
+	 */
 	public function testStatus() {
 		$result = $this->Elasticsearch->find('all', array('fields' => array('name')));
 		debug($result);

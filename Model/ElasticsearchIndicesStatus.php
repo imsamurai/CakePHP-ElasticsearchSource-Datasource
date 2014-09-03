@@ -5,9 +5,6 @@
  * Date: 18.10.2013
  * Time: 15:54:36
  * Format: http://book.cakephp.org/2.0/en/models.html
- *
- * @package ElasticsearchSource
- * @subpackage Indices
  */
 App::uses('ElasticsearchModel', 'ElasticsearchSource.Model');
 
@@ -16,7 +13,7 @@ App::uses('ElasticsearchModel', 'ElasticsearchSource.Model');
  *
  * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-status.html
  * @package ElasticsearchSource
- * @subpackage Indices
+ * @subpackage Model
  */
 class ElasticsearchIndicesStatus extends ElasticsearchModel {
 

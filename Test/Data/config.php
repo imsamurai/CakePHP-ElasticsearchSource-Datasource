@@ -6,9 +6,6 @@
  * Time: 15:50:03
  *
  * Extends default plugin config for example and testing
- *
- * @package ElasticsearchSource
- * @subpackage Test
  */
 $CF = HttpSourceConfigFactory::instance();
 $Config = $CF->load('ElasticsearchSource');

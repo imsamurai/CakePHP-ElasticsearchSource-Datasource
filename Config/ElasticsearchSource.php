@@ -5,9 +5,6 @@
  * Date: 10.10.2013
  * Time: 18:00:00
  * Format: https://github.com/imsamurai/cakephp-httpsource-datasource
- *
- * @package ElasticsearchSource
- * @subpackage Config
  */
 $config['ElasticsearchSource']['config_version'] = 2;
 

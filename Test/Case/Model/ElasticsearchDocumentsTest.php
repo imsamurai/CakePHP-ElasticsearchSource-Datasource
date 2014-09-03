@@ -13,8 +13,8 @@ App::uses('ElasticsearchDocument', 'ElasticsearchSource.Model');
 /**
  * Tests documents api - search/get/delete/update/create
  *
- * @package ElasticsearchSource
- * @subpackage Test
+ * @package ElasticsearchSourceTest
+ * @subpackage Model
  */
 class ElasticsearchDocumentsTest extends ElasticsearchTest {
 
@@ -37,6 +37,9 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 		$this->Elasticsearch->setSource('document', 'test_index', 'test_type');
 	}
 
+	/**
+	 * Test search document
+	 */
 	public function testSearchDocument() {
 		$params = array(
 			'conditions' => array(
@@ -56,6 +59,9 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 		debug($result);
 	}
 
+	/**
+	 * Test get document
+	 */
 	public function testGetDocument() {
 		$params = array(
 			'conditions' => array(
@@ -71,6 +77,9 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 		debug($result);
 	}
 
+	/**
+	 * Test get multiple documents
+	 */
 	public function testGetMultipleDocuments() {
 		$params = array(
 			'conditions' => array(
@@ -87,6 +96,9 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 		}
 	}
 
+	/**
+	 * Test update document
+	 */
 	public function testUpdateDocument() {
 		$params = array(
 			"title" => "Test update",
@@ -116,6 +128,9 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 		$this->testDeleteDocument($params['id']);
 	}
 
+	/**
+	 * Test create document
+	 */
 	public function testCreateDocument() {
 		$params = array(
 			"title" => "Test create",
@@ -143,9 +158,12 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 		$this->testDeleteDocument($result[$this->Elasticsearch->alias]['id']);
 	}
 
-	public function testDeleteDocument($id = null) {
-		$id = is_null($id) ? 3 : $id;
-
+	/**
+	 * Test delete document
+	 * 
+	 * @param int $id
+	 */
+	public function testDeleteDocument($id = 3) {
 		$result = $this->Elasticsearch->delete($id);
 		debug($result);
 		$this->assertNotEqual($result, false);
@@ -163,6 +181,9 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 		$this->assertNotEqual($resultCheck, true);
 	}
 
+	/**
+	 * Test documents count
+	 */
 	public function testCountDocument() {
 		Cache::config('Elasticsearch', array(
 			'engine' => 'File',
@@ -204,6 +225,9 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 		$this->assertEqual($total1, $total2);
 	}
 
+	/**
+	 * Test highlight document
+	 */
 	public function testHighlightSearchDocument() {
 		$params = array(
 			'conditions' => array(
@@ -321,6 +345,9 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 		$DB->execute($DB->dropSchema($Schema));
 	}
 
+	/**
+	 * Test document exists
+	 */
 	public function testExistsDocument() {
 		$params = array(
 			"title" => "Test create",
