@@ -58,8 +58,8 @@ public $useTable = '<desired endpoint, for ex: "_search">';
 :: bootstrap.php ::
 ```
 ```php
-CakePlugin::load('HttpSource', array('bootstrap' => true, 'routes' => false));
-CakePlugin::load('ElasticsearchSource');
+CakePlugin::load('HttpSource', array('bootstrap' => true, 'routes' => true));
+CakePlugin::load('ElasticsearchSource', array('bootstrap' => false, 'routes' => true));
 ```
 #Tests
 

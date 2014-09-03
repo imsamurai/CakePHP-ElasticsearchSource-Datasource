@@ -10,7 +10,7 @@ git clone https://github.com/FriendsOfCake/travis.git --depth 1 ../travis;
 if [ "$PHPCS" != 1 ]; then
 	echo "
 		CakePlugin::load('HttpSource', array('bootstrap' => true, 'routes' => true));
-		CakePlugin::load('ElasticsearchSource');
+		CakePlugin::load('ElasticsearchSource', array('bootstrap' => false, 'routes' => true));
 	" >> ../cakephp/app/Config/bootstrap.php;
 	mv ../cakephp/app/Config/database.php ../cakephp/app/Config/database-default.php;
 	elasticsearchTest=;
