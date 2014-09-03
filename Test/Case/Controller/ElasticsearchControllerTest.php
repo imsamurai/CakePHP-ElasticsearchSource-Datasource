@@ -54,13 +54,13 @@ class ElasticsearchControllerTest extends ControllerTestCase {
 				->method('_getViewObject')
 				->willReturnCallback(function() use (&$Controller, $exception, $explaination) {
 					$View = new View($Controller);
+					$View->loadHelpers();
 					$Helper = $this->getMockBuilder('ElasticsearchHelper')
 							->setConstructorArgs(array(new View()))
 							->setMethods(array('explain'))
 							->getMock();
 
-					$Helper
-					->expects($this->exactly($exception ? 0 : 1))
+					$Helper->expects($this->exactly($exception ? 0 : 1))
 					->method('explain')
 					->with($explaination)
 					->willReturn($explaination . $explaination);
