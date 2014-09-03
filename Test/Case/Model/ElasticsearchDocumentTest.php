@@ -16,7 +16,7 @@ App::uses('ElasticsearchDocument', 'ElasticsearchSource.Model');
  * @package ElasticsearchSourceTest
  * @subpackage Model
  */
-class ElasticsearchDocumentsTest extends ElasticsearchTest {
+class ElasticsearchDocumentTest extends ElasticsearchTest {
 
 	/**
 	 * Fixtures
@@ -124,8 +124,6 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 		debug($resultCheck);
 		$this->assertNotEqual($resultCheck, false);
 		$this->assertCount(1, $resultCheck);
-		//not forget to delete document
-		$this->testDeleteDocument($params['id']);
 	}
 
 	/**
@@ -154,16 +152,13 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 		debug($resultCheck);
 		$this->assertNotEqual($resultCheck, false);
 		$this->assertCount(1, $resultCheck);
-		//not forget to delete document
-		$this->testDeleteDocument($result[$this->Elasticsearch->alias]['id']);
 	}
 
 	/**
 	 * Test delete document
-	 * 
-	 * @param int $id
 	 */
-	public function testDeleteDocument($id = 3) {
+	public function testDeleteDocument() {
+		$id = 3;
 		$result = $this->Elasticsearch->delete($id);
 		debug($result);
 		$this->assertNotEqual($result, false);
@@ -409,10 +404,31 @@ class ElasticsearchDocumentsTest extends ElasticsearchTest {
 			//set #3
 			array(
 				//rawQuery
-				'GET //_search?size=10 HTTP/1.1 Host: localhost:9200 Connection: close User-Agent: CakePHP Content-Type: application/x-www-form-urlencoded Content-Length: 171 {"query":{"bool":{"must":[{"match":{"_all":{"query":"guratabaata 1"}}}]}}}',
+				'GET ///_search?size=10 HTTP/1.1 Host: localhost:9200 Connection: close User-Agent: CakePHP Content-Type: application/x-www-form-urlencoded Content-Length: 171 {"query":{"bool":{"must":[{"match":{"_all":{"query":"guratabaata 1"}}}]}}}',
 				//explainationExists
 				true
-			)
+			),
+			//set #4
+			array(
+				//rawQuery
+				'GET /_search?size=10 HTTP/1.1 Host: localhost:9200 Connection: close User-Agent: CakePHP Content-Type: application/x-www-form-urlencoded Content-Length: 171 {"query":{"bool":{"must":[{"match":{"_all":{"query":"guratabaata 1"}}}]}}}',
+				//explainationExists
+				true
+			),
+			//set #5
+			array(
+				//rawQuery
+				'GET /_ulala?size=10 HTTP/1.1 Host: localhost:9200 Connection: close User-Agent: CakePHP Content-Type: application/x-www-form-urlencoded Content-Length: 0',
+				//explainationExists
+				false
+			),
+			//set #6
+			array(
+				//rawQuery
+				'GET /_ulala HTTP/1.1 Host: localhost:9200 Connection: close User-Agent: CakePHP Content-Type: application/x-www-form-urlencoded Content-Length: 0',
+				//explainationExists
+				false
+			),
 		);
 	}
 

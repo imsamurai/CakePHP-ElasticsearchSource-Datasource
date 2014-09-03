@@ -13,7 +13,7 @@ App::uses('ElasticsearchConnection', 'ElasticsearchSource.Model/Datasource');
  * Elasticsearch DataSource
  *
  * @package ElasticsearchSource
- * @subpackage Model.Datasource
+ * @subpackage Model.Datasource.Http
  */
 class ElasticsearchSource extends HttpSource {
 
@@ -22,7 +22,6 @@ class ElasticsearchSource extends HttpSource {
 	 */
 	const HTTP_METHOD_CREATE = 'POST';
 	const HTTP_METHOD_UPDATE = 'PUT';
-	const HTTP_METHOD_CHECK = 'HEAD';
 
 	/**
 	 * Elasticsearch API Datasource
@@ -36,14 +35,7 @@ class ElasticsearchSource extends HttpSource {
 	 *
 	 * @var int
 	 */
-	public $candidates = 0;
-
-	/**
-	 * last request status
-	 *
-	 * @var string
-	 */
-	protected $_requestStatus = array();
+	protected $_candidates = 0;
 
 	/**
 	 * {@inheritdoc}
@@ -52,7 +44,7 @@ class ElasticsearchSource extends HttpSource {
 	 * @param HttpSourceConnection $Connection
 	 */
 	public function __construct($config = array(), HttpSourceConnection $Connection = null) {
-		parent::__construct($config, new ElasticsearchConnection($config));
+		parent::__construct($config, $Connection ? $Connection : new ElasticsearchConnection($config));
 	}
 
 	/**
@@ -83,7 +75,7 @@ class ElasticsearchSource extends HttpSource {
 	 * @return int
 	 */
 	public function lastCandidates() {
-		return $this->candidates;
+		return $this->_candidates;
 	}
 
 	/**
@@ -103,16 +95,11 @@ class ElasticsearchSource extends HttpSource {
 	 * @return mixed results for query if it is cached, false otherwise
 	 */
 	public function getQueryCache(array $request) {
-		$key = serialize($request);
-		$cacheName = $this->_currentEndpoint->cacheName();
-		if (!$cacheName) {
+		$cache = parent::getQueryCache($request);
+		if ($cache === false) {
 			return false;
 		}
-		$cache = Cache::read(md5($key), $cacheName);
-		if (!is_array($cache)) {
-			return false;
-		}
-		$this->candidates = $cache['candidates'];
+		$this->_candidates = $cache['_candidates'];
 		return $cache['data'];
 	}
 
@@ -126,7 +113,7 @@ class ElasticsearchSource extends HttpSource {
 	 * @return array|false $response
 	 */
 	public function request(Model $model = null, $requestData = null, $requestMethod = HttpSource::METHOD_READ) {
-		$this->candidates = 0;
+		$this->_candidates = 0;
 		return parent::request($model, $requestData, $requestMethod);
 	}
 
@@ -140,7 +127,7 @@ class ElasticsearchSource extends HttpSource {
 	 */
 	protected function _singleRequest(array $request, $requestMethod, Model $model = null) {
 		$response = parent::_singleRequest($request, $requestMethod, $model);
-		$this->candidates += $this->_Connection->getCandidates();
+		$this->_candidates += $this->_Connection->getCandidates();
 		return $response;
 	}
 
@@ -151,14 +138,10 @@ class ElasticsearchSource extends HttpSource {
 	 * @param mixed $data result of $request query
 	 */
 	protected function _writeQueryCache(array $request, $data) {
-		$key = serialize($request);
-		$cacheName = $this->_currentEndpoint->cacheName();
-		if ($cacheName) {
-			Cache::write(md5($key), array(
-				'data' => $data,
-				'candidates' => $this->lastCandidates()
-					), $cacheName);
-		}
+		return parent::_writeQueryCache($request, array(
+			'data' => $data,
+			'_candidates' => $this->lastCandidates()
+		));
 	}
 
 }

@@ -71,11 +71,12 @@ class ElasticsearchDocument extends ElasticsearchModel {
 	 * @return array Array of explain information or empty array if connection is unsupported.
 	 */
 	public function explainQuery($connection, $query) {
+		$query = ltrim($query);
 		$patterns = array(
-			'#^\s*GET /(?P<index>[^/]*)/(?P<type>[^/]*)/(?P<id>[^/?=_\s]*)(:?\?(?P<query>[^\s]*)|)#',
-			'#^\s*GET /(?P<index>[^/]*)/(?P<type>[^/]*)/_search(:?\?(?P<query>[^\s]*)|)#',
-			'#^\s*GET /(?P<index>[^/]*)/_search(:?\?(?P<query>[^\s]*)|)#',
-			'#^\s*GET /(?P<id>_search)(:?\?(?P<query>[^\s]*)|)#',
+			'#^GET /(?P<index>[^/\?\s]*)/(?P<type>[^/\?\s]*)/(?P<id>[^/?=_\s]*)(:?\?(?P<query>[^\s]*)|)#ims',
+			'#^GET /(?P<index>[^/\?\s]*)/(?P<type>[^/\?\s]*)/_search(:?\?(?P<query>[^\s]*)|)#ims',
+			'#^GET /(?P<index>[^/\?\s]*)/_search(:?\?(?P<query>[^\s]*)|)#ims',
+			'#^GET /(?P<id>_search)(:?\?(?P<query>[^\s]*)|)#ims',
 			'#(?P<data>{.*})#'
 		);
 		$queryData = array();

@@ -12,7 +12,7 @@ App::uses('HtmlHelper', 'View/Helper');
  * ElasticsearchHelper
  * 
  * @package ElasticsearchSource
- * @subpackage Helper
+ * @subpackage View.Helper
  */
 class ElasticsearchHelper extends HtmlHelper {
 
@@ -43,10 +43,6 @@ class ElasticsearchHelper extends HtmlHelper {
 	 * @return string
 	 */
 	protected function _explainationToString($explaination) {
-		if (!$explaination) {
-			return '';
-		}
-
 		$out = '<li>' . $explaination['value'] . ' = ' . $explaination['description'];
 		$subExplains = array_map(function($explaination) {
 			return $this->_explainationToString($explaination);

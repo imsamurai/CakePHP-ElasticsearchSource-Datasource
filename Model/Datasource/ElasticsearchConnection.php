@@ -6,6 +6,8 @@
  * Time: 18:00:00
  */
 
+App::uses('HttpSourceConnection', 'HttpSource.Model/Datasource');
+
 /**
  * Elasticsearch Connection
  *
