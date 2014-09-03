@@ -9,7 +9,7 @@ git clone https://github.com/FriendsOfCake/travis.git --depth 1 ../travis;
 ../travis/before_script.sh;
 if [ "$PHPCS" != 1 ]; then
 	echo "
-		CakePlugin::load('HttpSource', array('bootstrap' => true, 'routes' => false));
+		CakePlugin::load('HttpSource', array('bootstrap' => true, 'routes' => true));
 		CakePlugin::load('ElasticsearchSource');
 	" >> ../cakephp/app/Config/bootstrap.php;
 	echo "<?php
@@ -30,6 +30,7 @@ if [ "$PHPCS" != 1 ]; then
 				'encoding' => 'utf8'
 			);
 		}" > ../cakephp/app/Config/database.php;
+	cat ../cakephp/app/Config/database.php;
 	echo "<?php
 		require_once dirname(dirname(__FILE__)) . '/vendor/autoload.php';
 		require_once dirname(dirname(dirname(__FILE__))) . '/lib/Cake/Console/ShellDispatcher.php';
