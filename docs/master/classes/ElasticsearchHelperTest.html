@@ -3,7 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
     <meta charset="utf-8"/>
-    <title>    API Documentation &raquo; \ElasticsearchTest
+    <title>    API Documentation &raquo; \ElasticsearchHelperTest
 </title>
     <meta name="author" content=""/>
     <meta name="description" content=""/>
@@ -118,8 +118,8 @@
             <i class="icon-custom icon-method"></i> Methods
             <ul>
                                                                                                     <li class="method public">
-        <a href="#method_setConfig" title="setConfig :: Sets config for source">
-            <span class="description">Sets config for source</span><pre>setConfig</pre>
+        <a href="#method_explainProvider" title="explainProvider :: Data provider for testExplain">
+            <span class="description">Data provider for testExplain</span><pre>explainProvider</pre>
         </a>
     </li>
 
@@ -129,15 +129,21 @@
         </a>
     </li>
 
+                                                                                                        <li class="method public">
+        <a href="#method_testExplain" title="testExplain :: Test explain()">
+            <span class="description">Test explain()</span><pre>testExplain</pre>
+        </a>
+    </li>
+
                                                 </ul>
         </li>
         <li class="nav-header protected">» Protected
             <ul>
-                                                                                                                    </ul>
+                                                                                                                                                        </ul>
         </li>
         <li class="nav-header private">» Private
             <ul>
-                                                                                                                    </ul>
+                                                                                                                                                        </ul>
         </li>
         <li class="nav-header">
             <i class="icon-custom icon-constant"></i> Constants
@@ -151,23 +157,23 @@
 
         <div class="span8">
             <div class="element class">
-                <h1>ElasticsearchTest</h1>
+                <h1>ElasticsearchHelperTest</h1>
                 <small style="display: block; text-align: right">
                                             Extends \CakeTestCase
                                                         </small>
-                <p class="short_description">Tests</p>
+                <p class="short_description">ElasticsearchHelperTest</p>
                 <div class="details">
                     <div class="long_description">
                         
                     </div>
                     <table class="table table-bordered">
-                                                                                    <tr>
+                                                                                                                                        <tr>
                                     <th>
                                         package
                                                                             </th>
                                     <td>
                                                                                     
-                                                                                <p>ElasticsearchSource</p>
+                                                                                <p>ElasticsearchSourceTest</p>
                                     </td>
                                 </tr>
                                                                                                                 <tr>
@@ -176,18 +182,18 @@
                                                                             </th>
                                     <td>
                                                                                     
-                                                                                <p>Test</p>
+                                                                                <p>View.Helper</p>
                                     </td>
                                 </tr>
                                                                                                                             </table>
 
                     <h3><i class="icon-custom icon-method"></i> Methods</h3>
-                                                                <a id="method_setConfig"></a>
-                        <div class="element clickable method public  method_setConfig" data-toggle="collapse" data-target=".method_setConfig .collapse">
-                            <h2>Sets config for source</h2>
-                            <pre>setConfig() </pre>
+                                                                <a id="method_explainProvider"></a>
+                        <div class="element clickable method public  method_explainProvider" data-toggle="collapse" data-target=".method_explainProvider .collapse">
+                            <h2>Data provider for testExplain</h2>
+                            <pre>explainProvider() : array</pre>
                             <div class="labels">
-                                                                <span class="label">static</span>                                                                                                                            </div>
+                                                                                                                                                                                            </div>
 
                             
                             <div class="row collapse">
@@ -202,16 +208,11 @@
                                                 <td>
                                                                                                     </td>
                                             </tr>
-                                                                                    <tr>
-                                                <th>
-                                                    
-                                                </th>
-                                                <td>
-                                                                                                    </td>
-                                            </tr>
                                                                             </table>
 
                                     
+                                                                            <h3>Response</h3>
+                                        <code>array</code><p></p>
                                                                     </div>
                             </div>
 
@@ -250,71 +251,89 @@
                             </div>
 
                         </div>
+                                            <a id="method_testExplain"></a>
+                        <div class="element clickable method public  method_testExplain" data-toggle="collapse" data-target=".method_testExplain .collapse">
+                            <h2>Test explain()</h2>
+                            <pre>testExplain(array $explainations, string $result) </pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    dataProvider
+                                                </th>
+                                                <td>
+                                                                                                                                                                        
+                                                                                                                                                                        <p>explainProvider</p>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$explainations</h4>
+                                                <code>array</code><p></p>
+                                            </div>
+                                                                                    <div class="subelement argument">
+                                                <h4>$result</h4>
+                                                <code>string</code><p></p>
+                                            </div>
+                                                                            
+                                                                    </div>
+                            </div>
+
+                        </div>
                     
                     
                                                                 <h3><i class="icon-custom icon-property"></i> Properties</h3>
-                                                    <a id="property_Elasticsearch"> </a>
-                            <div class="element clickable property  public property_Elasticsearch" data-toggle="collapse" data-target=".property_Elasticsearch .collapse">
-                                <h2>Elasticsearch Model</h2>
-                                <pre>Elasticsearch : \Elasticsearch</pre>
+                                                    <a id="property_Helper"> </a>
+                            <div class="element clickable property  public property_Helper" data-toggle="collapse" data-target=".property_Helper .collapse">
+                                <h2>Helper</h2>
+                                <pre>Helper : \ElasticsearchHelper</pre>
                                 <div class="labels">
                                                                                                         </div>
                                 <div class="row collapse">
                                     <div class="detail-description">
-                                        <div class="long_description"></div>
+                                        <div class="long_description"><p>Elasticsearch Helper</p></div>
 
                                         <table class="table">
                                                                                             <tr>
                                                     <th>
-                                                        var
+                                                        
                                                     </th>
                                                     <td>
-                                                                                                                    
                                                                                                             </td>
                                                 </tr>
                                                                                     </table>
 
                                                                                     <h3>Type(s)</h3>
-                                            <code>\Elasticsearch</code>
-                                                                            </div>
-                                </div>
-                            </div>
-                                                    <a id="property_autoFixtures"> </a>
-                            <div class="element clickable property  public property_autoFixtures" data-toggle="collapse" data-target=".property_autoFixtures .collapse">
-                                <h2>{@inheritdoc}</h2>
-                                <pre>autoFixtures : boolean</pre>
-                                <div class="labels">
-                                                                                                        </div>
-                                <div class="row collapse">
-                                    <div class="detail-description">
-                                        <div class="long_description"></div>
-
-                                        <table class="table">
-                                                                                            <tr>
-                                                    <th>
-                                                        var
-                                                    </th>
-                                                    <td>
-                                                                                                                    
-                                                                                                            </td>
-                                                </tr>
-                                                                                    </table>
-
-                                                                                    <h3>Type(s)</h3>
-                                            <code>boolean</code>
+                                            <code>\ElasticsearchHelper</code>
                                                                             </div>
                                 </div>
                             </div>
                                                             </div>
             </div>
-            <a id="\ElasticsearchTest"></a>
+            <a id="\ElasticsearchHelperTest"></a>
             <ul class="breadcrumb">
                 <li><a href="../index.html"><i class="icon-custom icon-class"></i></a></li>
                     
     
     <li><span class="divider">\</span><a href="../namespaces/default.html">\</a></li>
 
-                <li class="active"><span class="divider">\</span><a href="../classes/ElasticsearchTest.html">ElasticsearchTest</a></li>
+                <li class="active"><span class="divider">\</span><a href="../classes/ElasticsearchHelperTest.html">ElasticsearchHelperTest</a></li>
             </ul>
         </div>
     </div>
