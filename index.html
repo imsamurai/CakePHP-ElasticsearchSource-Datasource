@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Elasticsearch Datasource for CakePHP by imsamurai</title>
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script src="javascripts/main.js"></script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+
+  </head>
+  <body>
+
+      <header>
+        <h1>Elasticsearch Datasource for CakePHP</h1>
+        <p>ES REST api plugin</p>
+      </header>
+
+      <div id="banner">
+        <span id="logo"></span>
+
+        <a href="https://github.com/imsamurai/CakePHP-ElasticsearchSource-Datasource" class="button fork"><strong>View On GitHub</strong></a>
+        <div class="downloads">
+          <span>Downloads:</span>
+          <ul>
+            <li><a href="https://github.com/imsamurai/CakePHP-ElasticsearchSource-Datasource/zipball/master" class="button">ZIP</a></li>
+            <li><a href="https://github.com/imsamurai/CakePHP-ElasticsearchSource-Datasource/tarball/master" class="button">TAR</a></li>
+          </ul>
+        </div>
+      </div><!-- end banner -->
+
+    <div class="wrapper">
+      <nav>
+        <ul></ul>
+      </nav>
+      <section>
+        <h1>
+<a name="elasticsearchsource-plugin" class="anchor" href="#elasticsearchsource-plugin"><span class="octicon octicon-link"></span></a>ElasticsearchSource Plugin</h1>
+
+<h2>
+<a name="api-documentation" class="anchor" href="#api-documentation"><span class="octicon octicon-link"></span></a>API Documentation</h2>
+
+<p>Check out <a href="http://imsamurai.github.io/CakePHP-ElasticsearchSource-Datasource/docs/master/">ElasticsearchSource API Documentation</a></p>
+
+<h2>
+<a name="abstract" class="anchor" href="#abstract"><span class="octicon octicon-link"></span></a>Abstract</h2>
+
+<p><a href="https://travis-ci.org/imsamurai/CakePHP-ElasticsearchSource-Datasource"><img src="https://travis-ci.org/imsamurai/CakePHP-ElasticsearchSource-Datasource.png" alt="Build Status"></a> <a href="https://coveralls.io/r/imsamurai/CakePHP-ElasticsearchSource-Datasource?branch=master"><img src="https://coveralls.io/repos/imsamurai/CakePHP-ElasticsearchSource-Datasource/badge.png?branch=master" alt="Coverage Status"></a> <a href="https://packagist.org/packages/imsamurai/elasticsearch-source"><img src="https://poser.pugx.org/imsamurai/elasticsearch-source/v/stable.png" alt="Latest Stable Version"></a> <a href="https://packagist.org/packages/imsamurai/elasticsearch-source"><img src="https://poser.pugx.org/imsamurai/elasticsearch-source/downloads.png" alt="Total Downloads"></a> <a href="https://packagist.org/packages/imsamurai/elasticsearch-source"><img src="https://poser.pugx.org/imsamurai/elasticsearch-source/v/unstable.png" alt="Latest Unstable Version"></a> <a href="https://packagist.org/packages/imsamurai/elasticsearch-source"><img src="https://poser.pugx.org/imsamurai/elasticsearch-source/license.png" alt="License"></a></p>
+
+<p>CakePHP ElasticsearchSource is DataSource Plugin  for <a href="http://www.elasticsearch.org/">Elasticsearch</a></p>
+
+<h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<h3>
+<a name="step-1-clone-or-download-httpsource" class="anchor" href="#step-1-clone-or-download-httpsource"><span class="octicon octicon-link"></span></a>Step 1: Clone or download <a href="https://github.com/imsamurai/cakephp-httpsource-datasource">HttpSource</a>
+</h3>
+
+<h3>
+<a name="step-2-clone-or-download-to-pluginelasticsearchsource" class="anchor" href="#step-2-clone-or-download-to-pluginelasticsearchsource"><span class="octicon octicon-link"></span></a>Step 2: Clone or download to <code>Plugin/ElasticsearchSource</code>
+</h3>
+
+<p>cd my_cake_app/app git://github.com/imsamurai/CakePHP-ElasticsearchSource-Datasource.git Plugin/ElasticsearchSource</p>
+
+<p>or if you use git add as submodule:</p>
+
+<pre><code>cd my_cake_app
+git submodule add "git://github.com/imsamurai/CakePHP-ElasticsearchSource-Datasource.git" "app/Plugin/ElasticsearchSource"
+</code></pre>
+
+<p>then update submodules:</p>
+
+<pre><code>git submodule init
+git submodule update
+</code></pre>
+
+<h3>
+<a name="step-3-add-your-configuration-to-databasephp-and-set-it-to-the-model" class="anchor" href="#step-3-add-your-configuration-to-databasephp-and-set-it-to-the-model"><span class="octicon octicon-link"></span></a>Step 3: Add your configuration to <code>database.php</code> and set it to the model</h3>
+
+<pre><code>:: database.php ::
+</code></pre>
+
+<div class="highlight highlight-php"><pre><span class="k">public</span> <span class="nv">$elasticsearch</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+  <span class="s1">'datasource'</span> <span class="o">=&gt;</span> <span class="s1">'ElasticsearchSource.Http/ElasticsearchSource'</span><span class="p">,</span>
+  <span class="s1">'host'</span> <span class="o">=&gt;</span> <span class="s1">'example.com'</span><span class="p">,</span>
+  <span class="s1">'port'</span> <span class="o">=&gt;</span> <span class="s1">'some port'</span>
+<span class="p">);</span>
+<span class="k">public</span> <span class="nv">$elasticsearchTest</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+  <span class="s1">'datasource'</span> <span class="o">=&gt;</span> <span class="s1">'ElasticsearchSource.Http/ElasticsearchSource'</span><span class="p">,</span>
+  <span class="s1">'host'</span> <span class="o">=&gt;</span> <span class="s1">'localhost'</span><span class="p">,</span>
+  <span class="s1">'prefix'</span> <span class="o">=&gt;</span> <span class="s1">''</span><span class="p">,</span>
+  <span class="s1">'port'</span> <span class="o">=&gt;</span> <span class="mi">9200</span><span class="p">,</span>
+  <span class="s1">'timeout'</span> <span class="o">=&gt;</span> <span class="mi">5</span>
+<span class="p">);</span>
+</pre></div>
+
+<p>Then make model</p>
+
+<pre><code>:: Elasticsearch.php ::
+</code></pre>
+
+<div class="highlight highlight-php"><pre><span class="k">public</span> <span class="nv">$useDbConfig</span> <span class="o">=</span> <span class="s1">'elasticsearch'</span><span class="p">;</span>
+<span class="k">public</span> <span class="nv">$useTable</span> <span class="o">=</span> <span class="s1">'&lt;desired endpoint, for ex: "_search"&gt;'</span><span class="p">;</span>
+</pre></div>
+
+<h3>
+<a name="step-4-load-plugin" class="anchor" href="#step-4-load-plugin"><span class="octicon octicon-link"></span></a>Step 4: Load plugin</h3>
+
+<pre><code>:: bootstrap.php ::
+</code></pre>
+
+<div class="highlight highlight-php"><pre><span class="nx">CakePlugin</span><span class="o">::</span><span class="na">load</span><span class="p">(</span><span class="s1">'HttpSource'</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">'bootstrap'</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span> <span class="s1">'routes'</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">));</span>
+<span class="nx">CakePlugin</span><span class="o">::</span><span class="na">load</span><span class="p">(</span><span class="s1">'ElasticsearchSource'</span><span class="p">);</span>
+</pre></div>
+
+<h1>
+<a name="tests" class="anchor" href="#tests"><span class="octicon octicon-link"></span></a>Tests</h1>
+
+<p>To run tests add and fill $elasticsearchTest in <code>database.php</code></p>
+
+<h1>
+<a name="usage" class="anchor" href="#usage"><span class="octicon octicon-link"></span></a>Usage</h1>
+
+<p>You can use elasticsearch almost as db tables:</p>
+
+<div class="highlight highlight-php"><pre><span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Elasticsearch</span><span class="o">-&gt;</span><span class="na">setSource</span><span class="p">(</span><span class="s1">'search'</span><span class="p">);</span>
+    <span class="nv">$params</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+        <span class="s1">'conditions'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+            <span class="s1">'query'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span>
+                <span class="s2">"term"</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s2">"title"</span> <span class="o">=&gt;</span> <span class="s2">"apple"</span><span class="p">)</span>
+            <span class="p">)</span>
+        <span class="p">),</span>
+        <span class="s1">'fields'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">'title'</span><span class="p">,</span> <span class="s1">'rank'</span><span class="p">),</span>
+        <span class="s1">'order'</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span><span class="s1">'rank'</span> <span class="o">=&gt;</span> <span class="s1">'desc'</span><span class="p">),</span>
+        <span class="s1">'offset'</span> <span class="o">=&gt;</span> <span class="mi">2</span>
+    <span class="p">);</span>
+
+<span class="nv">$result</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">Elasticsearch</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="s1">'first'</span><span class="p">,</span> <span class="nv">$params</span><span class="p">);</span>
+</pre></div>
+
+<h1>
+<a name="documentation" class="anchor" href="#documentation"><span class="octicon octicon-link"></span></a>Documentation</h1>
+
+<p>Please read <a href="https://github.com/imsamurai/cakephp-httpsource-datasource/blob/master/README.md">HttpSource Plugin README</a></p>
+      </section>
+      <footer>
+        <p>Project maintained by <a href="https://github.com/imsamurai">imsamurai</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://twitter.com/michigangraham">mattgraham</a></small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+              <script type="text/javascript">
+            var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+            document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+          </script>
+          <script type="text/javascript">
+            try {
+              var pageTracker = _gat._getTracker("UA-54309823-1");
+            pageTracker._trackPageview();
+            } catch(err) {}
+          </script>
+
+  </body>
+</html>
