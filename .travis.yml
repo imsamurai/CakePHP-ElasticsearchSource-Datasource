@@ -42,33 +42,8 @@ before_install:
 before_script:
     - chmod +x ./travis/*
     - ./travis/before_script.sh
-    - if [ "$PHPCS" != 1 ]; then
-            echo "
-                CakePlugin::load('HttpSource', array('bootstrap' => true, 'routes' => false));
-                CakePlugin::load('ElasticsearchSource');
-            " >> ../cakephp/app/Config/bootstrap.php;
-            echo "<?php
-                class DATABASE_CONFIG {
-                    public \$elasticsearchTest = array(
-                        'datasource' => 'ElasticsearchSource.Http/ElasticsearchSource',
-                        'host' => 'localhost',
-                        'prefix' => '',
-                        'port' => 9200,
-                        'timeout' => 5
-                    );
-                    public \$test = array(
-                        'datasource' => 'Database/Mysql',
-                        'host' => '127.0.0.1',
-                        'login' => 'travis',
-                        'database' => 'test',
-                        'prefix' => '',
-                        'encoding' => 'utf8'
-                    );
-                }" > ../cakephp/app/Config/database.php;
-      fi
 
 script:
-  - cat ../cakephp/app/Config/database.php
   - ./travis/script.sh
 
 after_success:

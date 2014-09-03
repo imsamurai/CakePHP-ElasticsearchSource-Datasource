@@ -12,24 +12,15 @@ if [ "$PHPCS" != 1 ]; then
 		CakePlugin::load('HttpSource', array('bootstrap' => true, 'routes' => true));
 		CakePlugin::load('ElasticsearchSource');
 	" >> ../cakephp/app/Config/bootstrap.php;
-	echo "<?php
-		class DATABASE_CONFIG {
-			public \$elasticsearchTest = array(
+	mv ../cakephp/app/Config/database.php ../cakephp/app/Config/database-default.php;
+	elasticsearchTest="public \$elasticsearchTest = array(
 				'datasource' => 'ElasticsearchSource.Http/ElasticsearchSource',
 				'host' => 'localhost',
 				'prefix' => '',
 				'port' => 9200,
 				'timeout' => 5
-			);
-			public \$test = array(
-				'datasource' => 'Database/Mysql',
-				'host' => '127.0.0.1',
-				'login' => 'travis',
-				'database' => 'test',
-				'prefix' => '',
-				'encoding' => 'utf8'
-			);
-		}" > ../cakephp/app/Config/database.php;
+			);";
+	cat ../cakephp/app/Config/database-default.php | sed -e "s/class DATABASE_CONFIG {/class DATABASE_CONFIG { $(printf '%s\n' "$elasticsearchTest" | sed 's/[[\.*^$/]/\\&/g')/" > ../cakephp/app/Config/database.php;
 	echo "<?php
 		require_once dirname(dirname(__FILE__)) . '/vendor/autoload.php';
 		require_once dirname(dirname(dirname(__FILE__))) . '/lib/Cake/Console/ShellDispatcher.php';
