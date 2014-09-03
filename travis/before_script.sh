@@ -29,6 +29,7 @@ if [ "$PHPCS" != 1 ]; then
 		require_once dirname(dirname(dirname(__FILE__))) . '/lib/Cake/Console/ShellDispatcher.php';
 		return ShellDispatcher::run(\$argv);
 	" > ../cakephp/app/Console/cake.php;
+	echo "Configure::write('debug', 0);" >> ../cakephp/app/Config/core.php;
 fi;
 if [ "$PHPCS" = 1 ]; then
 	rm -rf ~/.phpenv/versions/$(phpenv version-name)/pear/PHP/CodeSniffer/Standards/CakePHP;
