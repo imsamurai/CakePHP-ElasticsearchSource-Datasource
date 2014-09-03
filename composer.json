@@ -20,7 +20,7 @@
   ],
   "require": {
     "composer/installers": "*",
-	"imsamurai/http-source": ">=1.1.0"
+	"imsamurai/http-source": ">=1.2.1"
   },
   "support": {
     "email": "im.samuray@gmail.com",
