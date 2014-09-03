@@ -30,7 +30,6 @@ if [ "$PHPCS" != 1 ]; then
 				'encoding' => 'utf8'
 			);
 		}" > ../cakephp/app/Config/database.php;
-	cat ../cakephp/app/Config/database.php;
 	echo "<?php
 		require_once dirname(dirname(__FILE__)) . '/vendor/autoload.php';
 		require_once dirname(dirname(dirname(__FILE__))) . '/lib/Cake/Console/ShellDispatcher.php';
