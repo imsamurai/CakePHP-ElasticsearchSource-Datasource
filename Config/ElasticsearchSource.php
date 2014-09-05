@@ -138,7 +138,7 @@ $Config/*
 				->addCondition($CF->condition()->name('type')->sendInQuery()->required())
 				->addCondition($CF->condition()->name('id')->sendInQuery()->length(100)->required())
 				->addCondition($CF->condition()->name('version')->sendInQuery())
-				->addCondition($CF->condition()->name('op_type')->sendInQuery())
+				->addCondition($CF->condition()->name('op_type')->sendInQuery()->defaults('create'))
 				->addCondition($CF->condition()->name('routing')->sendInQuery())
 				->addCondition($CF->condition()->name('parent')->sendInQuery())
 				->addCondition($CF->condition()->name('timestamp')->sendInQuery())
