@@ -62,7 +62,7 @@ class ElasticsearchModel extends HttpSourceModel {
 	 * @param string $implementation
 	 * @throws MissingTableException when database table $tableName is not found on data source
 	 */
-	public function setSource($tableName, $indexName = null, $typeName = null, $language = null, $implementation = null) {
+	public function setSource($tableName, $indexName = null, $typeName = null, $language = null, $implementation = null, $scheme = null) {
 		if ($indexName) {
 			$this->useIndex = $indexName;
 		}
@@ -74,6 +74,9 @@ class ElasticsearchModel extends HttpSourceModel {
 		}
 		if (!is_null($implementation)) {
 			$this->implementation = $implementation;
+		}
+		if (!is_null($scheme)) {
+			$this->scheme = $scheme;
 		}
 		parent::setSource($tableName);
 	}
@@ -103,6 +106,7 @@ class ElasticsearchModel extends HttpSourceModel {
 		$this->set('implementation', $this->implementation);
 		$this->set('index', $this->useIndex);
 		$this->set('type', $this->useType);
+		$this->set('scheme', $this->scheme);
 		return parent::beforeSave($options);
 	}
 
