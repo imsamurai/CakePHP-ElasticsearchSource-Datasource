@@ -119,7 +119,7 @@ class ElasticsearchModel extends HttpSourceModel {
 	 * @return bool
 	 */
 	public function beforeSave($options = array()) {
-		if($this->opType == 'create' ) {
+		if ($this->opType == 'create' ) {
 			$this->data[$this->alias]['op_type'] = $this->opType;
 		}
 		$this->set('language', $this->language);
