@@ -52,6 +52,20 @@ class ElasticsearchModel extends HttpSourceModel {
 	public $implementation;
 
 	/**
+	 * Document scheme
+	 *
+	 * @var string
+	 */
+	public $scheme;
+
+	/**
+	 * op_type elasticsearch parameter
+	 *
+	 * @var string
+	 */
+	public $op_type;
+
+	/**
 	 * {@inheritdoc}
 	 * With index/type support
 	 * 
@@ -102,6 +116,9 @@ class ElasticsearchModel extends HttpSourceModel {
 	 * @return bool
 	 */
 	public function beforeSave($options = array()) {
+		if($this->op_type == 'create' ){
+			$this->data[$this->alias]['op_type'] = $this->op_type;
+		}
 		$this->set('language', $this->language);
 		$this->set('implementation', $this->implementation);
 		$this->set('index', $this->useIndex);
