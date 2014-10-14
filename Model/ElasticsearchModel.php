@@ -76,7 +76,7 @@ class ElasticsearchModel extends HttpSourceModel {
 	 * @param string $implementation
 	 * @throws MissingTableException when database table $tableName is not found on data source
 	 */
-	public function setSource($tableName, $indexName = null, $typeName = null, $language = null, $implementation = null, $scheme = null) {
+	public function setSource($tableName, $indexName = null, $typeName = null, $language = null, $implementation = null, $scheme = null, $op_type = null) {
 		if ($indexName) {
 			$this->useIndex = $indexName;
 		}
@@ -91,6 +91,9 @@ class ElasticsearchModel extends HttpSourceModel {
 		}
 		if (!is_null($scheme)) {
 			$this->scheme = $scheme;
+		}
+		if (!is_null($op_type)) {
+			$this->op_type = $op_type;
 		}
 		parent::setSource($tableName);
 	}
@@ -116,7 +119,7 @@ class ElasticsearchModel extends HttpSourceModel {
 	 * @return bool
 	 */
 	public function beforeSave($options = array()) {
-		if($this->op_type == 'create' ){
+		if($this->op_type == 'create' ) {
 			$this->data[$this->alias]['op_type'] = $this->op_type;
 		}
 		$this->set('language', $this->language);
