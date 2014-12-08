@@ -85,7 +85,10 @@ class ElasticsearchConnection extends HttpSourceConnection {
 	 * @return string
 	 */
 	protected function _extractRemoteError() {
-		return Hash::get((array)$this->_lastResponse, 'error');
+		try {
+			return Hash::get((array)$this->_decode(), 'error');
+		} catch (Exception $E) {
+			return 'Unknown error, response: ' . $this->_Response;
+		}
 	}
-
 }
