@@ -5,216 +5,216 @@
  -->
 <!-- Title: G Pages: 1 -->
 <svg width="920pt" height="1144pt"
- viewBox="0.00 0.00 920.00 1144.47" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g id="graph1" class="graph" transform="scale(1 1) rotate(0) translate(4 1140.47)">
+ viewBox="0.00 0.00 920.00 1144.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<g id="graph1" class="graph" transform="scale(1 1) rotate(0) translate(4 1140)">
 <title>G</title>
-<polygon fill="white" stroke="white" points="-4,5 -4,-1140.47 917,-1140.47 917,5 -4,5"/>
+<polygon fill="white" stroke="white" points="-4,5 -4,-1140 917,-1140 917,5 -4,5"/>
 <g id="graph2" class="cluster"><title>cluster_Global</title>
-<polyline fill="none" stroke="gray" points="372,-406.466 892,-406.466 "/>
-<path fill="none" stroke="gray" d="M892,-406.466C898,-406.466 904,-412.466 904,-418.466"/>
-<polyline fill="none" stroke="gray" points="904,-418.466 904,-1116.47 "/>
-<path fill="none" stroke="gray" d="M904,-1116.47C904,-1122.47 898,-1128.47 892,-1128.47"/>
-<polyline fill="none" stroke="gray" points="892,-1128.47 372,-1128.47 "/>
-<path fill="none" stroke="gray" d="M372,-1128.47C366,-1128.47 360,-1122.47 360,-1116.47"/>
-<polyline fill="none" stroke="gray" points="360,-1116.47 360,-418.466 "/>
-<path fill="none" stroke="gray" d="M360,-418.466C360,-412.466 366,-406.466 372,-406.466"/>
-<text text-anchor="middle" x="632" y="-1114.57" font-family="Times Roman,serif" font-size="11.00" fill="gray">Global</text>
-</g>
-<!-- \\ElasticsearchController -->
-<g id="node2" class="node"><title>\\ElasticsearchController</title>
-<polygon fill="none" stroke="black" points="872,-882.466 700,-882.466 700,-846.466 872,-846.466 872,-882.466"/>
-<text text-anchor="middle" x="786" y="-861.566" font-family="Courier,monospace" font-size="11.00">ElasticsearchController</text>
-</g>
-<!-- \\HttpSourceController -->
-<g id="node18" class="node"><title>\\HttpSourceController</title>
-<ellipse fill="none" stroke="black" cx="437" cy="-380.466" rx="118.794" ry="18.3848"/>
-<text text-anchor="middle" x="437" y="-376.866" font-family="Times Roman,serif" font-size="14.00" fill="gray">\HttpSourceController</text>
-</g>
-<!-- \\ElasticsearchController&#45;&gt;\\HttpSourceController -->
-<g id="edge3" class="edge"><title>\\ElasticsearchController&#45;&gt;\\HttpSourceController</title>
-<path fill="none" stroke="black" d="M699.927,-854.167C690.948,-850.105 682.681,-844.68 676,-837.466 542.845,-693.69 744.838,-538.725 604,-402.466 592.621,-391.457 578.586,-384.121 563.527,-379.396"/>
-<polygon fill="none" stroke="black" points="564.07,-375.916 553.501,-376.656 562.224,-382.668 564.07,-375.916"/>
-</g>
-<!-- \\ElasticsearchConnection -->
-<g id="node3" class="node"><title>\\ElasticsearchConnection</title>
-<polygon fill="none" stroke="black" points="872,-828.466 700,-828.466 700,-792.466 872,-792.466 872,-828.466"/>
-<text text-anchor="middle" x="786" y="-807.566" font-family="Courier,monospace" font-size="11.00">ElasticsearchConnection</text>
-</g>
-<!-- \\HttpSourceConnection -->
-<g id="node20" class="node"><title>\\HttpSourceConnection</title>
-<ellipse fill="none" stroke="black" cx="437" cy="-326.466" rx="125.158" ry="18.3848"/>
-<text text-anchor="middle" x="437" y="-322.866" font-family="Times Roman,serif" font-size="14.00" fill="gray">\HttpSourceConnection</text>
-</g>
-<!-- \\ElasticsearchConnection&#45;&gt;\\HttpSourceConnection -->
-<g id="edge5" class="edge"><title>\\ElasticsearchConnection&#45;&gt;\\HttpSourceConnection</title>
-<path fill="none" stroke="black" d="M699.94,-800.154C690.959,-796.095 682.688,-790.673 676,-783.466 544.201,-641.422 741.401,-490.098 604,-353.466 594.541,-344.06 583.181,-337.141 570.892,-332.124"/>
-<polygon fill="none" stroke="black" points="571.925,-328.775 561.33,-328.648 569.533,-335.354 571.925,-328.775"/>
-</g>
-<!-- \\ElasticsearchSource -->
-<g id="node4" class="node"><title>\\ElasticsearchSource</title>
-<polygon fill="none" stroke="black" points="858,-774.466 714,-774.466 714,-738.466 858,-738.466 858,-774.466"/>
-<text text-anchor="middle" x="786" y="-753.566" font-family="Courier,monospace" font-size="11.00">ElasticsearchSource</text>
-</g>
-<!-- \\HttpSource -->
-<g id="node22" class="node"><title>\\HttpSource</title>
-<ellipse fill="none" stroke="black" cx="437" cy="-272.466" rx="70.0036" ry="18.3848"/>
-<text text-anchor="middle" x="437" y="-268.866" font-family="Times Roman,serif" font-size="14.00" fill="gray">\HttpSource</text>
-</g>
-<!-- \\ElasticsearchSource&#45;&gt;\\HttpSource -->
-<g id="edge7" class="edge"><title>\\ElasticsearchSource&#45;&gt;\\HttpSource</title>
-<path fill="none" stroke="black" d="M713.268,-751.104C699.264,-746.889 685.898,-740.133 676,-729.466 544.201,-587.422 741.401,-436.098 604,-299.466 580.416,-276.014 545.019,-268.027 512.874,-266.412"/>
-<polygon fill="none" stroke="black" points="512.672,-262.905 502.571,-266.1 512.46,-269.901 512.672,-262.905"/>
-</g>
-<!-- \\ElasticsearchModel -->
-<g id="node5" class="node"><title>\\ElasticsearchModel</title>
-<polygon fill="none" stroke="black" points="506,-1071.47 368,-1071.47 368,-1035.47 506,-1035.47 506,-1071.47"/>
-<text text-anchor="middle" x="437" y="-1050.57" font-family="Courier,monospace" font-size="11.00">ElasticsearchModel</text>
-</g>
-<!-- \\HttpSourceModel -->
-<g id="node24" class="node"><title>\\HttpSourceModel</title>
-<ellipse fill="none" stroke="black" cx="99" cy="-1053.47" rx="98.9949" ry="18.3848"/>
-<text text-anchor="middle" x="99" y="-1049.87" font-family="Times Roman,serif" font-size="14.00" fill="gray">\HttpSourceModel</text>
-</g>
-<!-- \\ElasticsearchModel&#45;&gt;\\HttpSourceModel -->
-<g id="edge9" class="edge"><title>\\ElasticsearchModel&#45;&gt;\\HttpSourceModel</title>
-<path fill="none" stroke="black" d="M367.785,-1053.47C321.88,-1053.47 260.671,-1053.47 208.26,-1053.47"/>
-<polygon fill="none" stroke="black" points="208.243,-1049.97 198.243,-1053.47 208.243,-1056.97 208.243,-1049.97"/>
-</g>
-<!-- \\ElasticsearchIndicesStatus -->
-<g id="node6" class="node"><title>\\ElasticsearchIndicesStatus</title>
-<polygon fill="none" stroke="black" points="882,-1098.47 690,-1098.47 690,-1062.47 882,-1062.47 882,-1098.47"/>
-<text text-anchor="middle" x="786" y="-1077.57" font-family="Courier,monospace" font-size="11.00">ElasticsearchIndicesStatus</text>
-</g>
-<!-- \\ElasticsearchIndicesStatus&#45;&gt;\\ElasticsearchModel -->
-<g id="edge11" class="edge"><title>\\ElasticsearchIndicesStatus&#45;&gt;\\ElasticsearchModel</title>
-<path fill="none" stroke="black" d="M689.71,-1073.02C635.14,-1068.79 567.704,-1063.58 516.222,-1059.59"/>
-<polygon fill="none" stroke="black" points="516.388,-1056.1 506.147,-1058.82 515.848,-1063.08 516.388,-1056.1"/>
-</g>
-<!-- \\ElasticsearchDocument -->
-<g id="node7" class="node"><title>\\ElasticsearchDocument</title>
-<polygon fill="none" stroke="black" points="865,-1044.47 707,-1044.47 707,-1008.47 865,-1008.47 865,-1044.47"/>
-<text text-anchor="middle" x="786" y="-1023.57" font-family="Courier,monospace" font-size="11.00">ElasticsearchDocument</text>
-</g>
-<!-- \\ElasticsearchDocument&#45;&gt;\\ElasticsearchModel -->
-<g id="edge13" class="edge"><title>\\ElasticsearchDocument&#45;&gt;\\ElasticsearchModel</title>
-<path fill="none" stroke="black" d="M706.806,-1032.59C649.795,-1037 573.205,-1042.93 516.194,-1047.34"/>
-<polygon fill="none" stroke="black" points="515.845,-1043.86 506.145,-1048.12 516.385,-1050.83 515.845,-1043.86"/>
+<polyline fill="none" stroke="gray" points="372,-406 892,-406 "/>
+<path fill="none" stroke="gray" d="M892,-406C898,-406 904,-412 904,-418"/>
+<polyline fill="none" stroke="gray" points="904,-418 904,-1116 "/>
+<path fill="none" stroke="gray" d="M904,-1116C904,-1122 898,-1128 892,-1128"/>
+<polyline fill="none" stroke="gray" points="892,-1128 372,-1128 "/>
+<path fill="none" stroke="gray" d="M372,-1128C366,-1128 360,-1122 360,-1116"/>
+<polyline fill="none" stroke="gray" points="360,-1116 360,-418 "/>
+<path fill="none" stroke="gray" d="M360,-418C360,-412 366,-406 372,-406"/>
+<text text-anchor="middle" x="632" y="-1114.1" font-family="Times Roman,serif" font-size="11.00" fill="gray">Global</text>
 </g>
 <!-- \\ElasticsearchHelper -->
-<g id="node8" class="node"><title>\\ElasticsearchHelper</title>
-<polygon fill="none" stroke="black" points="858,-720.466 714,-720.466 714,-684.466 858,-684.466 858,-720.466"/>
-<text text-anchor="middle" x="786" y="-699.566" font-family="Courier,monospace" font-size="11.00">ElasticsearchHelper</text>
+<g id="node2" class="node"><title>\\ElasticsearchHelper</title>
+<polygon fill="none" stroke="black" points="858,-882 714,-882 714,-846 858,-846 858,-882"/>
+<text text-anchor="middle" x="786" y="-861.1" font-family="Courier,monospace" font-size="11.00">ElasticsearchHelper</text>
 </g>
 <!-- \\HtmlHelper -->
-<g id="node28" class="node"><title>\\HtmlHelper</title>
-<ellipse fill="none" stroke="black" cx="437" cy="-218.466" rx="70.0036" ry="18.3848"/>
-<text text-anchor="middle" x="437" y="-214.866" font-family="Times Roman,serif" font-size="14.00" fill="gray">\HtmlHelper</text>
+<g id="node18" class="node"><title>\\HtmlHelper</title>
+<ellipse fill="none" stroke="black" cx="437" cy="-380" rx="70.0036" ry="18.3848"/>
+<text text-anchor="middle" x="437" y="-376.4" font-family="Times Roman,serif" font-size="14.00" fill="gray">\HtmlHelper</text>
 </g>
 <!-- \\ElasticsearchHelper&#45;&gt;\\HtmlHelper -->
-<g id="edge15" class="edge"><title>\\ElasticsearchHelper&#45;&gt;\\HtmlHelper</title>
-<path fill="none" stroke="black" d="M713.268,-697.104C699.264,-692.889 685.898,-686.133 676,-675.466 544.201,-533.422 741.401,-382.098 604,-245.466 580.416,-222.014 545.019,-214.027 512.874,-212.412"/>
-<polygon fill="none" stroke="black" points="512.672,-208.905 502.571,-212.1 512.46,-215.901 512.672,-208.905"/>
+<g id="edge3" class="edge"><title>\\ElasticsearchHelper&#45;&gt;\\HtmlHelper</title>
+<path fill="none" stroke="black" d="M713.253,-858.652C699.25,-854.436 685.888,-847.676 676,-837 542.845,-693.224 744.838,-538.259 604,-402 579.334,-378.136 542.187,-371.529 509.185,-371.371"/>
+<polygon fill="none" stroke="black" points="509.043,-367.873 499.095,-371.518 509.145,-374.872 509.043,-367.873"/>
 </g>
 <!-- \\ElasticsearchArticleFixture -->
-<g id="node9" class="node"><title>\\ElasticsearchArticleFixture</title>
-<polygon fill="none" stroke="black" points="885,-666.466 687,-666.466 687,-630.466 885,-630.466 885,-666.466"/>
-<text text-anchor="middle" x="786" y="-645.566" font-family="Courier,monospace" font-size="11.00">ElasticsearchArticleFixture</text>
+<g id="node3" class="node"><title>\\ElasticsearchArticleFixture</title>
+<polygon fill="none" stroke="black" points="885,-828 687,-828 687,-792 885,-792 885,-828"/>
+<text text-anchor="middle" x="786" y="-807.1" font-family="Courier,monospace" font-size="11.00">ElasticsearchArticleFixture</text>
 </g>
 <!-- \\HttpSourceTestFixture -->
-<g id="node30" class="node"><title>\\HttpSourceTestFixture</title>
-<ellipse fill="none" stroke="black" cx="437" cy="-164.466" rx="123.951" ry="18.3848"/>
-<text text-anchor="middle" x="437" y="-160.866" font-family="Times Roman,serif" font-size="14.00" fill="gray">\HttpSourceTestFixture</text>
+<g id="node20" class="node"><title>\\HttpSourceTestFixture</title>
+<ellipse fill="none" stroke="black" cx="437" cy="-326" rx="123.951" ry="18.3848"/>
+<text text-anchor="middle" x="437" y="-322.4" font-family="Times Roman,serif" font-size="14.00" fill="gray">\HttpSourceTestFixture</text>
 </g>
 <!-- \\ElasticsearchArticleFixture&#45;&gt;\\HttpSourceTestFixture -->
-<g id="edge17" class="edge"><title>\\ElasticsearchArticleFixture&#45;&gt;\\HttpSourceTestFixture</title>
-<path fill="none" stroke="black" d="M686.149,-630.32C682.488,-627.719 679.076,-624.781 676,-621.466 544.201,-479.422 741.401,-328.098 604,-191.466 594.458,-181.977 582.981,-175.02 570.569,-169.992"/>
-<polygon fill="none" stroke="black" points="571.505,-166.61 560.911,-166.514 569.133,-173.195 571.505,-166.61"/>
+<g id="edge5" class="edge"><title>\\ElasticsearchArticleFixture&#45;&gt;\\HttpSourceTestFixture</title>
+<path fill="none" stroke="black" d="M686.149,-791.854C682.488,-789.253 679.076,-786.315 676,-783 544.201,-640.956 741.401,-489.632 604,-353 594.458,-343.511 582.981,-336.554 570.569,-331.526"/>
+<polygon fill="none" stroke="black" points="571.505,-328.144 560.911,-328.048 569.133,-334.729 571.505,-328.144"/>
 </g>
 <!-- \\ElasticsearchTest -->
-<g id="node10" class="node"><title>\\ElasticsearchTest</title>
-<polygon fill="none" stroke="black" points="503,-936.466 371,-936.466 371,-900.466 503,-900.466 503,-936.466"/>
-<text text-anchor="start" x="403" y="-923.899" font-family="Courier,monospace" font-size="11.00">«abstract»</text>
-<text text-anchor="start" x="379.5" y="-910.699" font-family="Courier,monospace" font-size="11.00">ElasticsearchTest</text>
+<g id="node4" class="node"><title>\\ElasticsearchTest</title>
+<polygon fill="none" stroke="black" points="503,-936 371,-936 371,-900 503,-900 503,-936"/>
+<text text-anchor="start" x="403" y="-923.433" font-family="Courier,monospace" font-size="11.00">«abstract»</text>
+<text text-anchor="start" x="379.5" y="-910.233" font-family="Courier,monospace" font-size="11.00">ElasticsearchTest</text>
 </g>
 <!-- \\CakeTestCase -->
-<g id="node32" class="node"><title>\\CakeTestCase</title>
-<ellipse fill="none" stroke="black" cx="99" cy="-464.466" rx="82.0244" ry="18.3848"/>
-<text text-anchor="middle" x="99" y="-460.866" font-family="Times Roman,serif" font-size="14.00" fill="gray">\CakeTestCase</text>
+<g id="node22" class="node"><title>\\CakeTestCase</title>
+<ellipse fill="none" stroke="black" cx="99" cy="-599" rx="82.0244" ry="18.3848"/>
+<text text-anchor="middle" x="99" y="-595.4" font-family="Times Roman,serif" font-size="14.00" fill="gray">\CakeTestCase</text>
 </g>
 <!-- \\ElasticsearchTest&#45;&gt;\\CakeTestCase -->
-<g id="edge19" class="edge"><title>\\ElasticsearchTest&#45;&gt;\\CakeTestCase</title>
-<path fill="none" stroke="black" d="M370.756,-924.729C337.378,-924.434 298.131,-918.409 270,-896.466 137.273,-792.937 107.306,-571.129 100.763,-492.673"/>
-<polygon fill="none" stroke="black" points="104.243,-492.284 99.9869,-482.581 97.2641,-492.82 104.243,-492.284"/>
-</g>
-<!-- \\AllElasticsearchSourceTest -->
-<g id="node11" class="node"><title>\\AllElasticsearchSourceTest</title>
-<polygon fill="none" stroke="black" points="882,-612.466 690,-612.466 690,-576.466 882,-576.466 882,-612.466"/>
-<text text-anchor="middle" x="786" y="-591.566" font-family="Courier,monospace" font-size="11.00">AllElasticsearchSourceTest</text>
-</g>
-<!-- \\PHPUnit_Framework_TestSuite -->
-<g id="node34" class="node"><title>\\PHPUnit_Framework_TestSuite</title>
-<ellipse fill="none" stroke="black" cx="437" cy="-110.466" rx="166.877" ry="18.3848"/>
-<text text-anchor="middle" x="437" y="-106.866" font-family="Times Roman,serif" font-size="14.00" fill="gray">\PHPUnit_Framework_TestSuite</text>
-</g>
-<!-- \\AllElasticsearchSourceTest&#45;&gt;\\PHPUnit_Framework_TestSuite -->
-<g id="edge21" class="edge"><title>\\AllElasticsearchSourceTest&#45;&gt;\\PHPUnit_Framework_TestSuite</title>
-<path fill="none" stroke="black" d="M689.559,-578.602C684.595,-575.472 680.013,-571.79 676,-567.466 544.201,-425.422 741.401,-274.098 604,-137.466 599.285,-132.777 594.098,-128.707 588.559,-125.182"/>
-<polygon fill="none" stroke="black" points="590.006,-121.978 579.582,-120.081 586.547,-128.065 590.006,-121.978"/>
-</g>
-<!-- \\ElasticsearchControllerTest -->
-<g id="node12" class="node"><title>\\ElasticsearchControllerTest</title>
-<polygon fill="none" stroke="black" points="885,-558.466 687,-558.466 687,-522.466 885,-522.466 885,-558.466"/>
-<text text-anchor="middle" x="786" y="-537.566" font-family="Courier,monospace" font-size="11.00">ElasticsearchControllerTest</text>
-</g>
-<!-- \\ControllerTestCase -->
-<g id="node36" class="node"><title>\\ControllerTestCase</title>
-<ellipse fill="none" stroke="black" cx="437" cy="-56.466" rx="106.773" ry="18.3848"/>
-<text text-anchor="middle" x="437" y="-52.866" font-family="Times Roman,serif" font-size="14.00" fill="gray">\ControllerTestCase</text>
-</g>
-<!-- \\ElasticsearchControllerTest&#45;&gt;\\ControllerTestCase -->
-<g id="edge23" class="edge"><title>\\ElasticsearchControllerTest&#45;&gt;\\ControllerTestCase</title>
-<path fill="none" stroke="black" d="M686.149,-522.32C682.488,-519.719 679.076,-516.781 676,-513.466 544.201,-371.422 741.401,-220.098 604,-83.466 590.167,-69.7107 572.27,-61.2756 553.349,-56.3261"/>
-<polygon fill="none" stroke="black" points="553.906,-52.8632 543.377,-54.0458 552.345,-59.687 553.906,-52.8632"/>
-</g>
-<!-- \\ElasticsearchSourceTest -->
-<g id="node13" class="node"><title>\\ElasticsearchSourceTest</title>
-<polygon fill="none" stroke="black" points="872,-504.466 700,-504.466 700,-468.466 872,-468.466 872,-504.466"/>
-<text text-anchor="middle" x="786" y="-483.566" font-family="Courier,monospace" font-size="11.00">ElasticsearchSourceTest</text>
-</g>
-<!-- \\ElasticsearchSourceTest&#45;&gt;\\CakeTestCase -->
-<g id="edge25" class="edge"><title>\\ElasticsearchSourceTest&#45;&gt;\\CakeTestCase</title>
-<path fill="none" stroke="black" d="M699.94,-476.154C690.959,-472.095 682.688,-466.673 676,-459.466 544.201,-317.422 744.574,-162.832 604,-29.466 549.807,21.9478 511.697,-9.69035 437,-10.466"/>
-</g>
-<!-- \\ElasticsearchIndicesStatusTest -->
-<g id="node14" class="node"><title>\\ElasticsearchIndicesStatusTest</title>
-<polygon fill="none" stroke="black" points="895,-990.466 677,-990.466 677,-954.466 895,-954.466 895,-990.466"/>
-<text text-anchor="middle" x="786" y="-969.566" font-family="Courier,monospace" font-size="11.00">ElasticsearchIndicesStatusTest</text>
-</g>
-<!-- \\ElasticsearchIndicesStatusTest&#45;&gt;\\ElasticsearchTest -->
-<g id="edge27" class="edge"><title>\\ElasticsearchIndicesStatusTest&#45;&gt;\\ElasticsearchTest</title>
-<path fill="none" stroke="black" d="M676.053,-955.454C623.078,-947.257 560.862,-937.631 513.183,-930.254"/>
-<polygon fill="none" stroke="black" points="513.655,-926.785 503.238,-928.715 512.585,-933.703 513.655,-926.785"/>
-</g>
-<!-- \\ElasticsearchDocumentTest -->
-<g id="node15" class="node"><title>\\ElasticsearchDocumentTest</title>
-<polygon fill="none" stroke="black" points="878,-936.466 694,-936.466 694,-900.466 878,-900.466 878,-936.466"/>
-<text text-anchor="middle" x="786" y="-915.566" font-family="Courier,monospace" font-size="11.00">ElasticsearchDocumentTest</text>
-</g>
-<!-- \\ElasticsearchDocumentTest&#45;&gt;\\ElasticsearchTest -->
-<g id="edge29" class="edge"><title>\\ElasticsearchDocumentTest&#45;&gt;\\ElasticsearchTest</title>
-<path fill="none" stroke="black" d="M693.391,-918.466C637.141,-918.466 566.209,-918.466 513.219,-918.466"/>
-<polygon fill="none" stroke="black" points="513.206,-914.966 503.206,-918.466 513.206,-921.966 513.206,-914.966"/>
+<g id="edge7" class="edge"><title>\\ElasticsearchTest&#45;&gt;\\CakeTestCase</title>
+<path fill="none" stroke="black" d="M370.784,-922.504C338.004,-921.619 299.287,-915.596 270,-896 171.804,-830.297 123.057,-687.82 106.129,-627.209"/>
+<polygon fill="none" stroke="black" points="109.414,-625.947 103.421,-617.211 102.658,-627.778 109.414,-625.947"/>
 </g>
 <!-- \\ElasticsearchHelperTest -->
-<g id="node16" class="node"><title>\\ElasticsearchHelperTest</title>
-<polygon fill="none" stroke="black" points="872,-450.466 700,-450.466 700,-414.466 872,-414.466 872,-450.466"/>
-<text text-anchor="middle" x="786" y="-429.566" font-family="Courier,monospace" font-size="11.00">ElasticsearchHelperTest</text>
+<g id="node5" class="node"><title>\\ElasticsearchHelperTest</title>
+<polygon fill="none" stroke="black" points="872,-774 700,-774 700,-738 872,-738 872,-774"/>
+<text text-anchor="middle" x="786" y="-753.1" font-family="Courier,monospace" font-size="11.00">ElasticsearchHelperTest</text>
 </g>
 <!-- \\ElasticsearchHelperTest&#45;&gt;\\CakeTestCase -->
-<g id="edge31" class="edge"><title>\\ElasticsearchHelperTest&#45;&gt;\\CakeTestCase</title>
-<path fill="none" stroke="black" d="M783.988,-414.089C775.786,-348.931 738.614,-127.604 604,-29.466 543.637,14.5403 511.697,-9.69035 437,-10.466"/>
-<path fill="none" stroke="black" d="M437,-10.466C362.303,-11.2416 329.252,16.0251 270,-29.466 135.681,-132.59 106.718,-356.647 100.6,-435.948"/>
-<polygon fill="none" stroke="black" points="97.0927,-435.927 99.8796,-446.149 104.075,-436.42 97.0927,-435.927"/>
+<g id="edge9" class="edge"><title>\\ElasticsearchHelperTest&#45;&gt;\\CakeTestCase</title>
+<path fill="none" stroke="black" d="M699.94,-745.688C690.959,-741.629 682.688,-736.207 676,-729 544.201,-586.956 744.574,-432.366 604,-299 549.807,-247.586 511.481,-285.73 437,-280"/>
+</g>
+<!-- \\ElasticsearchIndicesStatusTest -->
+<g id="node6" class="node"><title>\\ElasticsearchIndicesStatusTest</title>
+<polygon fill="none" stroke="black" points="895,-936 677,-936 677,-900 895,-900 895,-936"/>
+<text text-anchor="middle" x="786" y="-915.1" font-family="Courier,monospace" font-size="11.00">ElasticsearchIndicesStatusTest</text>
+</g>
+<!-- \\ElasticsearchIndicesStatusTest&#45;&gt;\\ElasticsearchTest -->
+<g id="edge11" class="edge"><title>\\ElasticsearchIndicesStatusTest&#45;&gt;\\ElasticsearchTest</title>
+<path fill="none" stroke="black" d="M676.053,-918C623.188,-918 561.122,-918 513.482,-918"/>
+<polygon fill="none" stroke="black" points="513.238,-914.5 503.238,-918 513.237,-921.5 513.238,-914.5"/>
+</g>
+<!-- \\ElasticsearchDocumentTest -->
+<g id="node7" class="node"><title>\\ElasticsearchDocumentTest</title>
+<polygon fill="none" stroke="black" points="878,-990 694,-990 694,-954 878,-954 878,-990"/>
+<text text-anchor="middle" x="786" y="-969.1" font-family="Courier,monospace" font-size="11.00">ElasticsearchDocumentTest</text>
+</g>
+<!-- \\ElasticsearchDocumentTest&#45;&gt;\\ElasticsearchTest -->
+<g id="edge13" class="edge"><title>\\ElasticsearchDocumentTest&#45;&gt;\\ElasticsearchTest</title>
+<path fill="none" stroke="black" d="M693.391,-957.671C637.141,-948.967 566.209,-937.992 513.219,-929.793"/>
+<polygon fill="none" stroke="black" points="513.624,-926.314 503.206,-928.244 512.553,-933.232 513.624,-926.314"/>
+</g>
+<!-- \\ElasticsearchSourceTest -->
+<g id="node8" class="node"><title>\\ElasticsearchSourceTest</title>
+<polygon fill="none" stroke="black" points="872,-720 700,-720 700,-684 872,-684 872,-720"/>
+<text text-anchor="middle" x="786" y="-699.1" font-family="Courier,monospace" font-size="11.00">ElasticsearchSourceTest</text>
+</g>
+<!-- \\ElasticsearchSourceTest&#45;&gt;\\CakeTestCase -->
+<g id="edge15" class="edge"><title>\\ElasticsearchSourceTest&#45;&gt;\\CakeTestCase</title>
+<path fill="none" stroke="black" d="M699.832,-691.415C690.927,-687.396 682.703,-682.058 676,-675 558.825,-551.63 728.791,-414.66 604,-299 549.212,-248.221 511.481,-285.73 437,-280"/>
+<path fill="none" stroke="black" d="M437,-280C362.519,-274.27 332.361,-257.874 270,-299 170.176,-364.832 122.098,-510.198 105.731,-571.197"/>
+<polygon fill="none" stroke="black" points="102.336,-570.346 103.205,-580.905 109.11,-572.109 102.336,-570.346"/>
+</g>
+<!-- \\ElasticsearchControllerTest -->
+<g id="node9" class="node"><title>\\ElasticsearchControllerTest</title>
+<polygon fill="none" stroke="black" points="885,-666 687,-666 687,-630 885,-630 885,-666"/>
+<text text-anchor="middle" x="786" y="-645.1" font-family="Courier,monospace" font-size="11.00">ElasticsearchControllerTest</text>
+</g>
+<!-- \\ControllerTestCase -->
+<g id="node28" class="node"><title>\\ControllerTestCase</title>
+<ellipse fill="none" stroke="black" cx="437" cy="-234" rx="106.773" ry="18.3848"/>
+<text text-anchor="middle" x="437" y="-230.4" font-family="Times Roman,serif" font-size="14.00" fill="gray">\ControllerTestCase</text>
+</g>
+<!-- \\ElasticsearchControllerTest&#45;&gt;\\ControllerTestCase -->
+<g id="edge17" class="edge"><title>\\ElasticsearchControllerTest&#45;&gt;\\ControllerTestCase</title>
+<path fill="none" stroke="black" d="M686.289,-629.722C682.59,-627.156 679.132,-624.262 676,-621 564.497,-504.876 718.449,-379.222 604,-266 590.15,-252.298 572.342,-243.534 553.538,-238.073"/>
+<polygon fill="none" stroke="black" points="554.187,-234.626 543.629,-235.51 552.433,-241.403 554.187,-234.626"/>
+</g>
+<!-- \\AllElasticsearchSourceTest -->
+<g id="node10" class="node"><title>\\AllElasticsearchSourceTest</title>
+<polygon fill="none" stroke="black" points="882,-612 690,-612 690,-576 882,-576 882,-612"/>
+<text text-anchor="middle" x="786" y="-591.1" font-family="Courier,monospace" font-size="11.00">AllElasticsearchSourceTest</text>
+</g>
+<!-- \\PHPUnit_Framework_TestSuite -->
+<g id="node30" class="node"><title>\\PHPUnit_Framework_TestSuite</title>
+<ellipse fill="none" stroke="black" cx="437" cy="-180" rx="166.877" ry="18.3848"/>
+<text text-anchor="middle" x="437" y="-176.4" font-family="Times Roman,serif" font-size="14.00" fill="gray">\PHPUnit_Framework_TestSuite</text>
+</g>
+<!-- \\AllElasticsearchSourceTest&#45;&gt;\\PHPUnit_Framework_TestSuite -->
+<g id="edge19" class="edge"><title>\\AllElasticsearchSourceTest&#45;&gt;\\PHPUnit_Framework_TestSuite</title>
+<path fill="none" stroke="black" d="M689.968,-578.142C684.869,-575.015 680.148,-571.332 676,-567 563.147,-449.152 721.498,-320.217 604,-207 599.027,-202.208 593.558,-198.068 587.727,-194.502"/>
+<polygon fill="none" stroke="black" points="589.39,-191.422 578.939,-189.677 586.021,-197.558 589.39,-191.422"/>
+</g>
+<!-- \\ElasticsearchModel -->
+<g id="node11" class="node"><title>\\ElasticsearchModel</title>
+<polygon fill="none" stroke="black" points="506,-1071 368,-1071 368,-1035 506,-1035 506,-1071"/>
+<text text-anchor="middle" x="437" y="-1050.1" font-family="Courier,monospace" font-size="11.00">ElasticsearchModel</text>
+</g>
+<!-- \\HttpSourceModel -->
+<g id="node32" class="node"><title>\\HttpSourceModel</title>
+<ellipse fill="none" stroke="black" cx="99" cy="-1053" rx="98.9949" ry="18.3848"/>
+<text text-anchor="middle" x="99" y="-1049.4" font-family="Times Roman,serif" font-size="14.00" fill="gray">\HttpSourceModel</text>
+</g>
+<!-- \\ElasticsearchModel&#45;&gt;\\HttpSourceModel -->
+<g id="edge21" class="edge"><title>\\ElasticsearchModel&#45;&gt;\\HttpSourceModel</title>
+<path fill="none" stroke="black" d="M367.785,-1053C321.88,-1053 260.671,-1053 208.26,-1053"/>
+<polygon fill="none" stroke="black" points="208.243,-1049.5 198.243,-1053 208.243,-1056.5 208.243,-1049.5"/>
+</g>
+<!-- \\ElasticsearchIndicesStatus -->
+<g id="node12" class="node"><title>\\ElasticsearchIndicesStatus</title>
+<polygon fill="none" stroke="black" points="882,-1044 690,-1044 690,-1008 882,-1008 882,-1044"/>
+<text text-anchor="middle" x="786" y="-1023.1" font-family="Courier,monospace" font-size="11.00">ElasticsearchIndicesStatus</text>
+</g>
+<!-- \\ElasticsearchIndicesStatus&#45;&gt;\\ElasticsearchModel -->
+<g id="edge23" class="edge"><title>\\ElasticsearchIndicesStatus&#45;&gt;\\ElasticsearchModel</title>
+<path fill="none" stroke="black" d="M689.71,-1033.45C635.14,-1037.67 567.704,-1042.89 516.222,-1046.87"/>
+<polygon fill="none" stroke="black" points="515.848,-1043.39 506.147,-1047.65 516.388,-1050.37 515.848,-1043.39"/>
+</g>
+<!-- \\ElasticsearchDocument -->
+<g id="node13" class="node"><title>\\ElasticsearchDocument</title>
+<polygon fill="none" stroke="black" points="865,-1098 707,-1098 707,-1062 865,-1062 865,-1098"/>
+<text text-anchor="middle" x="786" y="-1077.1" font-family="Courier,monospace" font-size="11.00">ElasticsearchDocument</text>
+</g>
+<!-- \\ElasticsearchDocument&#45;&gt;\\ElasticsearchModel -->
+<g id="edge25" class="edge"><title>\\ElasticsearchDocument&#45;&gt;\\ElasticsearchModel</title>
+<path fill="none" stroke="black" d="M706.806,-1073.87C649.795,-1069.46 573.205,-1063.54 516.194,-1059.13"/>
+<polygon fill="none" stroke="black" points="516.385,-1055.63 506.145,-1058.35 515.845,-1062.61 516.385,-1055.63"/>
+</g>
+<!-- \\ElasticsearchSource -->
+<g id="node14" class="node"><title>\\ElasticsearchSource</title>
+<polygon fill="none" stroke="black" points="858,-558 714,-558 714,-522 858,-522 858,-558"/>
+<text text-anchor="middle" x="786" y="-537.1" font-family="Courier,monospace" font-size="11.00">ElasticsearchSource</text>
+</g>
+<!-- \\HttpSource -->
+<g id="node36" class="node"><title>\\HttpSource</title>
+<ellipse fill="none" stroke="black" cx="437" cy="-126" rx="70.0036" ry="18.3848"/>
+<text text-anchor="middle" x="437" y="-122.4" font-family="Times Roman,serif" font-size="14.00" fill="gray">\HttpSource</text>
+</g>
+<!-- \\ElasticsearchSource&#45;&gt;\\HttpSource -->
+<g id="edge27" class="edge"><title>\\ElasticsearchSource&#45;&gt;\\HttpSource</title>
+<path fill="none" stroke="black" d="M713.236,-534.314C699.32,-530.109 685.996,-523.439 676,-513 563.147,-395.152 721.498,-266.217 604,-153 580.241,-130.106 545.174,-122.106 513.3,-120.337"/>
+<polygon fill="none" stroke="black" points="513.2,-116.831 503.081,-119.97 512.949,-123.827 513.2,-116.831"/>
+</g>
+<!-- \\ElasticsearchConnection -->
+<g id="node15" class="node"><title>\\ElasticsearchConnection</title>
+<polygon fill="none" stroke="black" points="872,-504 700,-504 700,-468 872,-468 872,-504"/>
+<text text-anchor="middle" x="786" y="-483.1" font-family="Courier,monospace" font-size="11.00">ElasticsearchConnection</text>
+</g>
+<!-- \\HttpSourceConnection -->
+<g id="node38" class="node"><title>\\HttpSourceConnection</title>
+<ellipse fill="none" stroke="black" cx="437" cy="-72" rx="125.158" ry="18.3848"/>
+<text text-anchor="middle" x="437" y="-68.4" font-family="Times Roman,serif" font-size="14.00" fill="gray">\HttpSourceConnection</text>
+</g>
+<!-- \\ElasticsearchConnection&#45;&gt;\\HttpSourceConnection -->
+<g id="edge29" class="edge"><title>\\ElasticsearchConnection&#45;&gt;\\HttpSourceConnection</title>
+<path fill="none" stroke="black" d="M699.889,-475.361C690.974,-471.351 682.732,-466.03 676,-459 563.147,-341.152 721.498,-212.217 604,-99 594.394,-89.7437 582.939,-82.9221 570.594,-77.9625"/>
+<polygon fill="none" stroke="black" points="571.591,-74.6018 560.996,-74.5235 569.229,-81.1916 571.591,-74.6018"/>
+</g>
+<!-- \\ElasticsearchController -->
+<g id="node16" class="node"><title>\\ElasticsearchController</title>
+<polygon fill="none" stroke="black" points="872,-450 700,-450 700,-414 872,-414 872,-450"/>
+<text text-anchor="middle" x="786" y="-429.1" font-family="Courier,monospace" font-size="11.00">ElasticsearchController</text>
+</g>
+<!-- \\HttpSourceController -->
+<g id="node40" class="node"><title>\\HttpSourceController</title>
+<ellipse fill="none" stroke="black" cx="437" cy="-18" rx="118.794" ry="18.3848"/>
+<text text-anchor="middle" x="437" y="-14.4" font-family="Times Roman,serif" font-size="14.00" fill="gray">\HttpSourceController</text>
+</g>
+<!-- \\ElasticsearchController&#45;&gt;\\HttpSourceController -->
+<g id="edge31" class="edge"><title>\\ElasticsearchController&#45;&gt;\\HttpSourceController</title>
+<path fill="none" stroke="black" d="M783.439,-413.677C773.594,-350.671 732.082,-141.511 604,-45 591.878,-35.8659 577.844,-29.3194 563.165,-24.6879"/>
+<polygon fill="none" stroke="black" points="564.016,-21.2909 553.439,-21.9129 562.095,-28.0223 564.016,-21.2909"/>
 </g>
 </g>
 </svg>
