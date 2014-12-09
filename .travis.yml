@@ -43,6 +43,31 @@ before_script:
   - git clone git://github.com/imsamurai/travis-plugin-build.git --depth 1 travis
   - chmod +x ./travis/*
   - ./travis/before_script.sh
+  - if [ "$PHPCS" != 1 ]; then
+        echo "
+            CakePlugin::load('HttpSource', array('bootstrap' => true, 'routes' => true));
+            CakePlugin::load('ElasticsearchSource', array('bootstrap' => false, 'routes' => true));
+        " >> ../cakephp/app/Config/bootstrap.php;
+        mv ../cakephp/app/Config/database.php ../cakephp/app/Config/database-default.php;
+        cat ../cakephp/app/Config/database-default.php | sed "s/class DATABASE_CONFIG {/class DATABASE_CONFIG extends DB_CONFIG {/" > ../cakephp/app/Config/database.php;
+        echo "class DB_CONFIG {
+                public \$elasticsearchTest = array(
+                    'datasource' => 'ElasticsearchSource.Http/ElasticsearchSource',
+                    'host' => 'localhost',
+                    'prefix' => '',
+                    'port' => 9200,
+                    'timeout' => 5
+                );
+            }" >> ../cakephp/app/Config/database.php;
+        echo "<?php
+            require_once dirname(dirname(__FILE__)) . '/vendor/autoload.php';
+            require_once dirname(dirname(dirname(__FILE__))) . '/lib/Cake/Console/ShellDispatcher.php';
+            return ShellDispatcher::run(\$argv);
+        " > ../cakephp/app/Console/cake.php;
+        echo "Configure::write('debug', 0);" >> ../cakephp/app/Config/core.php;
+        curl -XGET '127.0.0.1:9200' -vvvv;
+        curl -XPUT '127.0.0.1:9200/test_index';
+    fi;
 
 script:
   - ./travis/script.sh
