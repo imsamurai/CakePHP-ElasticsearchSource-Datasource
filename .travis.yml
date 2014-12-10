@@ -37,7 +37,7 @@ matrix:
         - PHPDOC=1
 
 before_install:
-  - wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-0.90.12.deb && sudo dpkg -i elasticsearch-0.90.12.deb && sudo service elasticsearch restart
+  - wget https://download.elasticsearch.org/elasticsearch/elasticsearch/elasticsearch-1.4.1.deb && sudo dpkg -i elasticsearch-1.4.1.deb && sudo service elasticsearch restart
 
 before_script:
   - git clone git://github.com/imsamurai/travis-plugin-build.git --depth 1 travis
