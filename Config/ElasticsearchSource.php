@@ -345,8 +345,8 @@ $Config/*
 				->addCondition($CF->condition()->name('warmers')->sendInBody())
 				->result($CF->result()
 						->map(function($data, Model $Model) {
-							if (!empty($data['ok'])) {
-								return array('ok' => $data['ok']);
+							if (!empty($data['acknowledged'])) {
+								return array('ok' => $data['acknowledged']);
 							}
 							return false;
 						})
@@ -368,8 +368,8 @@ $Config/*
 				->addCondition($CF->condition()->name('index')->sendInQuery()->required())
 				->result($CF->result()
 						->map(function($data, Model $Model) {
-							if (!empty($data['ok'])) {
-								return array('ok' => $data['ok']);
+							if (!empty($data['acknowledged'])) {
+								return array('ok' => $data['acknowledged']);
 							}
 							return false;
 						})
@@ -413,8 +413,8 @@ $Config/*
 				->addCondition($CF->condition()->name('mapping')->required()->extract(true))
 				->result($CF->result()
 						->map(function($data, Model $Model) {
-							if (!empty($data['ok'])) {
-								return array('ok' => $data['ok']);
+							if (!empty($data['acknowledged'])) {
+								return array('ok' => $data['acknowledged']);
 							}
 							return false;
 						})
@@ -436,8 +436,8 @@ $Config/*
 				->addCondition($CF->condition()->name('type')->sendInQuery()->required())
 				->result($CF->result()
 						->map(function($data, Model $Model) {
-							if (!empty($data['ok'])) {
-								return array('ok' => $data['ok']);
+							if (!empty($data['acknowledged'])) {
+								return array('ok' => $data['acknowledged']);
 							}
 							return false;
 						})
