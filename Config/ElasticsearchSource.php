@@ -122,7 +122,7 @@ $Config/*
 									'version' => isset($item['_version']) ? $item['_version'] : 0,
 									'highlight' => (array)Hash::get($item, 'highlight'),
 										) + (array)Hash::get($item, '_source') + (array)Hash::get($item, 'fields');
-							};
+							}
 							return $result;
 						}))
 		)

@@ -144,7 +144,11 @@ class ElasticsearchSource extends HttpSource {
 	protected function _singleRequest(array $request, $requestMethod, Model $model = null) {
 		$response = parent::_singleRequest($request, $requestMethod, $model);
 		$this->_candidates += $this->_Connection->getCandidates();
-		$this->_scrollId = $this->_Connection->getScrollId();
+		if ($this->_Connection->getCandidates()) {
+			$this->_scrollId = $this->_Connection->getScrollId();
+		} else {
+			$this->_scrollId = '';
+		}
 		return $response;
 	}
 
