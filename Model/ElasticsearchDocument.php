@@ -36,6 +36,39 @@ class ElasticsearchDocument extends ElasticsearchModel {
 	public $useTable = 'document';
 
 	/**
+	 * Elasticsearch index
+	 *
+	 * @var string
+	 */
+	public $useIndex;
+
+	/**
+	 * Elasticsearch index type
+	 *
+	 * @var string
+	 */
+	public $useType;
+
+	/**
+	 * {@inheritdoc}
+	 * With index/type support
+	 * 
+	 * @param string $tableName
+	 * @param string $indexName
+	 * @param string $typeName
+	 * @throws MissingTableException when database table $tableName is not found on data source
+	 */
+	public function setSource($tableName, $indexName = null, $typeName = null) {
+		parent::setSource($tableName);
+		if (!is_null($indexName)) {
+			$this->useIndex = $indexName;
+		}
+		if (!is_null($typeName)) {
+			$this->useType = $typeName;
+		}
+	}
+
+	/**
 	 * {@inheritdoc}
 	 * 
 	 * @param string $type
@@ -53,9 +86,14 @@ class ElasticsearchDocument extends ElasticsearchModel {
 	 * @return array
 	 */
 	public function beforeFind($queryData) {
-		$queryData = parent::beforeFind($queryData);
-		$this->_mapMultipleIds($queryData);
+		if (!isset($queryData['conditions']['index'])) {
+			$queryData['conditions']['index'] = $this->useIndex;
+		}
+		if (!isset($queryData['conditions']['type'])) {
+			$queryData['conditions']['type'] = $this->useType;
+		}
 
+		$this->_mapMultipleIds($queryData);
 		return $queryData;
 	}
 
@@ -71,7 +109,7 @@ class ElasticsearchDocument extends ElasticsearchModel {
 		return parent::exists($id, array(
 					'index' => $this->useIndex,
 					'type' => $this->useType,
-		), $force);
+						), $force);
 	}
 
 	/**
@@ -134,6 +172,35 @@ class ElasticsearchDocument extends ElasticsearchModel {
 	}
 
 	/**
+	 * {@inheritdoc}
+	 * With index/type support
+	 * 
+	 * @param integer|string $id ID of record to delete
+	 * @param boolean $cascade Set to true to delete records that depend on this record
+	 * @return boolean True on success
+	 */
+	public function delete($id = null, $cascade = true) {
+		return $this->deleteAll(array(
+					$this->primaryKey => $id,
+					'index' => $this->useIndex,
+					'type' => $this->useType
+						), $cascade);
+	}
+	
+	/**
+	 * {@inheritdoc}
+	 * With index/type support
+	 * 
+	 * @param array $options
+	 * @return bool
+	 */
+	public function beforeSave($options = array()) {
+		$this->set('index', $this->useIndex);
+		$this->set('type', $this->useType);
+		return parent::beforeSave($options);
+	}
+
+	/**
 	 * Put ids in right place in case of multiple ids
 	 * 
 	 * @param array $queryData
@@ -154,7 +221,7 @@ class ElasticsearchDocument extends ElasticsearchModel {
 			unset($queryData['conditions'][$idsKey]);
 		}
 	}
-	
+
 	/**
 	 * Handle scroll search
 	 * 
