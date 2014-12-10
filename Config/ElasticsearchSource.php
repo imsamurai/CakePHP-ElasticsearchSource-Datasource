@@ -442,6 +442,79 @@ $Config/*
 							return false;
 						})
 				)
-		);
+		)
+		/*
+		 * Aliases api
+		 *
+		 * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html
+		 */
+		->add(
+				$CF->endpoint()
+				->id(16)
+				->methodUpdate()
+				->table('aliases')
+				->path(':index/_aliases/:name/')
+				->addField($TimeIdField)
+				->addCondition($CF->condition()->name('index')->sendInQuery()->required())
+				->addCondition($CF->condition()->name('name')->sendInQuery()->required())
+				->addCondition($CF->condition()->name('routing')->sendInBody())
+				->addCondition($CF->condition()->name('filter')->sendInBody())
+				->result($CF->result()
+						->map(function($data, Model $Model) {
+							if (!empty($data['acknowledged'])) {
+								return array('ok' => $data['acknowledged']);
+							}
+							return false;
+						})
+				)
+		)
+		/*
+		 * Aliases api
+		 *
+		 * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html
+		 */
+		->add(
+				$CF->endpoint()
+				->id(17)
+				->methodRead()
+				->table('aliases')
+				->path(':index/_aliases/:name')
+				->addCondition($CF->condition()->name('index')->sendInQuery()->defaults('*'))
+				->addCondition($CF->condition()->name('name')->sendInQuery()->defaults('*'))
+				->result($CF->result()
+						->map(function($data, Model $Model) {
+							$result = array();
+							foreach ($data as $index => $aliases) {
+								foreach ((array)Hash::get($aliases, 'aliases') as $name => $params) {
+									$result[] = compact('name', 'index') + $params;
+								}
+							}
+							return $result;
+						})
+				)
+		)
+		/*
+		 * Aliases api
+		 *
+		 * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-aliases.html
+		 */
+		->add(
+				$CF->endpoint()
+				->id(18)
+				->methodDelete()
+				->table('aliases')
+				->path(':index/_aliases/:name')
+				->addCondition($CF->condition()->name('index')->sendInQuery()->defaults('*'))
+				->addCondition($CF->condition()->name('name')->sendInQuery()->defaults('*'))
+				->result($CF->result()
+						->map(function($data) {
+							if (!empty($data['acknowledged'])) {
+								return array('ok' => $data['acknowledged']);
+							}
+							return false;
+						})
+				)
+		)
+						;
 
 $config['ElasticsearchSource']['config'] = $Config;
