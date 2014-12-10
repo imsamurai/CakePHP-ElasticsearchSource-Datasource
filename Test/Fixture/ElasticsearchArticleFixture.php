@@ -69,7 +69,15 @@ class ElasticsearchArticleFixture extends HttpSourceTestFixture {
 			'mapping' => array(
 				'tableParameters' => array(
 					'index' => $this->_Model->useIndex,
-					'type' => $this->_Model->useType
+					'type' => $this->_Model->useType,
+					'mapping' => array(
+						$this->_Model->useType => array(
+							'_timestamp' => array(
+								'enabled' => true,
+								'store' => true
+							)
+						)
+					)
 				)
 			),
 		));

@@ -158,7 +158,7 @@ $Config/*
 				->path(':index/:type/:id')
 				->addCondition($CF->condition()->name('index')->sendInQuery()->required())
 				->addCondition($CF->condition()->name('type')->sendInQuery()->required())
-				->addCondition($CF->condition()->name('id')->sendInQuery()->length(100))
+				->addCondition($CF->condition()->name('id')->sendInQuery()->length(100)->defaults(''))
 				->addCondition($CF->condition()->name('routing')->sendInQuery())
 				->addCondition($CF->condition()->name('parent')->sendInQuery())
 				->addCondition($CF->condition()->name('timestamp')->sendInQuery())
@@ -171,9 +171,9 @@ $Config/*
 				->addCondition($CF->condition()->name('timeout')->sendInQuery())
 				->result($CF->result()
 						->map(function($data, Model $Model) {
-							if (!empty($data['ok'])) {
+							if (!empty($data['created'])) {
 								$Model->id = $data['_id'];
-								return array('ok' => $data['ok']);
+								return array('ok' => $data['created']);
 							}
 							return false;
 						})
@@ -202,9 +202,9 @@ $Config/*
 				->addCondition($CF->condition()->name('refresh')->sendInQuery())
 				->result($CF->result()
 						->map(function($data, Model $Model) {
-							if (!empty($data['ok'])) {
+							if (!empty($data['found'])) {
 								$Model->id = $data['_id'];
-								return array('ok' => $data['ok']);
+								return array('ok' => $data['found']);
 							}
 							return false;
 						})
@@ -283,7 +283,7 @@ $Config/*
 						->map(function($data) {
 							$result = array();
 							foreach ($data as $index => $mappingOptions) {
-								foreach ($mappingOptions as $type => $mapping) {
+								foreach ($mappingOptions['mappings'] as $type => $mapping) {
 									$result[] = array(
 										'id' => $index . '/' . $type,
 										'index' => $index,
@@ -293,11 +293,7 @@ $Config/*
 								}
 							}
 
-							if (!empty($result)) {
-								//debug($result); exit();
-								return $result;
-							}
-							return false;
+							return $result ? $result : false;
 						}))
 		)
 		/*
@@ -410,7 +406,7 @@ $Config/*
 				->addField($TimeIdField)
 				->addCondition($CF->condition()->name('index')->sendInQuery()->required())
 				->addCondition($CF->condition()->name('type')->sendInQuery()->required())
-				->addCondition($CF->condition()->name('mapping')->map(null, '_default_')->sendInBody()->defaults((object)array()))
+				->addCondition($CF->condition()->name('mapping')->required()->extract(true))
 				->result($CF->result()
 						->map(function($data, Model $Model) {
 							if (!empty($data['ok'])) {

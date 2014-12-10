@@ -256,7 +256,15 @@ class ElasticsearchDocumentTest extends ElasticsearchTest {
 			'mapping' => array(
 				'tableParameters' => array(
 					'index' => 'new_test_index',
-					'type' => 'new_test_type'
+					'type' => 'new_test_type',
+					'mapping' => array(
+						'new_test_type' => array(
+							'_timestamp' => array(
+								'enabled' => true,
+								'store' => true
+							)
+						)
+					)
 				)
 			),
 		));
@@ -319,20 +327,22 @@ class ElasticsearchDocumentTest extends ElasticsearchTest {
 		$mappings = $this->Elasticsearch->find('list', array('fields' => array('type', 'mapping')));
 
 		$expectedMappings = array(
-			'_timestamp' => array(
-				'enabled' => true,
-				'store' => true
-			),
-			'properties' => array(
-				'description' => array(
-					'type' => 'string'
+			'new_test_type' => array(
+				'_timestamp' => array(
+					'enabled' => true,
+					'store' => true
 				),
-				'pubtime' => array(
-					'type' => 'date',
-					'format' => 'basic_date_time_no_millis'
-				),
-				'title' => array(
-					'type' => 'string'
+				'properties' => array(
+					'description' => array(
+						'type' => 'string'
+					),
+					'pubtime' => array(
+						'type' => 'date',
+						'format' => 'basic_date_time_no_millis'
+					),
+					'title' => array(
+						'type' => 'string'
+					)
 				)
 			)
 		);
