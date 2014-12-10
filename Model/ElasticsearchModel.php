@@ -106,8 +106,12 @@ class ElasticsearchModel extends HttpSourceModel {
 	 * @return array
 	 */
 	public function beforeFind($queryData) {
-		$queryData = Hash::insert($queryData, 'conditions.index', $this->useIndex);
-		$queryData = Hash::insert($queryData, 'conditions.type', $this->useType);
+		if (!isset($queryData['conditions']['index'])) {
+			$queryData['conditions']['index'] = $this->useIndex;
+		}
+		if (!isset($queryData['conditions']['type'])) {
+			$queryData['conditions']['type'] = $this->useType;
+		}
 		return $queryData;
 	}
 

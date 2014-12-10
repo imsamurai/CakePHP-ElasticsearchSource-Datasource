@@ -83,7 +83,7 @@ $Config/*
 				->id(2)
 				->methodRead()
 				->table('document')
-				->path(':index/:type/_search')
+				->path(':index/:type/_search/:scroll_search')
 				->addCondition($CF->condition()->name('query')->sendInBody())
 				->addCondition($CF->condition()->name('filter')->sendInBody())
 				->addCondition($CF->condition()->name('facets')->sendInBody())
@@ -92,6 +92,10 @@ $Config/*
 				->addCondition($CF->condition()->name('fields')->sendInBody())
 				->addCondition($CF->condition()->name('size')->sendInQuery())
 				->addCondition($CF->condition()->name('from')->sendInQuery())
+				->addCondition($CF->condition()->name('scroll')->sendInQuery())
+				->addCondition($CF->condition()->name('search_type')->sendInQuery())
+				->addCondition($CF->condition()->name('scroll_id')->sendInQuery())
+				->addCondition($CF->condition()->name('scroll_search')->sendInQuery()->defaults(''))
 				->addCondition($CF->condition()->name('sort')->sendInBody())
 				->addCondition($CF->condition()->name('highlight')->sendInBody())
 				->addCondition($CF->condition()->name('version')->sendInBody())
@@ -118,7 +122,7 @@ $Config/*
 									'version' => isset($item['_version']) ? $item['_version'] : 0,
 									'highlight' => (array)Hash::get($item, 'highlight'),
 										) + (array)Hash::get($item, '_source') + (array)Hash::get($item, 'fields');
-							}
+							};
 							return $result;
 						}))
 		)

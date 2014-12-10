@@ -60,6 +60,50 @@ class ElasticsearchDocumentTest extends ElasticsearchTest {
 	}
 
 	/**
+	 * Test scroll search document
+	 */
+	public function testScrollSearchDocument() {
+		$params = array(
+			'conditions' => array(
+				'scroll' => '1m'
+			),
+			'fields' => array('title', 'rank', 'id'),
+			'order' => array('rank' => 'desc'),
+			'limit' => 100
+		);
+		$results = array();
+		while ($result = $this->Elasticsearch->find('all', $params)) {
+			$results = array_merge($results, $result);
+		}
+		debug($results);
+		$this->assertCount(3, $results);
+	}
+
+	/**
+	 * Test scroll scan search document
+	 */
+	public function testScrollScanSearchDocument() {
+		$params = array(
+			'conditions' => array(
+				'query' => array(
+					"term" => array("title" => "guratabaata")
+				),
+				'search_type' => 'scan',
+				'scroll' => '1m'
+			),
+			'fields' => array('title', 'rank', 'id'),
+			'order' => array('rank' => 'desc'),
+			'limit' => 100
+		);
+		$results = array();
+		while ($result = $this->Elasticsearch->find('all', $params)) {
+			$results = array_merge($results, $result);
+		}
+		debug($results);
+		$this->assertCount(3, $results);
+	}
+
+	/**
 	 * Test get document
 	 */
 	public function testGetDocument() {

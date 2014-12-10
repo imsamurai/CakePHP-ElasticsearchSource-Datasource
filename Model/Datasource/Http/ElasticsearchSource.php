@@ -36,6 +36,13 @@ class ElasticsearchSource extends HttpSource {
 	 * @var int
 	 */
 	protected $_candidates = 0;
+	
+	/**
+	 * Result scroll id
+	 *
+	 * @var string
+	 */
+	protected $_scrollId = '';
 
 	/**
 	 * {@inheritdoc}
@@ -76,6 +83,15 @@ class ElasticsearchSource extends HttpSource {
 	 */
 	public function lastCandidates() {
 		return $this->_candidates;
+	}
+	
+	/**
+	 * Get scroll id from search result.
+	 *
+	 * @return string
+	 */
+	public function lastScrollId() {
+		return $this->_scrollId;
 	}
 
 	/**
@@ -128,6 +144,7 @@ class ElasticsearchSource extends HttpSource {
 	protected function _singleRequest(array $request, $requestMethod, Model $model = null) {
 		$response = parent::_singleRequest($request, $requestMethod, $model);
 		$this->_candidates += $this->_Connection->getCandidates();
+		$this->_scrollId = $this->_Connection->getScrollId();
 		return $response;
 	}
 

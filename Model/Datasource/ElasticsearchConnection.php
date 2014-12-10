@@ -33,6 +33,13 @@ class ElasticsearchConnection extends HttpSourceConnection {
 	 * @var int 
 	 */
 	protected $_candidates;
+	
+	/**
+	 * Scroll id
+	 *
+	 * @var string 
+	 */
+	protected $_scrollId;
 
 	/**
 	 * {@inheritdoc}
@@ -41,6 +48,15 @@ class ElasticsearchConnection extends HttpSourceConnection {
 	 */
 	public function getCandidates() {
 		return $this->_candidates;
+	}
+	
+	/**
+	 * {@inheritdoc}
+	 *
+	 * @return string
+	 */
+	public function getScrollId() {
+		return $this->_scrollId;
 	}
 
 	/**
@@ -68,6 +84,7 @@ class ElasticsearchConnection extends HttpSourceConnection {
 		$this->_affected = count((array)Hash::get((array)$response, 'hits.hits'));
 		$this->_took .= " (" . (float)Hash::get((array)$response, 'took') . ")";
 		$this->_candidates = (int)Hash::get((array)$response, 'hits.total');
+		$this->_scrollId = (string)Hash::get((array)$response, '_scroll_id');
 		return $response;
 	}
 
@@ -77,6 +94,7 @@ class ElasticsearchConnection extends HttpSourceConnection {
 	public function reset() {
 		parent::reset();
 		$this->_candidates = null;
+		$this->_scrollId = null;
 	}
 
 	/**

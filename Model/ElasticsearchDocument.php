@@ -38,6 +38,17 @@ class ElasticsearchDocument extends ElasticsearchModel {
 	/**
 	 * {@inheritdoc}
 	 * 
+	 * @param string $type
+	 * @param array $query
+	 */
+	public function find($type = 'first', $query = array()) {
+		$this->_handleScrollFind($type, $query);
+		return parent::find($type, $query);
+	}
+
+	/**
+	 * {@inheritdoc}
+	 * 
 	 * @param array $queryData
 	 * @return array
 	 */
@@ -141,6 +152,31 @@ class ElasticsearchDocument extends ElasticsearchModel {
 			$queryData['conditions'] = Hash::insert($queryData['conditions'], 'query.ids.values', (array)$queryData['conditions'][$idsKey]);
 			$queryData['limit'] = count($queryData['conditions'][$idsKey]);
 			unset($queryData['conditions'][$idsKey]);
+		}
+	}
+	
+	/**
+	 * Handle scroll search
+	 * 
+	 * @param string $type
+	 * @param array $query
+	 */
+	protected function _handleScrollFind($type, &$query) {
+		$scrollId = $this->getDataSource()->lastScrollId();
+		if ($type === 'all' && !empty($query['conditions']['scroll'])) {
+			if (!$scrollId && Hash::get($query, 'conditions.search_type') === 'scan') {
+				parent::find($type, $query);
+				$scrollId = $this->getDataSource()->lastScrollId();
+			}
+			if ($scrollId) {
+				$query['conditions'] = array(
+					'scroll_id' => $scrollId,
+					'scroll' => $query['conditions']['scroll'],
+					'index' => '',
+					'type' => '',
+					'scroll_search' => 'scroll'
+				);
+			}
 		}
 	}
 
