@@ -514,6 +514,34 @@ $Config/*
 							return false;
 						})
 				)
+		)
+		/*
+		 * Bulk api
+		 *
+		 * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-bulk.html
+		 */
+		->add(
+				$CF->endpoint()
+				->id(19)
+				->methodCreate()
+				->table('bulk')
+				->path(':index/:type/_bulk')
+				->addCondition($CF->condition()->name('index')->sendInQuery()->defaults(''))
+				->addCondition($CF->condition()->name('type')->sendInQuery()->defaults(''))
+				->addCondition($CF->condition()->name('transactions')->sendInBody()->extract(true)->required()->map(function($transactions) {
+					$actions = array();
+					foreach ($transactions as $transaction) {
+						list($method, $request) = $transaction;
+						$action = array_filter((array)Hash::get($request, 'uri.query'));
+						$actions[] = json_encode(array(
+							$method => array_combine(array_map(function($key) { return "_$key"; }, array_keys($action)), array_values($action))
+						));
+						if ($method !== ElasticsearchSource::METHOD_DELETE) {
+							$actions[] = json_encode((array)Hash::get($request, 'body'));
+						}
+					}
+					return implode("\n", $actions);
+				}))
 		);
 
 $config['ElasticsearchSource']['config'] = $Config;

@@ -76,7 +76,9 @@ class ElasticsearchConnection extends HttpSourceConnection {
 	 * @return mixed false on error, decoded response array on success
 	 */
 	public function request($request = array()) {
-		if (!empty($request['body'])) {
+		if (!empty($request['body'][0]) && is_string($request['body'][0])) {
+			$request['body'] = $request['body'][0];
+		} elseif (!empty($request['body'])) {
 			$request['body'] = json_encode($request['body']);
 		}
 

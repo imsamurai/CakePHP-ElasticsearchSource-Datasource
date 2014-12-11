@@ -231,7 +231,6 @@ class ElasticsearchDocumentTest extends ElasticsearchTest {
 			'mask' => 0777,
 			'serialize' => true,
 			'duration' => '+10 minutes'
-			
 		));
 		Cache::clear(false, 'Elasticsearch');
 		$this->Elasticsearch->cacheQueries = false;
@@ -242,7 +241,7 @@ class ElasticsearchDocumentTest extends ElasticsearchTest {
 		$total1 = $this->Elasticsearch->getDatasource()->lastCandidates();
 		debug($this->Elasticsearch->find('all'));
 		$total2 = $this->Elasticsearch->getDatasource()->lastCandidates();
-		
+
 		$this->assertNotEqual($total, 0);
 		$this->assertNotEqual($total1, 0);
 		$this->assertNotEqual($total2, 0);
@@ -256,7 +255,7 @@ class ElasticsearchDocumentTest extends ElasticsearchTest {
 		$total1 = $this->Elasticsearch->getDatasource()->lastCandidates();
 		debug($this->Elasticsearch->find('all'));
 		$total2 = $this->Elasticsearch->getDatasource()->lastCandidates();
-		
+
 		$this->assertNotEqual($total, 0);
 		$this->assertNotEqual($total1, 0);
 		$this->assertNotEqual($total2, 0);
@@ -481,6 +480,87 @@ class ElasticsearchDocumentTest extends ElasticsearchTest {
 				//rawQuery
 				'GET /_ulala HTTP/1.1 Host: localhost:9200 Connection: close User-Agent: CakePHP Content-Type: application/x-www-form-urlencoded Content-Length: 0',
 				//explainationExists
+				false
+			),
+		);
+	}
+
+	/**
+	 * Test transactions
+	 * 
+	 * @param array $params
+	 * @param array $transactions
+	 * @param bool $autoTransactions
+	 * 
+	 * @dataProvider bulkProvider
+	 */
+	public function testBulk($params, $transactions, $autoTransactions) {
+		$Model = $this->Elasticsearch;
+		$Model->setTransactionParams($params['table'], $params['params'], $params['transactionsField'], $params['method']);
+		if (!$autoTransactions) {
+			$Model->getDataSource()->begin();
+		}
+		foreach ($transactions as $transaction) {
+			list($method, $options) = $transaction;
+			$this->assertTrue((bool)call_user_func_array(array($Model, $method), $options));
+		}
+		if (!$autoTransactions) {
+			$this->assertTrue($Model->getDataSource()->commit());
+		}
+		$this->assertEmpty($Model->getDataSource()->getTransactionParams());
+	}
+
+	/**
+	 * Data source for testBulk
+	 * 
+	 * @return array
+	 */
+	public function bulkProvider() {
+		return array(
+			//set #0
+			array(
+				//params
+				array(
+					'table' => 'bulk',
+					'params' => array(),
+					'transactionsField' => 'transactions',
+					'method' => HttpSource::METHOD_CREATE
+				),
+				//transactions
+				array(
+					array('saveAll', array(
+							array(
+								array('title' => 'bulk 1'),
+								array('title' => 'bulk 2'),
+								array('title' => 'bulk 3'),
+							)
+						))
+				),
+				//autoTransactions
+				true
+			),
+			//set #1
+			array(
+				//params
+				array(
+					'table' => 'bulk',
+					'params' => array(),
+					'transactionsField' => 'transactions',
+					'method' => HttpSource::METHOD_CREATE
+				),
+				//transactions
+				array(
+					array('save', array(
+							array('title' => 'bulk 11'),
+						)),
+					array('save', array(
+							array('title' => 'bulk 22'),
+						)),
+					array('save', array(
+							array('title' => 'bulk 33'),
+						)),
+				),
+				//autoTransactions
 				false
 			),
 		);
