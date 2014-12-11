@@ -7,6 +7,7 @@
  * Format: http://book.cakephp.org/2.0/en/development/testing.html
  *
  */
+App::uses('HttpSource', 'HttpSource.Model/Datasource');
 App::uses('ElasticsearchTest', 'ElasticsearchSource.Test/');
 App::uses('ElasticsearchDocument', 'ElasticsearchSource.Model');
 
