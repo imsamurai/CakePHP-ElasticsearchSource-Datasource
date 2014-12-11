@@ -534,7 +534,10 @@ $Config/*
 						list($method, $request) = $transaction;
 						$action = array_filter((array)Hash::get($request, 'uri.query'));
 						$actions[] = json_encode(array(
-							$method => array_combine(array_map(function($key) { return "_$key"; }, array_keys($action)), array_values($action))
+							$method => array_combine(array_map(function($key) { 
+								return "_$key";
+							}, 
+							array_keys($action)), array_values($action))
 						));
 						if ($method !== ElasticsearchSource::METHOD_DELETE) {
 							$actions[] = json_encode((array)Hash::get($request, 'body'));
