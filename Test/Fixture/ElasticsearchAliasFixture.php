@@ -52,5 +52,4 @@ class ElasticsearchAliasFixture extends HttpSourceTestFixture {
 		$this->_Model->setSource('aliases');
 	}
 
-
 }

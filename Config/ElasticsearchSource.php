@@ -514,7 +514,6 @@ $Config/*
 							return false;
 						})
 				)
-		)
-						;
+		);
 
 $config['ElasticsearchSource']['config'] = $Config;
