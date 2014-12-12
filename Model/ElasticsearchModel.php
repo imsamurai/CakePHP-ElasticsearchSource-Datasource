@@ -74,9 +74,12 @@ class ElasticsearchModel extends HttpSourceModel {
 	 * @param string $typeName
 	 * @param string $language
 	 * @param string $implementation
+	 * @param string $scheme
+	 * @param string $opType
+	 * @param string $ignoreNlp
 	 * @throws MissingTableException when database table $tableName is not found on data source
 	 */
-	public function setSource($tableName, $indexName = null, $typeName = null, $language = null, $implementation = null, $scheme = null, $opType = null) {
+	public function setSource($tableName, $indexName = null, $typeName = null, $language = null, $implementation = null, $scheme = null, $opType = null, $ignoreNlp = null) {
 		if ($indexName) {
 			$this->useIndex = $indexName;
 		}
@@ -94,6 +97,9 @@ class ElasticsearchModel extends HttpSourceModel {
 		}
 		if (!is_null($opType)) {
 			$this->opType = $opType;
+		}
+		if (!is_null($ignoreNlp)) {
+			$this->ignoreNlp = $ignoreNlp;
 		}
 		parent::setSource($tableName);
 	}
@@ -127,6 +133,7 @@ class ElasticsearchModel extends HttpSourceModel {
 		$this->set('index', $this->useIndex);
 		$this->set('type', $this->useType);
 		$this->set('scheme', $this->scheme);
+		$this->set('ignore-nlp', $this->ignoreNlp);
 		return parent::beforeSave($options);
 	}
 
