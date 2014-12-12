@@ -294,7 +294,7 @@ class ElasticsearchDocumentTest extends ElasticsearchTest {
 			'name' => 'TestSuite',
 			'index' => array(
 				'tableParameters' => array(
-					'index' => 'new_test_index'
+					'name' => 'new_test_index'
 				)
 			),
 			'mapping' => array(
