@@ -520,7 +520,6 @@ class ElasticsearchDocumentTest extends ElasticsearchTest {
 				)
 			)
 		);
-		
 		$this->assertCount($count, $this->Elasticsearch->find('all', $findParams));
 	}
 
@@ -604,9 +603,9 @@ class ElasticsearchDocumentTest extends ElasticsearchTest {
 				array(
 					array('saveAll', array(
 							array(
-								array('title' => 'bulkb 1', 'id' => 1, 'op_type' => 'create'),
-								array('title' => 'bulkb 2', 'id' => 2,  'op_type' => 'create'),
-								array('title' => 'bulkb 3', 'id' => 1,  'op_type' => 'update'),
+								array('title' => 'bulkb 1', 'id' => 1000, 'op_type' => 'create'),
+								array('title' => 'bulkb 2', 'id' => 2000,  'op_type' => 'create'),
+								array('title' => 'bulkb 3', 'id' => 1000,  'op_type' => 'create'),
 							)
 						))
 				),

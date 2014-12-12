@@ -537,8 +537,9 @@ $Config/*
 					foreach ($transactions as $transaction) {
 						list($method, $request) = $transaction;
 						$document = (array)Hash::get($request, 'body');
-						$method = isset($document['op_type']) ? $document['op_type'] : $method;
 						$action = array_filter((array)Hash::get($request, 'uri.query'));
+						$method = isset($document['op_type']) ? $document['op_type'] : (isset($action['op_type']) ? $action['op_type'] : $method);
+						
 						$actions[] = json_encode(array(
 							$method => array_combine(array_map(function($key) { 
 								return "_$key";
