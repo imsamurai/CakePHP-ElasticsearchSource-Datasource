@@ -23,4 +23,11 @@ class ElasticsearchModel extends HttpSourceModel {
 	 */
 	public $name = 'ElasticsearchModel';
 
+	/**
+	 * {@inheritdoc}
+	 *
+	 * @var string
+	 */
+	public $useDbConfig = 'elasticsearch';
+
 }
