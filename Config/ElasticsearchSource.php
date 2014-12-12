@@ -543,7 +543,11 @@ $Config/*
 							array_keys($action)), array_values($action))
 						));
 						if ($method !== ElasticsearchSource::METHOD_DELETE) {
-							$actions[] = json_encode((array)Hash::get($request, 'body'));
+							if ($method === ElasticsearchSource::METHOD_UPDATE) {
+								$actions[] = json_encode(array('doc' => (array)Hash::get($request, 'body')));
+							} else {
+								$actions[] = json_encode((array)Hash::get($request, 'body'));
+							}
 						}
 					}
 					return implode("\n", $actions);
