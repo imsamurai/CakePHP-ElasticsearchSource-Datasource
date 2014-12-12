@@ -388,12 +388,12 @@ $Config/*
 				->addCondition($CF->condition()->name('name')->sendInQuery()->defaults('_all'))
 				->result($CF->result()
 						->map(function($data, Model $Model) {
-						$result = array();
-						foreach ($data as $name => $indexData) {
-							$result[] = array(
-								'name' => $name
-							) + $indexData;
-						}//debug($result);
+							$result = array();
+							foreach ($data as $name => $indexData) {
+								$result[] = array(
+									'name' => $name
+										) + $indexData;
+							}
 							return $result;
 						})
 				)
