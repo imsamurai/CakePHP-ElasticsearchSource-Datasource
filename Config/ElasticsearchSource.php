@@ -531,10 +531,13 @@ $Config/*
 				->path(':index/:type/_bulk')
 				->addCondition($CF->condition()->name('index')->sendInQuery()->defaults(''))
 				->addCondition($CF->condition()->name('type')->sendInQuery()->defaults(''))
+				->addCondition($CF->condition()->name('refresh')->sendInQuery())
 				->addCondition($CF->condition()->name('transactions')->sendInBody()->extract(true)->required()->map(function($transactions) {
 					$actions = array();
 					foreach ($transactions as $transaction) {
 						list($method, $request) = $transaction;
+						$document = (array)Hash::get($request, 'body');
+						$method = isset($document['op_type']) ? $document['op_type'] : $method;
 						$action = array_filter((array)Hash::get($request, 'uri.query'));
 						$actions[] = json_encode(array(
 							$method => array_combine(array_map(function($key) { 
@@ -544,13 +547,13 @@ $Config/*
 						));
 						if ($method !== ElasticsearchSource::METHOD_DELETE) {
 							if ($method === ElasticsearchSource::METHOD_UPDATE) {
-								$actions[] = json_encode(array('doc' => (array)Hash::get($request, 'body')));
+								$actions[] = json_encode(array('doc' => $document));
 							} else {
-								$actions[] = json_encode((array)Hash::get($request, 'body'));
+								$actions[] = json_encode($document);
 							}
 						}
 					}
-					return implode("\n", $actions);
+					return implode("\n", $actions) . "\n";
 				}))
 		)
 		/*

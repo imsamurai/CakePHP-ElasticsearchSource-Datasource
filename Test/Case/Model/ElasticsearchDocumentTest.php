@@ -492,10 +492,12 @@ class ElasticsearchDocumentTest extends ElasticsearchTest {
 	 * @param array $params
 	 * @param array $transactions
 	 * @param bool $autoTransactions
+	 * @param int $count
+	 * @param string $find
 	 * 
 	 * @dataProvider bulkProvider
 	 */
-	public function testBulk($params, $transactions, $autoTransactions) {
+	public function testBulk($params, $transactions, $autoTransactions, $count, $find) {
 		$Model = $this->Elasticsearch;
 		$Model->setTransactionParams($params['table'], $params['params'], $params['transactionsField'], $params['method']);
 		if (!$autoTransactions) {
@@ -509,6 +511,17 @@ class ElasticsearchDocumentTest extends ElasticsearchTest {
 			$this->assertTrue($Model->getDataSource()->commit());
 		}
 		$this->assertEmpty($Model->getDataSource()->getTransactionParams());
+		$findParams = array(
+			'conditions' => array(
+				'query' => array(
+					'term' => array(
+						'title' => $find
+					)
+				)
+			)
+		);
+		
+		$this->assertCount($count, $this->Elasticsearch->find('all', $findParams));
 	}
 
 	/**
@@ -523,7 +536,9 @@ class ElasticsearchDocumentTest extends ElasticsearchTest {
 				//params
 				array(
 					'table' => 'bulk',
-					'params' => array(),
+					'params' => array(
+						'conditions' => array('refresh' => true)
+					),
 					'transactionsField' => 'transactions',
 					'method' => HttpSource::METHOD_CREATE
 				),
@@ -531,38 +546,76 @@ class ElasticsearchDocumentTest extends ElasticsearchTest {
 				array(
 					array('saveAll', array(
 							array(
-								array('title' => 'bulk 1'),
-								array('title' => 'bulk 2'),
-								array('title' => 'bulk 3'),
+								array('title' => 'bulka 1'),
+								array('title' => 'bulka 2'),
+								array('title' => 'bulka 3'),
 							)
 						))
 				),
 				//autoTransactions
-				true
+				true,
+				//count
+				3,
+				//find
+				'bulka'
 			),
 			//set #1
 			array(
 				//params
 				array(
 					'table' => 'bulk',
-					'params' => array(),
+					'params' => array(
+						'conditions' => array('refresh' => true)
+					),
 					'transactionsField' => 'transactions',
 					'method' => HttpSource::METHOD_CREATE
 				),
 				//transactions
 				array(
 					array('save', array(
-							array('title' => 'bulk 11'),
+							array('title' => 'bulkc 11'),
 						)),
 					array('save', array(
-							array('title' => 'bulk 22'),
+							array('title' => 'bulkc 22'),
 						)),
 					array('save', array(
-							array('title' => 'bulk 33'),
+							array('title' => 'bulkc 33'),
 						)),
 				),
 				//autoTransactions
-				false
+				false,
+				//count
+				3,
+				//find
+				'bulkc'
+			),
+			//set #2
+			array(
+				//params
+				array(
+					'table' => 'bulk',
+					'params' => array(
+						'conditions' => array('refresh' => true)
+					),
+					'transactionsField' => 'transactions',
+					'method' => HttpSource::METHOD_CREATE
+				),
+				//transactions
+				array(
+					array('saveAll', array(
+							array(
+								array('title' => 'bulkb 1', 'id' => 1, 'op_type' => 'create'),
+								array('title' => 'bulkb 2', 'id' => 2,  'op_type' => 'create'),
+								array('title' => 'bulkb 3', 'id' => 1,  'op_type' => 'update'),
+							)
+						))
+				),
+				//autoTransactions
+				true,
+				//count
+				2,
+				//find
+				'bulkb'
 			),
 		);
 	}
