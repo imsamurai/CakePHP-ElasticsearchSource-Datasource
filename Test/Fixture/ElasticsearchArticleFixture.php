@@ -63,7 +63,7 @@ class ElasticsearchArticleFixture extends HttpSourceTestFixture {
 			'name' => 'TestSuite',
 			'index' => array(
 				'tableParameters' => array(
-					'index' => $this->_Model->useIndex
+					'name' => $this->_Model->useIndex
 				)
 			),
 			'mapping' => array(
@@ -102,7 +102,7 @@ class ElasticsearchArticleFixture extends HttpSourceTestFixture {
 			),
 			'index' => array(
 				'tableParameters' => array(
-					'index' => $this->_Model->useIndex
+					'name' => $this->_Model->useIndex
 				)
 			)
 		));

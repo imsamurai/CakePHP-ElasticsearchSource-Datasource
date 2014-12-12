@@ -57,7 +57,7 @@ $Config/*
 		/*
 		 * Check api
 		 *
-		 * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/docs-get.html
+		 * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-get.html
 		 */
 		->add(
 				$CF->endpoint()
@@ -330,16 +330,15 @@ $Config/*
 		/*
 		 * Create index api
 		 *
-		 * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-create-index.html
+		 * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-create-index.html
 		 */
 		->add(
 				$CF->endpoint()
 				->id(10)
 				->methodCreate()
 				->table('index')
-				->path(':index')
-				->addField($TimeIdField)
-				->addCondition($CF->condition()->name('index')->sendInQuery()->required())
+				->path(':name')
+				->addCondition($CF->condition()->name('name')->sendInQuery()->required())
 				->addCondition($CF->condition()->name('settings')->sendInBody())
 				->addCondition($CF->condition()->name('mappings')->sendInBody())
 				->addCondition($CF->condition()->name('warmers')->sendInBody())
@@ -356,16 +355,15 @@ $Config/*
 		/*
 		 * Delete index api
 		 *
-		 * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-delete-index.html
+		 * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-delete-index.html
 		 */
 		->add(
 				$CF->endpoint()
 				->id(11)
 				->methodDelete()
 				->table('index')
-				->path(':index')
-				->addField($TimeIdField)
-				->addCondition($CF->condition()->name('index')->sendInQuery()->required())
+				->path(':name')
+				->addCondition($CF->condition()->name('name')->sendInQuery()->required())
 				->result($CF->result()
 						->map(function($data, Model $Model) {
 							if (!empty($data['acknowledged'])) {
@@ -379,27 +377,32 @@ $Config/*
 		/*
 		 * Exists index api
 		 *
-		 * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-exists.html
+		 * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-exists.html
 		 */
 		->add(
 				$CF->endpoint()
 				->id(12)
 				->methodRead()
 				->table('index')
-				->path(':index')
-				->addField($TimeIdField)
-				->addCondition($CF->condition()->name('index')->sendInQuery()->required())
+				->path(':name')
+				->addCondition($CF->condition()->name('name')->sendInQuery()->defaults('_all'))
 				->result($CF->result()
 						->map(function($data, Model $Model) {
-							return $data ? array(array('ok' => true)) : false;
+						$result = array();
+						foreach ($data as $name => $indexData) {
+							$result[] = array(
+								'name' => $name
+							) + $indexData;
+						}//debug($result);
+							return $result;
 						})
 				)
 		)
 
 		/*
-		 * Create type api
+		 * Create index api
 		 *
-		 * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-create-index.html
+		 * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-create-index.html
 		 */
 		->add(
 				$CF->endpoint()
@@ -421,9 +424,9 @@ $Config/*
 				)
 		)
 		/*
-		 * Create delete api
+		 * Delete index api
 		 *
-		 * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/0.90/indices-create-index.html
+		 * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-create-index.html
 		 */
 		->add(
 				$CF->endpoint()
@@ -545,6 +548,68 @@ $Config/*
 					}
 					return implode("\n", $actions);
 				}))
-		);
+		)
+		/*
+		 * indices exists
+		 *
+		 * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-exists.html
+		 */
+		->add(
+				$CF->endpoint()
+				->id(20)
+				->methodCheck()
+				->table('mapping')
+				->path(':index/:type/')
+				->addField($TimeIdField)
+				->addCondition($CF->condition()->name('index')->sendInQuery()->required())
+				->addCondition($CF->condition()->name('type')->sendInQuery()->required())
+				->result($CF->result()
+						->map(function() {
+							return array('ok' => true);
+						})
+				)
+		)
+		/*
+		 * indices exists
+		 *
+		 * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-exists.html
+		 */
+		->add(
+				$CF->endpoint()
+				->id(21)
+				->methodCheck()
+				->table('index')
+				->path(':name')
+				->addCondition($CF->condition()->name('name')->sendInQuery()->required())
+				->result($CF->result()
+						->map(function() {
+							return array('ok' => true);
+						})
+				)
+		)
+		/*
+		 * Create index api
+		 *
+		 * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/indices-create-index.html
+		 */
+		->add(
+				$CF->endpoint()
+				->id(22)
+				->methodUpdate()
+				->table('index')
+				->path(':name')
+				->addCondition($CF->condition()->name('name')->sendInQuery()->required())
+				->addCondition($CF->condition()->name('settings')->sendInBody())
+				->addCondition($CF->condition()->name('mappings')->sendInBody())
+				->addCondition($CF->condition()->name('warmers')->sendInBody())
+				->result($CF->result()
+						->map(function($data, Model $Model) {
+							if (!empty($data['acknowledged'])) {
+								return array('ok' => $data['acknowledged']);
+							}
+							return false;
+						})
+				)
+);
 
 $config['ElasticsearchSource']['config'] = $Config;
