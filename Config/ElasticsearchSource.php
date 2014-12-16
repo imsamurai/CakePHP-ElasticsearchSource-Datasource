@@ -618,6 +618,29 @@ $Config/*
 							return false;
 						})
 				)
-);
+		)
+		/*
+		 * Delete by query api
+		 *
+		 * @link http://www.elasticsearch.org/guide/en/elasticsearch/reference/current/docs-delete-by-query.html
+		 */
+		->add(
+				$CF->endpoint()
+				->id(23)
+				->methodDelete()
+				->table('document')
+				->path(':index/:type/_query')
+				->addCondition($CF->condition()->name('index')->sendInQuery()->defaults('_all'))
+				->addCondition($CF->condition()->name('type')->sendInQuery()->defaults(''))
+				->addCondition($CF->condition()->name('query')->sendInBody()->defaults(array('match_all' => new stdClass())))
+				->addCondition($CF->condition()->name('warmers')->sendInBody())
+				->result($CF->result()
+						->map(function($data) {
+							if (!empty($data)) {
+								return array('ok' => true);
+							}
+							return false;
+						})
+				));
 
 $config['ElasticsearchSource']['config'] = $Config;

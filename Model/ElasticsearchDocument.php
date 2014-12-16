@@ -170,6 +170,22 @@ class ElasticsearchDocument extends ElasticsearchModel {
 		}
 		return Hash::extract($explanations, '{n}.{s}');
 	}
+	
+	/**
+	 * {@inheritdoc}
+	 * 
+	 * @param mixed $conditions Conditions to match
+	 * @param boolean $cascade Set to true to delete records that depend on this record (NOT USED)
+	 * @param boolean $callbacks Run callbacks (NOT USED)
+	 * @return boolean True on success, false on failure
+	 */
+	public function deleteAll($conditions, $cascade = true, $callbacks = false) {
+		$conditions+= array(
+			'index' => $this->useIndex,
+			'type' => $this->useType
+		);
+		return parent::deleteAll($conditions, $cascade, $callbacks);
+	}
 
 	/**
 	 * {@inheritdoc}
@@ -180,11 +196,7 @@ class ElasticsearchDocument extends ElasticsearchModel {
 	 * @return boolean True on success
 	 */
 	public function delete($id = null, $cascade = true) {
-		return $this->deleteAll(array(
-					$this->primaryKey => $id,
-					'index' => $this->useIndex,
-					'type' => $this->useType
-						), $cascade);
+		return $this->deleteAll(array($this->primaryKey => $id), $cascade);
 	}
 	
 	/**

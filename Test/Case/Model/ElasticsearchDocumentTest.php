@@ -604,8 +604,8 @@ class ElasticsearchDocumentTest extends ElasticsearchTest {
 					array('saveAll', array(
 							array(
 								array('title' => 'bulkb 1', 'id' => 1000, 'op_type' => 'create'),
-								array('title' => 'bulkb 2', 'id' => 2000,  'op_type' => 'create'),
-								array('title' => 'bulkb 3', 'id' => 1000,  'op_type' => 'create'),
+								array('title' => 'bulkb 2', 'id' => 2000, 'op_type' => 'create'),
+								array('title' => 'bulkb 3', 'id' => 1000, 'op_type' => 'create'),
 							)
 						))
 				),
@@ -615,6 +615,66 @@ class ElasticsearchDocumentTest extends ElasticsearchTest {
 				2,
 				//find
 				'bulkb'
+			),
+		);
+	}
+
+	/**
+	 * Test delete all
+	 * 
+	 * @param type $query
+	 * @param type $countAfter
+	 * @dataProvider deleteByQueryProvider
+	 */
+	public function testDeleteByQuery($query, $countAfter) {
+		$this->assertTrue($this->Elasticsearch->deleteAll($query ? compact('query') : array(1 => 1)));
+		$this->assertCount($countAfter, $this->Elasticsearch->find('all'));
+	}
+
+	/**
+	 * Data provider for testDeleteByQuery
+	 * 
+	 * @return array
+	 */
+	public function deleteByQueryProvider() {
+		return array(
+			//set #0
+			array(
+				//query
+				array(
+					'match_all' => new stdClass()
+				),
+				//countAfter
+				0
+			),
+			//set #1
+			array(
+				//query
+				null,
+				//countAfter
+				0
+			),
+			//set #2
+			array(
+				//query
+				array(
+					'match' => array(
+						'title' => 'guratabaata'
+					)
+				),
+				//countAfter
+				0
+			),
+			//set #3
+			array(
+				//query
+				array(
+					'match' => array(
+						'rank' => 2
+					)
+				),
+				//countAfter
+				2
 			),
 		);
 	}
