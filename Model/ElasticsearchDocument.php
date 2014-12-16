@@ -180,7 +180,7 @@ class ElasticsearchDocument extends ElasticsearchModel {
 	 * @return boolean True on success, false on failure
 	 */
 	public function deleteAll($conditions, $cascade = true, $callbacks = false) {
-		$conditions+= array(
+		$conditions += array(
 			'index' => $this->useIndex,
 			'type' => $this->useType
 		);
