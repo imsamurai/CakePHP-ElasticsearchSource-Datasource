@@ -140,6 +140,12 @@ With index/type support</span><pre>delete</pre>
     </li>
 
                                                                                                         <li class="method public">
+        <a href="#method_deleteAll" title="deleteAll :: {@inheritdoc}">
+            <span class="description">{@inheritdoc}</span><pre>deleteAll</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
         <a href="#method_exists" title="exists :: {@inheritdoc}">
             <span class="description">{@inheritdoc}</span><pre>exists</pre>
         </a>
@@ -179,11 +185,11 @@ With index/type support</span><pre>setSource</pre>
                                 <span class="description">Put ids in right place in case of multiple ids</span><pre>_mapMultipleIds</pre>
                             </a>
                         </li>
-                                                                                                                                                                                                                                                                                                            </ul>
+                                                                                                                                                                                                                                                                                                                                                </ul>
         </li>
         <li class="nav-header private">» Private
             <ul>
-                                                                                                                                                                                                                                                                                                                                                                                </ul>
+                                                                                                                                                                                                                                                                                                                                                                                                                    </ul>
         </li>
         <li class="nav-header">
             <i class="icon-custom icon-constant"></i> Constants
@@ -415,6 +421,41 @@ With index/type support</h2>
                                                                             
                                                                             <h3>Response</h3>
                                         <code>boolean</code><p><p>True on success</p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_deleteAll"></a>
+                        <div class="element clickable method public  method_deleteAll" data-toggle="collapse" data-target=".method_deleteAll .collapse">
+                            <h2>{@inheritdoc}</h2>
+                            <pre>deleteAll(mixed $conditions, boolean $cascade = true, boolean $callbacks = false) : boolean</pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                            </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$conditions</h4>
+                                                <code>mixed</code><p><p>Conditions to match</p></p>
+                                            </div>
+                                                                                    <div class="subelement argument">
+                                                <h4>$cascade</h4>
+                                                <code>boolean</code><p><p>Set to true to delete records that depend on this record (NOT USED)</p></p>
+                                            </div>
+                                                                                    <div class="subelement argument">
+                                                <h4>$callbacks</h4>
+                                                <code>boolean</code><p><p>Run callbacks (NOT USED)</p></p>
+                                            </div>
+                                                                            
+                                                                            <h3>Response</h3>
+                                        <code>boolean</code><p><p>True on success, false on failure</p></p>
                                                                     </div>
                             </div>
 
@@ -724,7 +765,7 @@ With index/type support</h2>
             Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by
             <a href="http://glyphicons.com/">Glyphicons</a>.<br/>
             Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and<br/>
-            generated on Tue, 16 Dec 2014 14:13:29 +0000.<br/>
+            generated on Tue, 16 Dec 2014 14:41:32 +0000.<br/>
     </footer>
     </body>
 </html>
