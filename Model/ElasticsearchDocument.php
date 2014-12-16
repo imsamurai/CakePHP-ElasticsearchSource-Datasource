@@ -229,21 +229,26 @@ class ElasticsearchDocument extends ElasticsearchModel {
 	 * @param array $query
 	 */
 	protected function _handleScrollFind($type, &$query) {
+		if ($type !== 'all' || empty($query['conditions']['scroll'])) {
+			return;
+		}
 		$scrollId = $this->getDataSource()->lastScrollId();
-		if ($type === 'all' && !empty($query['conditions']['scroll'])) {
-			if (!$scrollId && Hash::get($query, 'conditions.search_type') === 'scan') {
-				parent::find($type, $query);
-				$scrollId = $this->getDataSource()->lastScrollId();
-			}
-			if ($scrollId) {
-				$query['conditions'] = array(
-					'scroll_id' => $scrollId,
-					'scroll' => $query['conditions']['scroll'],
-					'index' => '',
-					'type' => '',
-					'scroll_search' => 'scroll'
-				);
-			}
+		if (!$scrollId) {
+			$scrollId = (string)Hash::get($query, 'conditions.scroll_id');
+		}
+		if (!$scrollId && Hash::get($query, 'conditions.search_type') === 'scan') {
+			parent::find($type, $query);
+			$scrollId = $this->getDataSource()->lastScrollId();
+		}
+		
+		if ($scrollId) {
+			$query['conditions'] = array(
+				'scroll_id' => $scrollId,
+				'scroll' => $query['conditions']['scroll'],
+				'index' => '',
+				'type' => '',
+				'scroll_search' => 'scroll'
+			);
 		}
 	}
 
