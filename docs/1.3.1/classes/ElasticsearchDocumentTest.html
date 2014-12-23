@@ -1,0 +1,1147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>    API Documentation &raquo; \ElasticsearchDocumentTest
+</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
+
+            <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+            <!--[if lt IE 9]>
+        <script src="https://html5shim.googlecode.com/svn/trunk/html5.js" type="text/javascript"></script>
+        <![endif]-->
+        <script src="../js/jquery-1.7.1.min.js" type="text/javascript"></script>
+        <script src="../js/jquery-ui-1.8.2.custom.min.js" type="text/javascript"></script>
+        <script src="../js/jquery.mousewheel.min.js" type="text/javascript"></script>
+        <script src="../js/bootstrap.js" type="text/javascript"></script>
+        <script src="../js/template.js" type="text/javascript"></script>
+        <script src="../js/prettify/prettify.min.js" type="text/javascript"></script>
+    
+            <link rel="shortcut icon" href="../img/favicon.ico"/>
+        <link rel="apple-touch-icon" href="../img/apple-touch-icon.png"/>
+        <link rel="apple-touch-icon" sizes="72x72" href="../img/apple-touch-icon-72x72.png"/>
+        <link rel="apple-touch-icon" sizes="114x114" href="../img/apple-touch-icon-114x114.png"/>
+    </head>
+<body>
+
+        <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span> <span class="icon-bar"></span>
+                    <span class="icon-bar"></span> </a>
+                <a class="brand" href="../index.html">API Documentation</a>
+
+                <div class="nav-collapse">
+                    <ul class="nav">
+                        <li class="dropdown">
+                            <a href="#api" class="dropdown-toggle" data-toggle="dropdown">
+                                API Documentation <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                                                                            </ul>
+                        </li>
+                        <li class="dropdown" id="charts-menu">
+                            <a href="#charts" class="dropdown-toggle" data-toggle="dropdown">
+                                Charts <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="../graph_class.html">
+                                        <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown" id="reports-menu">
+                            <a href="#reports" class="dropdown-toggle" data-toggle="dropdown">
+                                Reports <b class="caret"></b>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a href="../errors.html">
+                                        <i class="icon-list-alt"></i>&#160;Errors
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../markers.html">
+                                        <i class="icon-list-alt"></i>&#160;Markers
+                                    </a>
+                                </li>
+                                <li>
+                                    <a href="../deprecated.html">
+                                        <i class="icon-list-alt"></i>&#160;Deprecated
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="go_to_top">
+            <a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>
+        </div>
+    </div>
+    
+    <div id="___" class="container">
+        <noscript>
+            <div class="alert alert-warning">
+                Javascript is disabled; several features are only available if Javascript is enabled.
+            </div>
+        </noscript>
+
+        
+            <style>
+        .deprecated h2 {
+            text-decoration: line-through;
+        }
+    </style>
+    <div class="row">
+        <div class="span4">
+                    <div class="btn-group view pull-right" data-toggle="buttons-radio">
+        <button class="btn details" title="Show descriptions and method names"><i class="icon-list"></i></button>
+        <button class="btn simple" title="Show only method names"><i class="icon-align-justify"></i></button>
+    </div>
+    <div class="btn-group visibility" data-toggle="buttons-checkbox">
+        <button class="btn public active" title="Show public elements">Public</button>
+        <button class="btn protected" title="Show protected elements">Protected</button>
+        <button class="btn private" title="Show private elements">Private</button>
+        <button class="btn inherited active" title="Show inherited elements">Inherited</button>
+    </div>
+
+        <ul class="side-nav nav nav-list">
+        <li class="nav-header">
+            <i class="icon-custom icon-method"></i> Methods
+            <ul>
+                                                                                                    <li class="method public">
+        <a href="#method_bulkProvider" title="bulkProvider :: Data source for testBulk">
+            <span class="description">Data source for testBulk</span><pre>bulkProvider</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_deleteByQueryProvider" title="deleteByQueryProvider :: Data provider for testDeleteByQuery">
+            <span class="description">Data provider for testDeleteByQuery</span><pre>deleteByQueryProvider</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_explainQueryProvider" title="explainQueryProvider :: Data provider for testExplainQuery">
+            <span class="description">Data provider for testExplainQuery</span><pre>explainQueryProvider</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public inherited">
+        <a href="#method_setConfig" title="setConfig :: Sets config for source">
+            <span class="description">Sets config for source</span><pre>setConfig</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public inherited">
+        <a href="#method_setUp" title="setUp :: {@inheritdoc}">
+            <span class="description">{@inheritdoc}</span><pre>setUp</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_testBulk" title="testBulk :: Test transactions">
+            <span class="description">Test transactions</span><pre>testBulk</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_testCountDocument" title="testCountDocument :: Test documents count">
+            <span class="description">Test documents count</span><pre>testCountDocument</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_testCreateDocument" title="testCreateDocument :: Test create document">
+            <span class="description">Test create document</span><pre>testCreateDocument</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_testCreateDropSchema" title="testCreateDropSchema :: Test create/drop schema">
+            <span class="description">Test create/drop schema</span><pre>testCreateDropSchema</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_testDeleteByQuery" title="testDeleteByQuery :: Test delete all">
+            <span class="description">Test delete all</span><pre>testDeleteByQuery</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_testDeleteDocument" title="testDeleteDocument :: Test delete document">
+            <span class="description">Test delete document</span><pre>testDeleteDocument</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_testExistsDocument" title="testExistsDocument :: Test document exists">
+            <span class="description">Test document exists</span><pre>testExistsDocument</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_testExplainQuery" title="testExplainQuery :: Test query explaination">
+            <span class="description">Test query explaination</span><pre>testExplainQuery</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_testGetDocument" title="testGetDocument :: Test get document">
+            <span class="description">Test get document</span><pre>testGetDocument</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_testGetMultipleDocuments" title="testGetMultipleDocuments :: Test get multiple documents">
+            <span class="description">Test get multiple documents</span><pre>testGetMultipleDocuments</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_testHighlightSearchDocument" title="testHighlightSearchDocument :: Test highlight document">
+            <span class="description">Test highlight document</span><pre>testHighlightSearchDocument</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_testMapping" title="testMapping :: Test type mapping">
+            <span class="description">Test type mapping</span><pre>testMapping</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_testScrollScanSearchDocument" title="testScrollScanSearchDocument :: Test scroll scan search document">
+            <span class="description">Test scroll scan search document</span><pre>testScrollScanSearchDocument</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_testScrollSearchDocument" title="testScrollSearchDocument :: Test scroll search document">
+            <span class="description">Test scroll search document</span><pre>testScrollSearchDocument</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_testSearchDocument" title="testSearchDocument :: Test search document">
+            <span class="description">Test search document</span><pre>testSearchDocument</pre>
+        </a>
+    </li>
+
+                                                                                                        <li class="method public">
+        <a href="#method_testUpdateDocument" title="testUpdateDocument :: Test update document">
+            <span class="description">Test update document</span><pre>testUpdateDocument</pre>
+        </a>
+    </li>
+
+                                                </ul>
+        </li>
+        <li class="nav-header protected">» Protected
+            <ul>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </ul>
+        </li>
+        <li class="nav-header private">» Private
+            <ul>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </ul>
+        </li>
+        <li class="nav-header">
+            <i class="icon-custom icon-constant"></i> Constants
+            <ul>
+                            </ul>
+        </li>
+    </ul>
+
+
+        </div>
+
+        <div class="span8">
+            <div class="element class">
+                <h1>ElasticsearchDocumentTest</h1>
+                <small style="display: block; text-align: right">
+                                            Extends <a href="../classes/ElasticsearchTest.html">\ElasticsearchTest</a>
+                                                        </small>
+                <p class="short_description">Tests documents api - search/get/delete/update/create</p>
+                <div class="details">
+                    <div class="long_description">
+                        
+                    </div>
+                    <table class="table table-bordered">
+                                                                                    <tr>
+                                    <th>
+                                        package
+                                                                            </th>
+                                    <td>
+                                                                                    
+                                                                                <p>ElasticsearchSourceTest</p>
+                                    </td>
+                                </tr>
+                                                                                                                <tr>
+                                    <th>
+                                        subpackage
+                                                                            </th>
+                                    <td>
+                                                                                    
+                                                                                <p>Model</p>
+                                    </td>
+                                </tr>
+                                                                                                                            </table>
+
+                    <h3><i class="icon-custom icon-method"></i> Methods</h3>
+                                                                <a id="method_bulkProvider"></a>
+                        <div class="element clickable method public  method_bulkProvider" data-toggle="collapse" data-target=".method_bulkProvider .collapse">
+                            <h2>Data source for testBulk</h2>
+                            <pre>bulkProvider() : array</pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                    
+                                                                            <h3>Response</h3>
+                                        <code>array</code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_deleteByQueryProvider"></a>
+                        <div class="element clickable method public  method_deleteByQueryProvider" data-toggle="collapse" data-target=".method_deleteByQueryProvider .collapse">
+                            <h2>Data provider for testDeleteByQuery</h2>
+                            <pre>deleteByQueryProvider() : array</pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                    
+                                                                            <h3>Response</h3>
+                                        <code>array</code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_explainQueryProvider"></a>
+                        <div class="element clickable method public  method_explainQueryProvider" data-toggle="collapse" data-target=".method_explainQueryProvider .collapse">
+                            <h2>Data provider for testExplainQuery</h2>
+                            <pre>explainQueryProvider() : array</pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                    
+                                                                            <h3>Response</h3>
+                                        <code>array</code><p></p>
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_setConfig"></a>
+                        <div class="element clickable method public  method_setConfig inherited" data-toggle="collapse" data-target=".method_setConfig .collapse">
+                            <h2>Sets config for source</h2>
+                            <pre>setConfig() </pre>
+                            <div class="labels">
+                                <span class="label">inherited</span>                                <span class="label">static</span>                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                    
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_setUp"></a>
+                        <div class="element clickable method public  method_setUp inherited" data-toggle="collapse" data-target=".method_setUp .collapse">
+                            <h2>{@inheritdoc}</h2>
+                            <pre>setUp() </pre>
+                            <div class="labels">
+                                <span class="label">inherited</span>                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                    
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_testBulk"></a>
+                        <div class="element clickable method public  method_testBulk" data-toggle="collapse" data-target=".method_testBulk .collapse">
+                            <h2>Test transactions</h2>
+                            <pre>testBulk(array $params, array $transactions, boolean $autoTransactions, integer $count, string $find) </pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    dataProvider
+                                                </th>
+                                                <td>
+                                                                                                                                                                        
+                                                                                                                                                                        <p>bulkProvider</p>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$params</h4>
+                                                <code>array</code><p></p>
+                                            </div>
+                                                                                    <div class="subelement argument">
+                                                <h4>$transactions</h4>
+                                                <code>array</code><p></p>
+                                            </div>
+                                                                                    <div class="subelement argument">
+                                                <h4>$autoTransactions</h4>
+                                                <code>boolean</code><p></p>
+                                            </div>
+                                                                                    <div class="subelement argument">
+                                                <h4>$count</h4>
+                                                <code>integer</code><p></p>
+                                            </div>
+                                                                                    <div class="subelement argument">
+                                                <h4>$find</h4>
+                                                <code>string</code><p></p>
+                                            </div>
+                                                                            
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_testCountDocument"></a>
+                        <div class="element clickable method public  method_testCountDocument" data-toggle="collapse" data-target=".method_testCountDocument .collapse">
+                            <h2>Test documents count</h2>
+                            <pre>testCountDocument() </pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                    
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_testCreateDocument"></a>
+                        <div class="element clickable method public  method_testCreateDocument" data-toggle="collapse" data-target=".method_testCreateDocument .collapse">
+                            <h2>Test create document</h2>
+                            <pre>testCreateDocument() </pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                    
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_testCreateDropSchema"></a>
+                        <div class="element clickable method public  method_testCreateDropSchema" data-toggle="collapse" data-target=".method_testCreateDropSchema .collapse">
+                            <h2>Test create/drop schema</h2>
+                            <pre>testCreateDropSchema() </pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                    
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_testDeleteByQuery"></a>
+                        <div class="element clickable method public  method_testDeleteByQuery" data-toggle="collapse" data-target=".method_testDeleteByQuery .collapse">
+                            <h2>Test delete all</h2>
+                            <pre>testDeleteByQuery(\type $query, \type $countAfter) </pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    dataProvider
+                                                </th>
+                                                <td>
+                                                                                                                                                                        
+                                                                                                                                                                        <p>deleteByQueryProvider</p>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$query</h4>
+                                                <code>\type</code><p></p>
+                                            </div>
+                                                                                    <div class="subelement argument">
+                                                <h4>$countAfter</h4>
+                                                <code>\type</code><p></p>
+                                            </div>
+                                                                            
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_testDeleteDocument"></a>
+                        <div class="element clickable method public  method_testDeleteDocument" data-toggle="collapse" data-target=".method_testDeleteDocument .collapse">
+                            <h2>Test delete document</h2>
+                            <pre>testDeleteDocument() </pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                    
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_testExistsDocument"></a>
+                        <div class="element clickable method public  method_testExistsDocument" data-toggle="collapse" data-target=".method_testExistsDocument .collapse">
+                            <h2>Test document exists</h2>
+                            <pre>testExistsDocument() </pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                    
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_testExplainQuery"></a>
+                        <div class="element clickable method public  method_testExplainQuery" data-toggle="collapse" data-target=".method_testExplainQuery .collapse">
+                            <h2>Test query explaination</h2>
+                            <pre>testExplainQuery(string $rawQuery, array $explainationExists) </pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    dataProvider
+                                                </th>
+                                                <td>
+                                                                                                                                                                        
+                                                                                                                                                                        <p>explainQueryProvider</p>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                                                            <h3>Arguments</h3>
+                                                                                    <div class="subelement argument">
+                                                <h4>$rawQuery</h4>
+                                                <code>string</code><p></p>
+                                            </div>
+                                                                                    <div class="subelement argument">
+                                                <h4>$explainationExists</h4>
+                                                <code>array</code><p></p>
+                                            </div>
+                                                                            
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_testGetDocument"></a>
+                        <div class="element clickable method public  method_testGetDocument" data-toggle="collapse" data-target=".method_testGetDocument .collapse">
+                            <h2>Test get document</h2>
+                            <pre>testGetDocument() </pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                    
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_testGetMultipleDocuments"></a>
+                        <div class="element clickable method public  method_testGetMultipleDocuments" data-toggle="collapse" data-target=".method_testGetMultipleDocuments .collapse">
+                            <h2>Test get multiple documents</h2>
+                            <pre>testGetMultipleDocuments() </pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                    
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_testHighlightSearchDocument"></a>
+                        <div class="element clickable method public  method_testHighlightSearchDocument" data-toggle="collapse" data-target=".method_testHighlightSearchDocument .collapse">
+                            <h2>Test highlight document</h2>
+                            <pre>testHighlightSearchDocument() </pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                    
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_testMapping"></a>
+                        <div class="element clickable method public  method_testMapping" data-toggle="collapse" data-target=".method_testMapping .collapse">
+                            <h2>Test type mapping</h2>
+                            <pre>testMapping() </pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                    
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_testScrollScanSearchDocument"></a>
+                        <div class="element clickable method public  method_testScrollScanSearchDocument" data-toggle="collapse" data-target=".method_testScrollScanSearchDocument .collapse">
+                            <h2>Test scroll scan search document</h2>
+                            <pre>testScrollScanSearchDocument() </pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                    
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_testScrollSearchDocument"></a>
+                        <div class="element clickable method public  method_testScrollSearchDocument" data-toggle="collapse" data-target=".method_testScrollSearchDocument .collapse">
+                            <h2>Test scroll search document</h2>
+                            <pre>testScrollSearchDocument() </pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                    
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_testSearchDocument"></a>
+                        <div class="element clickable method public  method_testSearchDocument" data-toggle="collapse" data-target=".method_testSearchDocument .collapse">
+                            <h2>Test search document</h2>
+                            <pre>testSearchDocument() </pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                    
+                                                                    </div>
+                            </div>
+
+                        </div>
+                                            <a id="method_testUpdateDocument"></a>
+                        <div class="element clickable method public  method_testUpdateDocument" data-toggle="collapse" data-target=".method_testUpdateDocument .collapse">
+                            <h2>Test update document</h2>
+                            <pre>testUpdateDocument() </pre>
+                            <div class="labels">
+                                                                                                                                                                                            </div>
+
+                            
+                            <div class="row collapse">
+                                <div class="detail-description">
+                                    <div class="long_description"></div>
+
+                                    <table class="table">
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                                    <tr>
+                                                <th>
+                                                    
+                                                </th>
+                                                <td>
+                                                                                                    </td>
+                                            </tr>
+                                                                            </table>
+
+                                    
+                                                                    </div>
+                            </div>
+
+                        </div>
+                    
+                    
+                                                                <h3><i class="icon-custom icon-property"></i> Properties</h3>
+                                                    <a id="property_fixtures"> </a>
+                            <div class="element clickable property  public property_fixtures" data-toggle="collapse" data-target=".property_fixtures .collapse">
+                                <h2>Fixtures</h2>
+                                <pre>fixtures : array</pre>
+                                <div class="labels">
+                                                                                                        </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        var
+                                                    </th>
+                                                    <td>
+                                                                                                                    
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+
+                                                                                    <h3>Type(s)</h3>
+                                            <code>array</code>
+                                                                            </div>
+                                </div>
+                            </div>
+                                                    <a id="property_Elasticsearch"> </a>
+                            <div class="element clickable property  public property_Elasticsearch inherited" data-toggle="collapse" data-target=".property_Elasticsearch .collapse">
+                                <h2>Elasticsearch Model</h2>
+                                <pre>Elasticsearch : \Elasticsearch</pre>
+                                <div class="labels">
+                                    <span class="label">inherited</span>                                                                    </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        var
+                                                    </th>
+                                                    <td>
+                                                                                                                    
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+
+                                                                                    <h3>Type(s)</h3>
+                                            <code>\Elasticsearch</code>
+                                                                            </div>
+                                </div>
+                            </div>
+                                                    <a id="property_autoFixtures"> </a>
+                            <div class="element clickable property  public property_autoFixtures inherited" data-toggle="collapse" data-target=".property_autoFixtures .collapse">
+                                <h2>{@inheritdoc}</h2>
+                                <pre>autoFixtures : boolean</pre>
+                                <div class="labels">
+                                    <span class="label">inherited</span>                                                                    </div>
+                                <div class="row collapse">
+                                    <div class="detail-description">
+                                        <div class="long_description"></div>
+
+                                        <table class="table">
+                                                                                            <tr>
+                                                    <th>
+                                                        var
+                                                    </th>
+                                                    <td>
+                                                                                                                    
+                                                                                                            </td>
+                                                </tr>
+                                                                                    </table>
+
+                                                                                    <h3>Type(s)</h3>
+                                            <code>boolean</code>
+                                                                            </div>
+                                </div>
+                            </div>
+                                                            </div>
+            </div>
+            <a id="\ElasticsearchDocumentTest"></a>
+            <ul class="breadcrumb">
+                <li><a href="../index.html"><i class="icon-custom icon-class"></i></a></li>
+                    
+    
+    <li><span class="divider">\</span><a href="../namespaces/default.html">\</a></li>
+
+                <li class="active"><span class="divider">\</span><a href="../classes/ElasticsearchDocumentTest.html">ElasticsearchDocumentTest</a></li>
+            </ul>
+        </div>
+    </div>
+
+    </div>
+
+        <footer class="span12">
+            Template is built using <a href="http://twitter.github.com/bootstrap/">Twitter Bootstrap 2</a> and icons provided by
+            <a href="http://glyphicons.com/">Glyphicons</a>.<br/>
+            Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and<br/>
+            generated on Tue, 23 Dec 2014 12:06:23 +0000.<br/>
+    </footer>
+    </body>
+</html>
