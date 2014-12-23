@@ -241,35 +241,35 @@
 <path fill="none" stroke="black" d="M716.81,-1258.02C703.224,-1261.44 689.12,-1265.17 676,-1269 613.829,-1287.13 543.771,-1311.33 495.663,-1328.54"/>
 <polygon fill="none" stroke="black" points="494.271,-1325.32 486.042,-1332 496.636,-1331.91 494.271,-1325.32"/>
 </g>
-<!-- \\ElasticsearchConnection -->
-<g id="node21" class="node"><title>\\ElasticsearchConnection</title>
-<polygon fill="none" stroke="black" points="872,-558 700,-558 700,-522 872,-522 872,-558"/>
-<text text-anchor="middle" x="786" y="-537.1" font-family="Courier,monospace" font-size="11.00">ElasticsearchConnection</text>
-</g>
-<!-- \\HttpSourceConnection -->
-<g id="node50" class="node"><title>\\HttpSourceConnection</title>
-<ellipse fill="none" stroke="black" cx="437" cy="-126" rx="125.158" ry="18.3848"/>
-<text text-anchor="middle" x="437" y="-122.4" font-family="Times Roman,serif" font-size="14.00" fill="gray">\HttpSourceConnection</text>
-</g>
-<!-- \\ElasticsearchConnection&#45;&gt;\\HttpSourceConnection -->
-<g id="edge41" class="edge"><title>\\ElasticsearchConnection&#45;&gt;\\HttpSourceConnection</title>
-<path fill="none" stroke="black" d="M699.889,-529.361C690.974,-525.351 682.732,-520.03 676,-513 563.147,-395.152 721.498,-266.217 604,-153 594.394,-143.744 582.939,-136.922 570.594,-131.963"/>
-<polygon fill="none" stroke="black" points="571.591,-128.602 560.996,-128.523 569.229,-135.192 571.591,-128.602"/>
-</g>
 <!-- \\ElasticsearchSource -->
-<g id="node22" class="node"><title>\\ElasticsearchSource</title>
-<polygon fill="none" stroke="black" points="858,-504 714,-504 714,-468 858,-468 858,-504"/>
-<text text-anchor="middle" x="786" y="-483.1" font-family="Courier,monospace" font-size="11.00">ElasticsearchSource</text>
+<g id="node21" class="node"><title>\\ElasticsearchSource</title>
+<polygon fill="none" stroke="black" points="858,-558 714,-558 714,-522 858,-522 858,-558"/>
+<text text-anchor="middle" x="786" y="-537.1" font-family="Courier,monospace" font-size="11.00">ElasticsearchSource</text>
 </g>
 <!-- \\HttpSource -->
-<g id="node52" class="node"><title>\\HttpSource</title>
-<ellipse fill="none" stroke="black" cx="437" cy="-72" rx="70.0036" ry="18.3848"/>
-<text text-anchor="middle" x="437" y="-68.4" font-family="Times Roman,serif" font-size="14.00" fill="gray">\HttpSource</text>
+<g id="node50" class="node"><title>\\HttpSource</title>
+<ellipse fill="none" stroke="black" cx="437" cy="-126" rx="70.0036" ry="18.3848"/>
+<text text-anchor="middle" x="437" y="-122.4" font-family="Times Roman,serif" font-size="14.00" fill="gray">\HttpSource</text>
 </g>
 <!-- \\ElasticsearchSource&#45;&gt;\\HttpSource -->
-<g id="edge43" class="edge"><title>\\ElasticsearchSource&#45;&gt;\\HttpSource</title>
-<path fill="none" stroke="black" d="M713.236,-480.314C699.32,-476.109 685.996,-469.439 676,-459 563.147,-341.152 721.498,-212.217 604,-99 580.241,-76.1064 545.174,-68.1062 513.3,-66.3368"/>
-<polygon fill="none" stroke="black" points="513.2,-62.8311 503.081,-65.9703 512.949,-69.8266 513.2,-62.8311"/>
+<g id="edge41" class="edge"><title>\\ElasticsearchSource&#45;&gt;\\HttpSource</title>
+<path fill="none" stroke="black" d="M713.236,-534.314C699.32,-530.109 685.996,-523.439 676,-513 563.147,-395.152 721.498,-266.217 604,-153 580.241,-130.106 545.174,-122.106 513.3,-120.337"/>
+<polygon fill="none" stroke="black" points="513.2,-116.831 503.081,-119.97 512.949,-123.827 513.2,-116.831"/>
+</g>
+<!-- \\ElasticsearchConnection -->
+<g id="node22" class="node"><title>\\ElasticsearchConnection</title>
+<polygon fill="none" stroke="black" points="872,-504 700,-504 700,-468 872,-468 872,-504"/>
+<text text-anchor="middle" x="786" y="-483.1" font-family="Courier,monospace" font-size="11.00">ElasticsearchConnection</text>
+</g>
+<!-- \\HttpSourceConnection -->
+<g id="node52" class="node"><title>\\HttpSourceConnection</title>
+<ellipse fill="none" stroke="black" cx="437" cy="-72" rx="125.158" ry="18.3848"/>
+<text text-anchor="middle" x="437" y="-68.4" font-family="Times Roman,serif" font-size="14.00" fill="gray">\HttpSourceConnection</text>
+</g>
+<!-- \\ElasticsearchConnection&#45;&gt;\\HttpSourceConnection -->
+<g id="edge43" class="edge"><title>\\ElasticsearchConnection&#45;&gt;\\HttpSourceConnection</title>
+<path fill="none" stroke="black" d="M699.889,-475.361C690.974,-471.351 682.732,-466.03 676,-459 563.147,-341.152 721.498,-212.217 604,-99 594.394,-89.7437 582.939,-82.9221 570.594,-77.9625"/>
+<polygon fill="none" stroke="black" points="571.591,-74.6018 560.996,-74.5235 569.229,-81.1916 571.591,-74.6018"/>
 </g>
 <!-- \\ElasticsearchController -->
 <g id="node23" class="node"><title>\\ElasticsearchController</title>
